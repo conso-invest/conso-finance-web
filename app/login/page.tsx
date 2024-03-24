@@ -20,7 +20,7 @@ function Login() {
                     <Button className="w-full h-12 text-xl bg-secondarycolor">Connexion</Button>
                 </div>
                 <div className="mt-10 text-center">
-                    <Link href="/register">Vous n'avez pas de compte ? <span className="font-bold">Inscrivez-vous</span>   </Link>
+                    <Link href="/register">Vous n&aposavez pas de compte ? <span className="font-bold">Inscrivez-vous</span>   </Link>
                 </div>
             </div>
             <div></div>
