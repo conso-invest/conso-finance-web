@@ -11,25 +11,25 @@ function Register() {
                 <div className="lg:flex lg:justify-between">
                     <div className="mt-8 w-full mr-2">
                         <label htmlFor="Nom" className="font-bold">Nom</label>
-                        <Input placeholder="" />
+                        <Input placeholder="" className="h-12" />
                     </div>
                     <div className="mt-8 w-full">
                         <label htmlFor="Prenom" className="font-bold">Prénom</label>
-                        <Input placeholder="" />
+                        <Input placeholder="" className="h-12" />
                     </div>
                 </div>
 
                 <div className="mt-8">
-                    <label htmlFor="Email" className="font-bold">Email</label>
-                    <Input placeholder="" />
+                    <label htmlFor="Email" className="font-bold h-12">Email</label>
+                    <Input placeholder="" type="email" className="h-12" />
                 </div>
                 <div className="mt-8">
                     <label htmlFor="Profil" className="font-bold">Votre profil</label>
-                    <Input placeholder="" />
+                    <Input placeholder="" className="h-12" />
                 </div>
                 <div className="mt-8">
                     <label htmlFor="Mot de passe" className="font-bold">Mot de passe</label>
-                    <Input placeholder="" />
+                    <Input placeholder="" type="password" className="h-12" />
                 </div>
                 <div className="mt-16">
                     <Button className="w-full h-12 text-xl bg-secondarycolor">M&apo;sinscrire</Button>

@@ -10,11 +10,11 @@ function Login() {
                 <p className="mt-2 mb-10 text-sm w-4/5 lg:w-3/5">Connectez-vous à votre espace conso finance en toute securitée</p>
                 <div>
                     <label htmlFor="Nom" className="font-bold">Email</label>
-                    <Input placeholder="" />
+                    <Input placeholder="" type="email" className="h-12" />
                 </div>
                 <div className="mt-8">
                     <label htmlFor="Nom" className="font-bold">Mot de passe</label>
-                    <Input placeholder="" />
+                    <Input placeholder="" type="password" className="h-12" />
                 </div>
                 <div className="mt-16">
                     <Button className="w-full h-12 text-xl bg-secondarycolor">Connexion</Button>
