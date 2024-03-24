@@ -32,7 +32,7 @@ function Register() {
                     <Input placeholder="" />
                 </div>
                 <div className="mt-16">
-                    <Button className="w-full h-12 text-xl bg-secondarycolor">M&aposinscrire</Button>
+                    <Button className="w-full h-12 text-xl bg-secondarycolor">M&apo;sinscrire</Button>
                 </div>
                 <div className="mt-10 text-center">
                     <Link href="/login">Vous avez déjà un compte ? <span className="font-bold">Connectez-vous</span></Link>
