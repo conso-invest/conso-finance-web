@@ -68,10 +68,10 @@ function ProjetInProgress() {
         <div>
             <div className="flex justify-between items-center px-4 py-10 lg:px-20">
                 <div className="w-full">
-                    <h1 className="text-3xl lg:text-4xl font-extrabold">Les <span className="bg-teal-50 p-2 rounded">projets</span>  en cours</h1>
+                    <h1 className="text-3xl lg:text-4xl font-extrabold">Les <span className="bg-primarycolor text-white px-4 py-1 rounded">projets</span>  en cours</h1>
                     <div className="mt-5 overflow-auto lg:w-full whitespace-nowrap scroll-smooth no-scrollbar">
                         {categorieData.slice(0, 9).map(item => (
-                            <span key={item.id} className="cursor-pointer hover:border-b-2 border-blue-500 mr-4">{item.label}</span>
+                            <span key={item.id} className="cursor-pointer hover:border-b-2 border-primarycolor mr-4">{item.label}</span>
                         ))}
                     </div>
                 </div>
@@ -102,7 +102,7 @@ function ProjetInProgress() {
                 <h1 className="text-2xl font-extrabold my-5">Parcourir par catégorie</h1>
                 <div className="flex flex-wrap">
                     {categorieData.map(item => (
-                        <span key={item.id} className="cursor-pointer p-2 border rounded-full m-2 font-bold text-sm hover:text-blue-600 hover:border-blue-500">{item.label}</span>
+                        <span key={item.id} className="cursor-pointer p-2 border rounded-full m-2 font-bold text-sm hover:text-primarycolor hover:border-primarycolor">{item.label}</span>
                     ))}
                 </div>
             </div>
