@@ -7,7 +7,6 @@ export default function Home() {
     <main className="">
       <Hero></Hero>
       <ProjetInProgress></ProjetInProgress>
-      <Footer></Footer>
     </main>
   );
 }
