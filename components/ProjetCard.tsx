@@ -1,8 +1,9 @@
+import Image from "next/image";
 
 const ProjetCard = ({ item }: any) => {
     return (
         <div className="shadow-sm lg:w-1/5 flex-shrink-0 m-2 cursor-pointer rounded-sm border border-gray-100">
-            <img src={item.image} alt={item.title} className="w-full h-40 rounded-t-sm" />
+            <Image height={680} width={1020} src={item.image} alt={item.title} className="w-full h-40 rounded-t-sm" />
             <div className="p-2">
                 <h2 className="font-bold">{item.title}</h2>
                 <div className="flex justify-between mt-2 text-gray-500 text-xs">
