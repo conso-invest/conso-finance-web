@@ -14,7 +14,7 @@ function Hero() {
             <div className="mt-10 lg:w-3/6 relative">
                 <Image width={1020}
                     height={680} alt="banner" src="https://images.ctfassets.net/guty4ttb9vho/4DWq49imTfQHjiqatiKRo0/b722cd17c2aaf27f92e39b35f2d12626/fany-africa-blossom.png?w=1020&q=100&fm=webp" />
-                <div className="absolute bottom-0 right-0 bg-white p-4 text-sm w-40 lg:w-72 rounded shadow-sm"><p>Après sa formation Ulule, France a lancé la gamme d&apos;accessoires de soin de la peau</p> </div>
+                <div className="absolute bottom-0 right-0 bg-white p-4 text-sm w-40 lg:w-72 rounded shadow-sm"><p>{"Après sa formation Conso Finance, Audray a lancé la gamme d'accessoires de soin de la peau"}</p> </div>
             </div>
         </div>
     )
