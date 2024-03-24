@@ -7,7 +7,7 @@ function Register() {
         <div className="pt-28 py-12 px-4 flex justify-center items-center lg:py-20 lg:px-32 lg:pt-36">
             <div className="shadow-lg p-8 w-full lg:w-3/6 lg:p-10">
                 <p className="text-start font-bold text-2xl text-primarycolor">Bienvenue sur Conso Finance </p>
-                <p className="mt-2 mb-10 text-sm w-4/5 lg:w-3/5">Créez votre compte conso finance en toute securitée</p>
+                <p className="mt-2 mb-10 text-sm w-4/5 lg:w-3/5">Créez votre compte Conso Finance en toute sécurité.</p>
                 <div className="lg:flex lg:justify-between">
                     <div className="mt-8 w-full mr-2">
                         <label htmlFor="Nom" className="font-bold">Nom</label>
