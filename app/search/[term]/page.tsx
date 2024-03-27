@@ -22,7 +22,7 @@ function SearchPage({ params: { term } }: Props) {
                 <Image width={1020} height={680} alt="projet" className="h-full rounded-lg object-fill" src="https://ddnvb5fufqb8o.cloudfront.net/display/e04bd016987c16e4fb728877584381246ee8f1fb/thumbnail/1280x720/presales/5/8/6/1/8/1/181685/campagne-ulule-kisskiss.Gw8AD6ALxY.gif?q=60&upscale=0"></Image>
             </div>
             <div className="lg:w-3/4">
-                <h1 className="mt-2 text-2xl lg:text-5xl font-bold mb-5">Conserver vos aliments : 0 déchet, 100% plaisir 💚</h1>
+                <h1 className="mt-2 text-xl lg:text-5xl font-bold mb-5">Conserver vos aliments : 0 déchet, 100% plaisir 💚</h1>
                 <p>Sacasalades by Arminé, les sacs alimentaires 0 déchet pour conserver vos aliments de manière responsable, fabriqué en France avec ❤️</p>
 
                 <div className="progress mt-10 shadow-md rounded-lg p-5">
@@ -38,7 +38,7 @@ function SearchPage({ params: { term } }: Props) {
                             <div className="mr-2">
                                 <UsersRound size={35} />
                             </div>
-                            <div >
+                            <div className="text-sm text-md" >
                                 30 <span className="text-sm font-normal">contributions</span>
                             </div>
                         </div>
@@ -46,7 +46,7 @@ function SearchPage({ params: { term } }: Props) {
                             <div className="mr-2">
                                 <CalendarRangeIcon size={35} />
                             </div>
-                            <div>
+                            <div className="text-sm text-md">
                                 10 <span className="text-sm font-normal">Jours restant</span>
                             </div>
                         </div>
