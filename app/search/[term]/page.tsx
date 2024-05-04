@@ -1,8 +1,18 @@
+// Add this line at the top of your file
+"use client";
 import { Button } from "@/components/ui/button";
+import { project } from "@/lib/apiEndpoints";
+import axios from "axios";
 import { CalculatorIcon, CalendarRange, CalendarRangeIcon, TimerIcon, UsersRound } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-
+import { useEffect, useState } from "react";
+import * as DOMPurify from 'dompurify'
+import DetailProject from "../componemts/DetailProject";
+import ContrepartieProject from "../componemts/ContrepartieProject";
+import PublicationProject from "../componemts/PublicationProject";
+import CommentProject from "../componemts/CommentProject";
+import ContributionProject from "../componemts/ContributionProject";
 type Props = {
     params: {
         term: string,
@@ -10,10 +20,39 @@ type Props = {
 }
 
 function SearchPage({ params: { term } }: Props) {
+
+    const [detail,setDetail]=useState<any>({});
+    const [selected, setSelected] = useState<number>(1);
+
+ 
     console.log(term);
     if (!term) notFound();
     const termToUse = decodeURI(term);
     console.log(termToUse);
+
+    const handleClick = (index: any) => {
+        // Handle click event, e.g., navigate to a new page
+        console.log("click data");
+        console.log(index);
+        setSelected(index);
+        
+      };
+
+    useEffect(() => {
+    
+        const fetchOptions = async () => {
+          try {
+            const response = await axios.post(project.detail(termToUse));
+            console.log(response.data.data);
+            
+            setDetail((response.data.data));
+          } catch (error) {
+            console.error(error);
+          }
+        };
+    
+        fetchOptions();
+      }, []);
 
     //Api call to get projets
     return <div className="pt-20">
@@ -60,14 +99,25 @@ function SearchPage({ params: { term } }: Props) {
                     </Button>
                 </div>
 
-            </div>
+            </div> 
         </div>
-        <div className="overflow-auto flex lg:p-20 space-x-5 font-bold">
-            <span>Projet</span>
-            <span>Contreparties</span>
-            <span>Publications 1</span>
-            <span>Contribution 1</span>
-            <span>Commentaires 10</span>
+        <div className="overflow-auto flex lg:px-20 lg:pt-20 lg:pb-3 space-x-5 font-bold border-b-2">
+            <div className={`pb-2 ${selected==1 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={()=>handleClick(1)}>Projet</div>
+            <div className={`pb-2 ${selected==2 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={()=>handleClick(2)}>Contreparties</div>
+            <div className={`pb-2 ${selected==3 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={()=>handleClick(3)}>Publications 1</div>
+            <div className={`pb-2 ${selected==4 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={()=>handleClick(4)} >Contribution 1</div>
+            <div className={`pb-2 ${selected==5 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={()=>handleClick(5)}>Commentaires 10</div>
+        </div>
+       
+        <div className="overflow-auto  lg:px-20 lg:py-5">
+          
+        {selected==1 ? <DetailProject item={detail.description} /> : ''}
+        {selected==2 ? <ContrepartieProject item={detail.contrepartie} /> : ''}
+        {selected==3 ? <PublicationProject item={detail.publication} /> : ''}
+        {selected==4 ? <ContributionProject item={detail.souscription} /> : ''}
+        {selected==5 ? <CommentProject item={detail.commentaire} /> : ''}
+           
+            
         </div>
     </div>;
 }

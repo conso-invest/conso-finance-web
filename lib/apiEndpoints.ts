@@ -9,6 +9,10 @@ export const auth = {
 export const profil = {
   list: `${apiUrl}/profil/list`,
 };
+
+export const project = {
+  detail:(id:any)=> `${apiUrl}/projet/detail/${id}`,
+};
 /* export const users = {
   list: `${apiUrl}/users`,
   create: `${apiUrl}/users`,
