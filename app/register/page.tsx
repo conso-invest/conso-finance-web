@@ -23,17 +23,17 @@ function Register() {
 
   useEffect(() => {
     const isConnected = () => {
-        const userData = localStorage.getItem(UserData);
-        return userData !== null;
-      };
+      const userData = localStorage.getItem(UserData);
+      return userData !== null;
+    };
     // Check if the user is already logged in
-  
-  
+
+
     // If the user is already logged in, redirect them to the account page
     if (isConnected()) {
-        window.location.href = "/";
-
+      window.location.href = "/";
     }
+    
     const fetchOptions = async () => {
       try {
         const response = await axios.get(profil.list);
@@ -51,21 +51,21 @@ function Register() {
     setLoading(true);
 
     if (!name || !prenom || !email || !id_profil || !password || !telephone) {
-setLoading(false);
+      setLoading(false);
 
       setError("Tous les champs sont requis.");
       return;
     }
 
     if (!validateEmail(email)) {
-setLoading(false);
+      setLoading(false);
 
       setError("S'il vous plaît entrer une adresse e-mail valide.");
       return;
     }
 
     if (password.length < 8) {
-setLoading(false);
+      setLoading(false);
 
       setError("Le mot de passe doit contenir au moins 8 caractères.");
       return;
@@ -87,12 +87,12 @@ setLoading(false);
         // Redirect to login page
         window.location.href = "/";
       } else {
-setLoading(false);
+        setLoading(false);
 
         setError(response.data.message);
       }
     } catch (error) {
-setLoading(false);
+      setLoading(false);
 
       setError(
         "Une erreur s'est produite lors de l'inscription. Veuillez réessayer plus tard."
@@ -107,7 +107,7 @@ setLoading(false);
   };
 
   return (
-    <div className="flex items-center justify-center px-4 py-12 pt-28 lg:py-20 lg:px-32 lg:pt-36">
+    <div className="banner flex items-center justify-center px-4 py-12 pt-28 lg:py-20 lg:px-32 lg:pt-36">
       <div className="w-full p-8 shadow-lg lg:w-3/6 lg:p-10">
         <p className="text-2xl font-bold text-start text-primarycolor">
           Bienvenue sur Conso Finance{" "}
@@ -213,7 +213,7 @@ setLoading(false);
             <span className="font-bold">Connectez-vous</span>
           </Link>
         </div>
-       
+
       </div>
       <div></div>
     </div>

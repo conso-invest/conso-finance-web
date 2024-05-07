@@ -7,7 +7,6 @@ import { CalculatorIcon, CalendarRange, CalendarRangeIcon, TimerIcon, UsersRound
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
-import * as DOMPurify from 'dompurify'
 import DetailProject from "../componemts/DetailProject";
 import ContrepartieProject from "../componemts/ContrepartieProject";
 import PublicationProject from "../componemts/PublicationProject";
@@ -21,48 +20,43 @@ type Props = {
 
 function SearchPage({ params: { term } }: Props) {
 
-    const [detail,setDetail]=useState<any>({});
+    const [detail, setDetail] = useState<any>({});
     const [selected, setSelected] = useState<number>(1);
 
- 
-    console.log(term);
     if (!term) notFound();
     const termToUse = decodeURI(term);
-    console.log(termToUse);
 
     const handleClick = (index: any) => {
-        // Handle click event, e.g., navigate to a new page
-        console.log("click data");
-        console.log(index);
         setSelected(index);
-        
-      };
+    };
+
+
+    const fetchOptions = async () => {
+        try {
+            const response = await axios.get(project.detail(termToUse));
+            console.log(response.data.data);
+
+            setDetail((response.data.data));
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
 
     useEffect(() => {
-    
-        const fetchOptions = async () => {
-          try {
-            const response = await axios.post(project.detail(termToUse));
-            console.log(response.data.data);
-            
-            setDetail((response.data.data));
-          } catch (error) {
-            console.error(error);
-          }
-        };
-    
+
         fetchOptions();
-      }, []);
+    }, []);
 
     //Api call to get projets
     return <div className="pt-20">
         <div className="p-5 lg:flex lg:pt-20 lg:px-20 lg:space-x-10">
             <div>
-                <Image width={1020} height={680} alt="projet" className="h-full rounded-lg object-fill" src="https://ddnvb5fufqb8o.cloudfront.net/display/e04bd016987c16e4fb728877584381246ee8f1fb/thumbnail/1280x720/presales/5/8/6/1/8/1/181685/campagne-ulule-kisskiss.Gw8AD6ALxY.gif?q=60&upscale=0"></Image>
+                <Image width={1020} height={680} alt="projet" className="h-full rounded-lg object-fill" src={detail?.image}></Image>
             </div>
             <div className="lg:w-3/4">
-                <h1 className="mt-2 text-xl lg:text-5xl font-bold mb-5">Conserver vos aliments : 0 déchet, 100% plaisir 💚</h1>
-                <p>Sacasalades by Arminé, les sacs alimentaires 0 déchet pour conserver vos aliments de manière responsable, fabriqué en France avec ❤️</p>
+                <h1 className="mt-2 text-xl lg:text-5xl font-bold mb-5">{detail?.titre}</h1>
+                <p>{detail?.sous_titre}</p>
 
                 <div className="progress mt-10 shadow-md rounded-lg p-5">
                     <div className="flex justify-between">
@@ -99,25 +93,25 @@ function SearchPage({ params: { term } }: Props) {
                     </Button>
                 </div>
 
-            </div> 
+            </div>
         </div>
         <div className="overflow-auto flex lg:px-20 lg:pt-20 lg:pb-3 space-x-5 font-bold border-b-2">
-            <div className={`pb-2 ${selected==1 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={()=>handleClick(1)}>Projet</div>
-            <div className={`pb-2 ${selected==2 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={()=>handleClick(2)}>Contreparties</div>
-            <div className={`pb-2 ${selected==3 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={()=>handleClick(3)}>Publications 1</div>
-            <div className={`pb-2 ${selected==4 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={()=>handleClick(4)} >Contribution 1</div>
-            <div className={`pb-2 ${selected==5 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={()=>handleClick(5)}>Commentaires 10</div>
+            <div className={`pb-2 ${selected == 1 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={() => handleClick(1)}>Projet</div>
+            <div className={`pb-2 ${selected == 2 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={() => handleClick(2)}>Contreparties ({detail?.contrepartie?.length})</div>
+            <div className={`pb-2 ${selected == 3 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={() => handleClick(3)}>Publications ({detail?.publication?.length})</div>
+            <div className={`pb-2 ${selected == 4 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={() => handleClick(4)} >Contribution ({detail?.souscription?.length})</div>
+            <div className={`pb-2 ${selected == 5 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={() => handleClick(5)}>Commentaires ({detail?.commentaire?.length})</div>
         </div>
-       
+
         <div className="overflow-auto  lg:px-20 lg:py-5">
-          
-        {selected==1 ? <DetailProject item={detail.description} /> : ''}
-        {selected==2 ? <ContrepartieProject item={detail.contrepartie} /> : ''}
-        {selected==3 ? <PublicationProject item={detail.publication} /> : ''}
-        {selected==4 ? <ContributionProject item={detail.souscription} /> : ''}
-        {selected==5 ? <CommentProject item={detail.commentaire} /> : ''}
-           
-            
+
+            {selected == 1 ? <DetailProject item={detail.description} /> : ''}
+            {selected == 2 ? <ContrepartieProject item={detail.contrepartie} /> : ''}
+            {selected == 3 ? <PublicationProject item={detail.publication} /> : ''}
+            {selected == 4 ? <ContributionProject item={detail.souscription} /> : ''}
+            {selected == 5 ? <CommentProject item={detail.commentaire} /> : ''}
+
+
         </div>
     </div>;
 }

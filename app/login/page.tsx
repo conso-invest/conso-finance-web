@@ -8,6 +8,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { auth } from "@/lib/apiEndpoints";
 import { UserData } from "@/lib/const";
+
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -76,7 +78,7 @@ function Login() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center px-4 py-12 pt-28 lg:py-20 lg:px-32 lg:pt-36">
+    <div className="banner flex items-center justify-center px-4 py-12 pt-28 lg:py-20 lg:px-32 lg:pt-36">
       <div className="w-full p-8 shadow-lg lg:w-3/6 lg:p-10">
         <p className="text-2xl font-bold text-start text-primarycolor">
           Bon retour!{" "}

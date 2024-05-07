@@ -6,13 +6,17 @@ export const auth = {
   logout: `${apiUrl}/auth/logout`,
   refresh: `${apiUrl}/auth/refresh`,
 };
+
 export const profil = {
   list: `${apiUrl}/profil/list`,
 };
 
 export const project = {
-  detail:(id:any)=> `${apiUrl}/projet/detail/${id}`,
+  detail: (id: any) => `${apiUrl}/projet/detail/${id}`,
+  getAllCategory: `${apiUrl}/projet/get-all-category`,
+  getProjetByCategory: `${apiUrl}/projet/get-projet-by-category`,
 };
+
 /* export const users = {
   list: `${apiUrl}/users`,
   create: `${apiUrl}/users`,
