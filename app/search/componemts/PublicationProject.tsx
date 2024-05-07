@@ -13,7 +13,9 @@ const PublicationProject = ({ item }: any) => {
       <div className="flex-1">
 
         <h2 className="text-lg font-semibold">{item.titre} </h2>
-        <p className="text-gray-600">{item.description}</p>
+        <div className="text-gray-600"
+      dangerouslySetInnerHTML={{__html: item.description}}
+    />
    
       </div>
     </div> )}
