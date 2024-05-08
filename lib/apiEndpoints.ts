@@ -12,7 +12,7 @@ export const profil = {
 };
 
 export const project = {
-  detail: (id: any) => `${apiUrl}/projet/detail/${id}`,
+  detail: (slug: any) => `${apiUrl}/user/projet/detail/${slug}`,
   getAllCategory: `${apiUrl}/projet/get-all-category`,
   getProjetByCategory: `${apiUrl}/projet/get-projet-by-category`,
 };

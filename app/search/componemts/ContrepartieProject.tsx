@@ -24,8 +24,10 @@ const ContrepartieProject = ({ item }: any) => {
                   </div>
                   <img src={item.image} alt={item.titre} className="w-80 object-cover" />
                   <h2 className="text-lg font-semibold my-2">{item.titre} </h2>
-                  <p className="text-gray-600">{item.description}</p>
-                  <p className="text-gray-600 mt-4">Date Livraison: {item.date_livraison}</p>
+                  <div className="text-gray-600"
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                  />
+                  <p className="text-gray-600">Date Livraison: {item.date_livraison}</p>
                 </div>
               </div>
             )}
