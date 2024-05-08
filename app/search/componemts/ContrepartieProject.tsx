@@ -20,12 +20,12 @@ const ContrepartieProject = ({ item }: any) => {
                 <div className="w-full">
                   <div className="flex justify-between mb-7">
                     <div className="text-xl text-gray-600 font-bold">Pour {item.montant}Fcfa</div>
-                    <button className="bg-secondarycolor px-4 py-2 rounded text-white">Choisir</button>
+                    <button className="bg-secondarycolor px-4 py-2 rounded-full text-white">Choisir</button>
                   </div>
                   <img src={item.image} alt={item.titre} className="w-80 object-cover" />
                   <h2 className="text-lg font-semibold my-2">{item.titre} </h2>
                   <p className="text-gray-600">{item.description}</p>
-                  <p className="text-gray-600">Date Livraison: {item.date_livraison}</p>
+                  <p className="text-gray-600 mt-4">Date Livraison: {item.date_livraison}</p>
                 </div>
               </div>
             )}
