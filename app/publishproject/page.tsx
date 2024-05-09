@@ -151,7 +151,8 @@ const PublishRequestPage = () => {
               <label
                 htmlFor="file-input"
                 className="flex flex-col items-center justify-center w-full h-64 px-6 py-10 bg-white rounded-md shadow-md cursor-pointer hover:bg-gray-100"
-              >    {preview && (
+              >   
+               {preview && (
                 <div className="mt-4">
                   <img
                     src={preview}
