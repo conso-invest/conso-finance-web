@@ -45,7 +45,7 @@ function Header() {
           </Link>
 
           <Link
-            href="/"
+            href="/publishproject"
             className="hidden text-xs font-bold lg:flex hover:text-blue-400"
           >
             LANCER UN PROJET
@@ -92,7 +92,7 @@ function Header() {
       {isMenuOpen && (
         <div className="absolute left-0 right-0 h-screen pt-5 bg-white shadow-md lg:hidden">
           <div className="px-4 py-2">
-            <Link href="/" className="block py-2 border-b border-gray-200">
+            <Link href="/publishproject" className="block py-2 border-b border-gray-200">
               LANCER UN PROJET
             </Link>
             <Link href="/" className="block py-2">

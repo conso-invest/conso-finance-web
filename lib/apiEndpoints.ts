@@ -11,8 +11,13 @@ export const profil = {
   list: `${apiUrl}/profil/list`,
 };
 
+export const cat = {
+  list: `${apiUrl}/categorie/index`,
+};
+
 export const project = {
   detail: (slug: any) => `${apiUrl}/user/projet/detail/${slug}`,
+  send_request: `${apiUrl}/projet/send-request`,
   getAllCategory: `${apiUrl}/projet/get-all-category`,
   getProjetByCategory: `${apiUrl}/projet/get-projet-by-category`,
 };
