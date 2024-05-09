@@ -80,11 +80,8 @@ const PublishRequestPage = () => {
 
   useEffect(() => {
     const isConnected = () => {
-      const userData = localStorage.getItem(UserData);
-      console.log(JSON.parse(userData).token);
-
+      const userData = localStorage.getItem(UserData) || '';
       setUser(JSON.parse(userData));
-
       return userData !== null;
     };
     // Check if the user is already logged in
@@ -96,7 +93,7 @@ const PublishRequestPage = () => {
 
     const fetchCategory = async () => {
       try {
-        const response = await axios.get(cat.list);
+        const response = await axios.get(project.getAllCategory);
         setCategory(response.data.data);
       } catch (error) {
         console.error(error);
