@@ -21,7 +21,7 @@ const ProjetCard = ({ item }: any) => {
                     <p className='font-bold'>{item.objectif} FCFA</p>
                 </div>
                 <div className="w-full mt-2 bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
-                    <div className="bg-green-500 h-2.5 rounded-full" style={{ width: "45%" }}></div>
+                    <div className="bg-green-500 h-2.5 rounded-full" style={{ width: "1%" }}></div>
                 </div>
             </div>
         </div>

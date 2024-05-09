@@ -42,7 +42,7 @@ function Login() {
         const data = response.data.data;
         localStorage.setItem(UserData, JSON.stringify(data));
         // Redirect to a protected route
-        window.location.href = "/";
+        window.location.href = "/account";
       } else {
         // If the login attempt was unsuccessful, display an error message
         setError(response.data.message);
@@ -55,25 +55,24 @@ function Login() {
   const validateEmail = (email: string) => {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return!re.test(String(email).toLowerCase())? "Please enter a valid email address." : null;
+    return !re.test(String(email).toLowerCase()) ? "Please enter a valid email address." : null;
   };
 
   const validatePassword = (password: string) => {
-    return password.length < 8? "Password must be at least 8 characters long." : null;
+    return password.length < 8 ? "Password must be at least 8 characters long." : null;
   };
 
   useEffect(() => {
     const isConnected = () => {
-        const userData = localStorage.getItem("UserData");
-        return userData !== null;
-      };
+      const userData = localStorage?.getItem("UserData");
+      return userData !== null;
+    };
     // Check if the user is already logged in
-  
-  
+
+
     // If the user is already logged in, redirect them to the account page
     if (isConnected()) {
-        window.location.href = "/";
-
+      window.location.href = "/account";
     }
   }, []);
 
