@@ -71,7 +71,7 @@ function Header() {
           <div className="hidden h-10 border-r border-gray-300 lg:flex"></div>
           {isConnected() ? (
             <Link
-              href="/dashboard"
+              href="/account"
               className="flex items-center text-xs font-bold hover:text-blue-400"
             >
               <UserRound width={20} className="lg:mr-2" />
