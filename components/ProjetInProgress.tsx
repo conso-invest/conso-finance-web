@@ -13,6 +13,7 @@ function ProjetInProgress() {
     const [categoryList, setCategoryList] = useState<any>([]);
     const [projetList, setProjetList] = useState<any>([]);
     const [activeItem, setActiveItem] = useState<number>(0);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const handleScrollLeft = () => {
         if (scrollContainerRef && scrollContainerRef.current) {
@@ -38,9 +39,11 @@ function ProjetInProgress() {
     }
 
     const getProjetByID = async () => {
+        setIsLoading(true);
         const response = await axios.get(project.getProjetByCategory);
         console.log(response.data.data);
         setProjetList(response.data.data);
+        setIsLoading(false);
     }
 
     // Divisez les données en deux ensembles
@@ -59,10 +62,10 @@ function ProjetInProgress() {
         <div>
             <div className="flex justify-between items-center px-4 py-10 lg:px-20">
                 <div className="w-full">
-                    <h1 className="text-3xl lg:text-3xl font-extrabold"><span className="bg-primarycolor px-4 py-2 rounded text-white">Les projets en cours</span></h1>
-                    <div className="mt-5 overflow-auto lg:w-full whitespace-nowrap scroll-smooth no-scrollbar">
+                    <h1 className="text-xl lg:text-3xl font-extrabold"><span className="bg-primarycolor px-4 py-2 rounded text-white">Les projets en cours</span></h1>
+                    <div className="mt-8 overflow-auto lg:w-full whitespace-nowrap scroll-smooth no-scrollbar">
                         {categoryList.slice(0, 9).map((item: any) => (
-                            <span key={item.id} className={`${activeItem === item.id ? 'border-b-2 border-primarycolor' : ''} cursor-pointer hover:border-b-2 border-primarycolor mr-4`} onClick={() => getProjetByCategoryID(item.id)} >{item.description}</span>
+                            <span key={item.id} className={`${activeItem === item.id ? 'border-b-8 font-bold border-primarycolor' : ''} cursor-pointer hover:border-b-2 border-primarycolor mr-4`} onClick={() => getProjetByCategoryID(item.id)} >{item.description}</span>
                         ))}
                     </div>
                 </div>
@@ -78,12 +81,16 @@ function ProjetInProgress() {
             <div className="lg:overflow-auto whitespace-nowrap scroll-smooth no-scrollbar" ref={scrollContainerRef} >
                 <div className="lg:ml-20">
                     <div className="lg:flex">
-                        {firstRowData.map((item: any, index: any) => (<>
+                        {(firstRowData.length == 0 && !isLoading) && <div className="bg-gray-100 w-full flex justify-center items-center lg:mr-20">
+                            <h1 className="py-20 text-sm lg:text-2xl text-secondarycolor   ">Aucun projet dans cette rubrique pour le moment</h1>
+                        </div>}
+
+                        {firstRowData.length > 0 && firstRowData.map((item: any, index: any) => (<>
                             <ProjetCard key={index} item={item} ></ProjetCard>
                         </>))}
                     </div>
                     <div className="hidden lg:flex mt-5">
-                        {secondRowData.map((item: any, index: any) => (<>
+                        {secondRowData.length > 0 && secondRowData.map((item: any, index: any) => (<>
                             <ProjetCard key={index} item={item} ></ProjetCard>
                         </>))}
                     </div>
