@@ -13,7 +13,6 @@ const PublicationProject = ({ item }: any) => {
           </div>
         </div>)}
 
-
     </>
   );
 }
