@@ -1,0 +1,50 @@
+.loadingShimmer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+  }
+  
+  .loadingShimmer::after {
+    content: '';
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .shimmerBox {
+    width: 80px;
+    height: 8%;
+    margin: 10px;
+    background: #afaeae;
+    border-radius: 50%;
+    animation: shimmer 1.5s infinite;
+  }
+  
+  .loadingShimmer::after {
+    /* Generate 5 boxes using CSS */
+    counter-reset: boxes;
+  }
+  
+  .loadingShimmer::after div {
+    counter-increment: boxes;
+  }
+  
+  .loadingShimmer::after div:nth-child(-n + 5) {
+    display: block;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-20px);
+      opacity: 0;
+    }
+    50% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(20px);
+      opacity: 0;
+    }
+  }

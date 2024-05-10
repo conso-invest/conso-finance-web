@@ -1,10 +1,16 @@
 "use client";
 import { DnaIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import MonProfil from "./componemts/MonProfil";
+import MesProject from "./componemts/MesProject";
+import MesInvestissement from "./componemts/MesInvestissement";
+import MesDemande from "./componemts/MesDemande";
+import { UserData } from "@/lib/const";
 
 function Account() {
 
     const [activeTabs, setActiveTabs] = useState(1);
+    const [user, setUser] = useState<any>({});
 
     var tabsData = [
         { id: 1, name: "Profile", icon: <DnaIcon /> },
@@ -12,6 +18,9 @@ function Account() {
         { id: 3, name: "Mes projets", icon: <DnaIcon /> },
         { id: 4, name: "Mes investisements", icon: <DnaIcon /> },
     ]
+
+ 
+    
 
     return (<>
         <div className="h-full  px-4 py-12 pt-28 lg:py-20 lg:px-32 lg:pt-36">
@@ -34,28 +43,15 @@ function Account() {
                 <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
 
                     {activeTabs === 1 && <>
-                        <div>
-                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Profile</h3>
-                            Mom profile ici
-                        </div>
+                        <MonProfil item={activeTabs} />
                     </>}
                     {activeTabs === 2 && <>
-                        <div>
-                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Demandes</h3>
-                            Mes demandes ici
-                        </div>
+                        <MesDemande item={activeTabs} />
                     </>}
                     {activeTabs === 3 && <>
-                        <div>
-                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Projets</h3>
-                            Mes projets ici
-                        </div>
-                    </>}
+                        <MesProject item={activeTabs} />   </>}
                     {activeTabs === 4 && <>
-                        <div>
-                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Mes financements</h3>
-                            Mes investisements (Projet financés)
-                        </div>
+                        <MesInvestissement item={activeTabs} />
                     </>}
                 </div>
             </div>
