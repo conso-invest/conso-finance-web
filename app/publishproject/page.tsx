@@ -154,7 +154,7 @@ const PublishRequestPage = () => {
                   <img
                     src={preview}
                     alt="Preview"
-                    className="h-32 h-auto rounded-md w-32"
+                    className="h-32 rounded-md w-32"
                   />
                 </div>
               )}
