@@ -1,20 +1,11 @@
-import { redirect } from 'next/navigation'
-
-import Image from "next/image";
-import * as DOMPurify from 'dompurify'
+import ReactHtmlParser from 'react-html-parser';
 
 const DetailProject = ({ item }: any) => {
-
-
-    return (
-      <p>
-          <h1 className="font-bold ">Detail du project</h1>
-        <div
-      dangerouslySetInnerHTML={{__html: item}}
-    />
-
-      </p>
-    );
+  return (
+    <div className='border border-primarycolor shadow-lg p-4'>
+      {ReactHtmlParser(item)}
+    </div>
+  );
 }
 
 export default DetailProject;
