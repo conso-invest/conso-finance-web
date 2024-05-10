@@ -16,7 +16,9 @@ interface ProjectRequest {
     valide: boolean;
     comments: string;
   }
-
+const openDetail=({slug}:any)=>{
+    window.location.href = "/search/"+slug;
+}
 const MesProject = ({ item }: any) => {
     const [projet, setProjet] = useState<ProjectRequest[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -86,7 +88,7 @@ const MesProject = ({ item }: any) => {
         </div>
       </div>
     </div> */
-<div className="p-4 md:w-1/3 hover:cursor-pointer" key={item.id}>
+<div className="p-4 md:w-1/3 hover:cursor-pointer" key={item.id} onClick={()=>openDetail(item.slug)}>
   <div className="h-full border-2 border-gray-200 rounded-lg overflow-hidden">
     <img className="lg:h-48 md:h-36 w-full object-cover object-center" src={item.image} alt="blog"/>
     <div className="p-6">
