@@ -35,6 +35,7 @@ function SearchPage({ params: { term } }: Props) {
         try {
             const response = await axios.get(project.detail(termToUse));
             setDetail((response.data.data));
+            console.log(response.data.data);
         } catch (error) {
             console.error(error);
         }
@@ -52,7 +53,7 @@ function SearchPage({ params: { term } }: Props) {
                 </div>
                 <div className="relative m-4 top-10 lg:w-5/6 p-4 lg:top-20 lg:flex lg:space-x-10 bg-white rounded-lg shadow-md">
                     <div>
-                        <Image width={1020} height={680} alt="projet" className="h-full rounded-lg object-fill" src={detail?.image}></Image>
+                        <img width={1020} height={680} alt="projet" className="h-full rounded-lg object-fill" src={detail?.image}></img>
                     </div>
                     <div className="lg:w-3/4">
                         <h1 className="mt-2 text-xl lg:text-5xl font-bold mb-5">{detail?.titre}</h1>

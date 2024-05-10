@@ -8,7 +8,7 @@ const ProjetCard = ({ item }: any) => {
     const router = useRouter();
 
     const openProjetDetails = () => {
-        router.push(`/search/${item['slug']}`);
+        router.push(`/details/${item['slug']}`);
     }
 
     return (

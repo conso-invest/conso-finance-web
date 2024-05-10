@@ -20,6 +20,7 @@ export const project = {
   send_request: `${apiUrl}/projet/send-request`,
   getAllCategory: `${apiUrl}/projet/get-all-category`,
   getProjetByCategory: `${apiUrl}/projet/get-projet-by-category`,
+  getCategoryWithProjet: `${apiUrl}/projet/get-category-with-projet`,
   getProjetdemande: `${apiUrl}/projet/demande`,
   getProjetMeList: `${apiUrl}/projet/me/list`,
   getProjetsouscription: `${apiUrl}/projet/souscription`,

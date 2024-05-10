@@ -6,7 +6,7 @@ const ContrepartieProject = ({ item }: any) => {
       {item?.length == 0 && <>
         <p className="text-center p-4">Aucune contrepartie pour le moment</p>
       </>}
-
+      
       {item?.length > 0 &&
         <div className="flex">
           <div>
