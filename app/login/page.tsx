@@ -78,7 +78,7 @@ function Login() {
 
   return (
     <div className="banner flex items-center justify-center px-4 py-12 pt-28 lg:py-20 lg:px-32 lg:pt-36">
-      <div className="w-full p-8 shadow-lg lg:w-3/6 lg:p-10">
+      <div className="bg-white p-8 shadow-lg lg:w-3/6 lg:p-10">
         <p className="text-2xl font-bold text-start text-primarycolor">
           Bon retour!{" "}
         </p>

@@ -21,7 +21,10 @@ function Header() {
 
   const getUserName = () => {
     const userData = localStorage.getItem("UserData");
-    return userData ? JSON.parse(userData).name : null;
+    if (userData !== null) {
+      return JSON.parse(userData).name;
+    }
+    return null;
   };
 
   return (

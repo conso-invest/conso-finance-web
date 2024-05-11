@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import axios from "axios";
 import { project } from "@/lib/apiEndpoints";
-import Router from 'next/router';
 import Link from "next/link";
 
 function ProjetInProgress() {
@@ -86,14 +85,14 @@ function ProjetInProgress() {
                             <h1 className="py-20 text-sm lg:text-2xl text-secondarycolor   ">Aucun projet dans cette rubrique pour le moment</h1>
                         </div>}
 
-                        {firstRowData.length > 0 && firstRowData.map((item: any) => (<div key={item.id}>
-                            <ProjetCard  item={item} ></ProjetCard>
-                        </div>))}
+                        {firstRowData.length > 0 && firstRowData.map((item: any) => (
+                            <ProjetCard key={item.id} item={item} ></ProjetCard>
+                        ))}
                     </div>
                     <div className="hidden lg:flex mt-5">
-                        {secondRowData.length > 0 && secondRowData.map((item: any) => (<div key={item.id}>
-                            <ProjetCard  item={item} ></ProjetCard>
-                        </div>))}
+                        {secondRowData.length > 0 && secondRowData.map((item: any) => (
+                            <ProjetCard key={item.id} item={item} ></ProjetCard>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -101,8 +100,8 @@ function ProjetInProgress() {
                 <h1 className="text-2xl font-extrabold my-5">Parcourir par catégorie</h1>
                 <div className="flex flex-wrap" >
                     {categoryList.map((item: any) => (
-                        <Link href={`categories/${item.id}`} key={item?.id}>
-                            <span  className="cursor-pointer p-2 border rounded-full m-2 font-bold text-sm hover:text-primarycolor hover:border-primarycolor">{item.titre}</span>
+                        <Link href={`categories/${item.id}`}>
+                            <span key={item?.id} className="cursor-pointer p-2 border rounded-full m-2 font-bold text-sm hover:text-primarycolor hover:border-primarycolor">{item.titre}</span>
                         </Link>
                     ))}
                 </div>

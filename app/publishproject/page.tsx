@@ -8,7 +8,6 @@ import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react";
 import { auth, cat, profil, project } from "@/lib/apiEndpoints";
 import { UserData } from "@/lib/const";
-import ImageInput from "@/components/ui/image";
 
 const PublishRequestPage = () => {
   const [titre, setTitre] = useState("");
@@ -45,11 +44,9 @@ const PublishRequestPage = () => {
 
     if (
       !titre ||
-      !sousTitre ||
       !objectif ||
       !description ||
-      !idCategorie ||
-      !image
+      !idCategorie
     ) {
       setError("Veuillez remplir tous les champs.");
       return;
@@ -64,7 +61,7 @@ const PublishRequestPage = () => {
       formData.append("description", description);
       formData.append("id_categorie", idCategorie);
       formData.append("token", user.token);
-
+      formData.append("user_id", user.id);
       const response = await axios.post(project.send_request, formData);
 
       console.log(response.data);
@@ -81,7 +78,9 @@ const PublishRequestPage = () => {
   useEffect(() => {
     const isConnected = () => {
       const userData = localStorage.getItem(UserData) || '';
-      setUser(JSON.parse(userData));
+      if (userData != '') {
+        setUser(JSON.parse(userData));
+      }
       return userData !== null;
     };
     // Check if the user is already logged in
@@ -105,15 +104,15 @@ const PublishRequestPage = () => {
 
   return (
     <div className="banner flex items-center justify-center px-4 py-12 pt-28 lg:py-20 lg:px-32 lg:pt-36">
-      <div className="w-full p-8 shadow-lg lg:w-3/6 lg:p-10">
+      <div className="p-8 bg-white shadow-lg lg:w-3/6 lg:p-10">
         <p className="text-2xl font-bold text-start text-primarycolor">
-          Bienvenue sur Conso Finance{" "}
+          Lancez-vous sur conso finance
         </p>
-        <h1>Publish a Project Request</h1>
+        <h1 className="mb-5">Prenez quelques minutes pour le décrire afin qu'on puisse vous accompagner au mieux</h1>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="titre" className="font-bold">
-              Titre
+              Que voulez-vous financer ?
             </label>
             <Input
               placeholder=""
@@ -125,7 +124,7 @@ const PublishRequestPage = () => {
           </div>
           <div className="mt-8">
             <label htmlFor="sous_titre" className="font-bold">
-              Sous-titre
+              Nom du projet / Entreprise
             </label>
             <Input
               placeholder=""
@@ -140,54 +139,54 @@ const PublishRequestPage = () => {
               Image
             </label>
             <div className="flex flex-col items-center justify-center p-10 border-2 border-dashed border-gray-300 rounded-md">
-            <Input
+              <Input
                 placeholder=""
                 type="file"
-                className="sr-only" id="file-input"   onChange={handleImageChange}
+                className="sr-only" id="file-input" onChange={handleImageChange}
               />
               <label
                 htmlFor="file-input"
                 className="flex flex-col items-center justify-center w-full h-64 px-6 py-10 bg-white rounded-md shadow-md cursor-pointer hover:bg-gray-100"
-              >   
-               {preview && (
-                <div className="mt-4">
-                  <img
-                    src={preview}
-                    alt="Preview"
-                    className="h-32 rounded-md w-32"
-                  />
-                </div>
-              )}
-                  {!preview && (
-              <div className="mt-4 items-center justify-center">
-                <svg
-                  className="w-12 h-12 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                  ></path>
-                </svg>
-                <p className="mt-2 text-gray-500">
-                  Choose files to Upload or drag and drop them here
-                </p>
-              </div>
-            )}
-               
+              >
+                {preview && (
+                  <div className="mt-4">
+                    <img
+                      src={preview}
+                      alt="Preview"
+                      className="h-32 rounded-md w-32"
+                    />
+                  </div>
+                )}
+                {!preview && (
+                  <div className="mt-4 items-center justify-center">
+                    <svg
+                      className="w-12 h-12 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                      ></path>
+                    </svg>
+                    <p className="mt-2 text-gray-500">
+                      Choose files to Upload or drag and drop them here
+                    </p>
+                  </div>
+                )}
+
               </label>
             </div>
-           
+
             {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           </div>
           <div className="mt-8">
             <label htmlFor="objectif" className="font-bold">
-              Objectif
+              Budget souhaité
             </label>
             <Input
               placeholder=""
@@ -199,7 +198,7 @@ const PublishRequestPage = () => {
           </div>
           <div className="mt-8">
             <label htmlFor="description" className="font-bold">
-              Description
+              Palez nous de vous et du projet
             </label>
             <textarea
               className="w-full h-32 mt-2 border rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm"
@@ -225,7 +224,7 @@ const PublishRequestPage = () => {
           {error && <p className="text-red-500">{error}</p>}
           <div className="mt-16">
             <Button className="w-full h-12 text-xl bg-secondarycolor">
-              Publier la demande
+              Envoyer ma demande
             </Button>
           </div>
         </form>
