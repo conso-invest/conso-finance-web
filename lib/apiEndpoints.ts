@@ -1,3 +1,4 @@
+
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const auth = {
@@ -24,6 +25,7 @@ export const project = {
   getProjetdemande: `${apiUrl}/projet/demande`,
   getProjetMeList: `${apiUrl}/projet/me/list`,
   getProjetsouscription: `${apiUrl}/projet/souscription`,
+  search: `${apiUrl}/projet/search`,
 };
 
 /* export const users = {

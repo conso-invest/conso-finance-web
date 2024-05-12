@@ -45,7 +45,7 @@ function CategoriesPage({ params: { term } }: Props) {
                 <div className="absolute inset-0 w-full" style={{ backgroundImage: `url('/bg-cover.jpg')`, height: '60vh', zIndex: -1, filter: 'brightness(100%)' }}>
                 </div>
 
-                <div className="relative min-h-60 m-4 top-0 lg:w-5/6 p-4 lg:top-10 lg:flex lg:space-x-10 bg-white rounded-lg shadow-md">
+                <div className="w-full relative min-h-60 m-4 top-0 lg:w-5/6 p-4 lg:top-10 lg:flex lg:py-10 lg:space-x-10 bg-white rounded-lg shadow-md">
 
                     {projectData?.projects?.length === 0 &&
                         <div className="flex items-center">
@@ -62,7 +62,7 @@ function CategoriesPage({ params: { term } }: Props) {
                 </div>
             </div>
 
-            <div className="pt-48 h-2 bg-primarycolor"></div>
+            <div className="pt-48 h-2"></div>
 
         </div>
     )

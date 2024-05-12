@@ -75,7 +75,16 @@ const PublishRequestPage = () => {
     }
   };
 
-  useEffect(() => {
+  const fetchCategory = async () => {
+    try {
+      const response = await axios.get(project.getAllCategory);
+      setCategory(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const checkIfIsConnected = () => {
     const isConnected = () => {
       const userData = localStorage.getItem(UserData) || '';
       if (userData != '') {
@@ -89,16 +98,10 @@ const PublishRequestPage = () => {
     if (!isConnected()) {
       window.location.href = "/login";
     }
+  };
 
-    const fetchCategory = async () => {
-      try {
-        const response = await axios.get(project.getAllCategory);
-        setCategory(response.data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
+  useEffect(() => {
+    checkIfIsConnected();
     fetchCategory();
   }, []);
 

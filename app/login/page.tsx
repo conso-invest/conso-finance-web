@@ -36,7 +36,7 @@ function Login() {
         email,
         password,
       });
-      console.log(response.data);
+
       if (response.data.success) {
         // If the login attempt was successful, store the authentication token in local storage
         const data = response.data.data;
@@ -47,6 +47,7 @@ function Login() {
         // If the login attempt was unsuccessful, display an error message
         setError(response.data.message);
       }
+      
     } catch (error: any) {
       setError(error.response.data.error);
     }
