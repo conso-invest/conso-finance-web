@@ -60,7 +60,7 @@ const MesDemande = ({ item }: any) => {
       </h3>
       <section className="text-gray-700 body-font">
         {projectRequests.length == 0 &&
-          <div className="bg-white p-10 text-center text-xl">
+          <div className="bg-white py-10 text-center text-xl">
             <h1 className="mb-8">Aucune demande de financement en cours</h1>
             <Link href={`/request`} className="bg-primarycolor text-white rounded p-4">Demander du financement</Link>
           </div>

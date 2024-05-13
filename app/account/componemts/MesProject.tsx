@@ -63,7 +63,7 @@ const MesProject = ({ item }: any) => {
       </h3>
       <section className="text-gray-700 body-font">
         {projet.length == 0 &&
-          <div className="bg-white p-10 text-center text-xl">
+          <div className="bg-white py-10 text-center text-xl">
             <h1 className="mb-8">{`Vous n'avez aucun projet sur consofinance.`}</h1>
             <Link href={`/request`} className="bg-primarycolor text-white rounded p-4">Soumettre un projet</Link>
           </div>
@@ -71,7 +71,7 @@ const MesProject = ({ item }: any) => {
 
         <div className="flex flex-wrap space-y-2">
           {projet.map((item: any) => (
-            <ProjetCard key={item.id} item={item} mdrow={"w-1/3"}></ProjetCard>
+            <ProjetCard key={item.id} item={item} mdrow={"w-1/3"} lgrow ="w-1/3"></ProjetCard>
           ))}
         </div>
       </section>

@@ -48,9 +48,9 @@ const MesInvestissement = ({ item }: any) => {
       <h3 className="text-lg font-bold text-gray-900 dark:text-white">Mes investisements</h3>
       <div className="py-5 w-full">
         {souscription.length == 0 &&
-          <div className="bg-white p-10 text-center text-xl">
+          <div className="bg-white py-10 text-center text-xl">
             <h1 className="mb-8">{`Vous éffectué aucun investissement pour le moment`}</h1>
-            <Link href={`/`} className="bg-primarycolor text-white rounded p-4">Trouver des projets rentables</Link>
+            <Link href={`/`} className="bg-primarycolor text-white rounded p-4">Trouver des projets</Link>
           </div>
         }
 
