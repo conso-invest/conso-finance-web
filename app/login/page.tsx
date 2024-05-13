@@ -14,6 +14,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<any>(null);
+  const [isLoad, setIsLoad] = useState(false);
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -37,6 +38,8 @@ function Login() {
         password,
       });
 
+      setIsLoad(true);
+
       if (response.data.success) {
         // If the login attempt was successful, store the authentication token in local storage
         const data = response.data.data;
@@ -46,9 +49,11 @@ function Login() {
       } else {
         // If the login attempt was unsuccessful, display an error message
         setError(response.data.message);
+        setIsLoad(false);
       }
-      
+
     } catch (error: any) {
+      setIsLoad(false);
       setError(error.response.data.error);
     }
   };
@@ -86,7 +91,7 @@ function Login() {
         <p className="w-4/5 mt-2 mb-10 text-sm lg:w-3/5">
           Connectez-vous à votre espace Conso Finance en toute sécurité.
         </p>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={isLoad ? () => null : handleSubmit}>
           <div>
             <label htmlFor="email" className="font-bold">
               Email
@@ -114,7 +119,7 @@ function Login() {
           {error && <p className="text-red-500">{error}</p>}
           <div className="mt-16">
             <Button className="w-full h-12 text-xl bg-secondarycolor">
-              Connexion
+              {isLoad ? "Traitement..." : "Connexion"}
             </Button>
           </div>
         </form>

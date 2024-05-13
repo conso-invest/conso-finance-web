@@ -91,7 +91,7 @@ function ProjetInProgress() {
                     </div>
                     <div className="hidden lg:flex mt-5">
                         {secondRowData.length > 0 && secondRowData.map((item: any) => (
-                            <ProjetCard key={item.id} item={item} ></ProjetCard>
+                            <ProjetCard key={item.id} item={item}></ProjetCard>
                         ))}
                     </div>
                 </div>
