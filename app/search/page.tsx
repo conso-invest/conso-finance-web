@@ -1,7 +1,7 @@
 "use client";
 import ProjetCard from "@/components/ProjetCard";
 import { Select } from "@/components/ui/select";
-import {project } from "@/lib/apiEndpoints";
+import { project } from "@/lib/apiEndpoints";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -11,6 +11,8 @@ function Search() {
     const [date, setDate] = useState('');
     const [projectData, setProjectData] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState<any>();
+    const [isLoading, setIsLoading] = useState(false);
+    const [startSearch, setStartSearch] = useState(false);
 
     const fetchCategory = async () => {
         try {
@@ -26,21 +28,21 @@ function Search() {
     }, [])
 
     const handleSearch = async () => {
-        // Logique de recherche à implémenter ici
-        console.log('Catégorie :', selectedCategory);
-        console.log('Statut :', status);
-        console.log('Date :', date);
+        setIsLoading(true);
+        setStartSearch(true);
 
         var postData = {
-            'category_id': selectedCategory?.id,
+            'category_id': selectedCategory,
             'status': status,
             'date': date,
         };
 
         const response = await axios.post(project.search, postData);
+
+        setIsLoading(false)
+
         setProjectData(response.data.data);
 
-        console.log(response);
     };
 
 
@@ -49,9 +51,10 @@ function Search() {
             <div className="banner flex items-center justify-center px-4 py-12 pt-28 lg:py-20 lg:px-32 lg:pt-36">
                 <div className="shadow-lg px-8 py-6 lg:rounded-full">
                     <div className="space-y-5 lg:space-y-0 lg:flex justify-between items-center space-x-4">
-                        <div className="lg:flex items-center space-x-4">
-                            <label>Catégorie :</label>
+                        <div className="flex items-center space-x-4">
+                            <label>Catégorie:</label>
                             <Select
+                                className="h-12"
                                 onChange={(event) => setSelectedCategory(event.target.value)}
                             >
                                 {categoryData.map((option: any) => (
@@ -62,20 +65,19 @@ function Search() {
                             </Select>
                         </div>
                         <div className="flex items-center space-x-4">
-                            <label>Statut :</label>
+                            <label>Statut:</label>
                             <select
                                 className="border h-12 border-gray-300 rounded-md px-2 py-1"
                                 value={status}
                                 onChange={(e) => setStatus(e.target.value)}
                             >
-                                <option value="">Tous</option>
-                                <option value="status1">Statut 1</option>
-                                <option value="status2">Statut 2</option>
-                                <option value="status3">Statut 3</option>
+                                <option value="all">Tous</option>
+                                <option value="inprogress">En cours de financement</option>
+                                <option value="done">Terminée</option>
                             </select>
                         </div>
                         <div className="flex items-center space-x-4">
-                            <label>Date :</label>
+                            <label>Date:</label>
                             <input
                                 type="date"
                                 className="h-12 border border-gray-300 rounded-md px-2 py-1"
@@ -84,7 +86,7 @@ function Search() {
                             />
                         </div>
                         <button
-                            className="h-12 bg-primarycolor text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+                            className="w-full lg:w-auto h-12 bg-primarycolor text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
                             onClick={handleSearch}
                         >
                             Rechercher
@@ -94,9 +96,18 @@ function Search() {
             </div>
         </div>
         <div className="mx-4 my-10 lg:mx-20">
-            {projectData.length > 0 && <div className="flex flex-wrap">
+
+            {isLoading && <div className="w-full">
+                <h1 className="text-center">Recherche en cours...</h1>
+            </div>}
+
+            {(projectData?.length == 0 && !isLoading && startSearch) && <div className="w-full">
+                <h1 className="text-center">Aucun résultat pour cette recherche</h1>
+            </div>}
+
+            {(projectData?.length > 0 && !isLoading) && <div className="flex flex-wrap">
                 {projectData.map((item: any) => (
-                    <ProjetCard key={item.id} item={item}></ProjetCard>
+                    <ProjetCard key={item.id} item={item} mdrow="w-1/4" ></ProjetCard>
                 ))}
             </div>}
         </div>

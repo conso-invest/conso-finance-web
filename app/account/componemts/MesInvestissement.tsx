@@ -26,7 +26,7 @@ const MesInvestissement = ({ item }: any) => {
 
       console.log(JSON.parse(userData).token);
       console.log(postData);
-      
+
 
       const res = await axios.post(project.getProjetsouscription, postData);
       console.log(res.data);
@@ -45,30 +45,32 @@ const MesInvestissement = ({ item }: any) => {
   return (
     <div>
       <h3 className="text-lg font-bold text-gray-900 dark:text-white">Mes investisements</h3>
-      <div className="md:px-32 py-5 w-full">
-        <div className="shadow overflow-hidden rounded border-b border-gray-200">
-          <table className="w-full bg-white">
-            <thead className="bg-gray-800 text-white">
-              <tr>
-                <th className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Project</th>
-                <th className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Investor</th>
-                <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Package</th>
-                <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Amount</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-700 w-full">
+      <div className="py-5 w-full">
+        {souscription.map((item: any) => (<div className="shadow-sm rounded my-2 w-full bg-white p-4 cursor-pointer">
+          <div className="w-full">
+            <div className="flex justify-start items-start">
+              <div className="w-full">
+                <span className="font-bold text-primarycolor">Projet</span>
+                <h1 className="font-bold mb-4">{item.projet.titre}</h1>
 
-              {souscription.map((item: any) => (<tr key={item.id}>
-                <td className="w-1/3 text-left py-3 px-4">{item.projet.titre}</td>
-                <td className="w-1/3 text-left py-3 px-4">{item.user.name}</td>
-                <td className="text-left py-3 px-4"><a className="hover:text-blue-500" href="tel:622322662">{item.projet_contreparie.titre}</a></td>
-                <td className="text-left py-3 px-4"><a className="hover:text-blue-500" href="mailto:jonsmith@mail.com">{item.montant} FCFA</a></td>
-              </tr>))}
+                <span className="text-primarycolor font-bold">Promoteur</span>
+                <h1 className="font-bold">{item.projet?.owner?.name}</h1>
+              </div>
+              <div className="h-40 w-40">
+                <img src={item.projet?.image} className="w-full rounded-md h-full object-fill mt-5" alt="image" />
+              </div>
+            </div>
+            <hr className="mb-4" />
+            <div className="contrepartie">
+              <span className="font-bold text-primarycolor">Contre partie</span>
+              <h1 className="text-xl mb-2">{item.projet_contreparie.titre}</h1>
+              <p>{item.montant} FCFA</p>
+            </div>
+          </div>
 
-
-            </tbody>
-          </table>
         </div>
+        ))}
+
       </div>
     </div>
   );

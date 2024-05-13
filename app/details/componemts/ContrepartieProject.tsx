@@ -16,7 +16,7 @@ const ContrepartieProject = ({ item }: any) => {
             </div>
 
             {item.map((item: any) =>
-              <div className="w-full border shadow-sm mb-10 flex items-center border-b border-gray-200 p-4 rounded-lg" key={item.id}>
+              <div className="w-full lg:w-96 border shadow-sm mb-10 flex items-center border-b border-gray-200 p-4 rounded-lg" key={item.id}>
                 <div className="w-full">
                   <div className="flex justify-between mb-7">
                     <div className="text-xl text-gray-600 font-bold">Pour {item.montant} FCFA</div>

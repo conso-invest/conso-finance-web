@@ -12,12 +12,11 @@ function Account() {
     const [activeTabs, setActiveTabs] = useState(1);
 
     var tabsData = [
-        { id: 1, name: "Profile", icon: <DnaIcon /> },
+        { id: 1, name: "Profil", icon: <DnaIcon /> },
         { id: 2, name: "Mes demandes", icon: <DnaIcon /> },
         { id: 3, name: "Mes projets", icon: <DnaIcon /> },
         { id: 4, name: "Mes investisements", icon: <DnaIcon /> },
     ]
-
 
     return (<>
         <div className="h-full  px-4 py-12 pt-28 lg:py-20 lg:px-32 lg:pt-36">
@@ -37,7 +36,7 @@ function Account() {
                     })}
 
                 </ul>
-                <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full h-screen overflow-scroll">
+                <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full min-h-screen">
                     {activeTabs === 1 && <>
                         <MonProfil item={activeTabs} />
                     </>}

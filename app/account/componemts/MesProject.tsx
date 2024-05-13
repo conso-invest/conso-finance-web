@@ -61,12 +61,10 @@ const MesProject = ({ item }: any) => {
         Mes projets
       </h3>
       <section className="text-gray-700 body-font">
-        <div className="container px-5 py-5 mx-auto">
-          <div className="flex flex-wrap -m-4">
-            {projet.map((item: any) => (
-              <ProjetCard key={item.id} item={item}></ProjetCard>
-            ))}
-          </div>
+        <div className="flex flex-wrap space-y-2">
+          {projet.map((item: any) => (
+            <ProjetCard key={item.id} item={item} mdrow={"w-1/3"}></ProjetCard>
+          ))}
         </div>
       </section>
     </div>
