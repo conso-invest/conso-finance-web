@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation';
-const ProjetCard = ({ item, mdrow = "w-1/4" }: any) => {
+const ProjetCard = ({ item, mdrow = "w-1/4", lgrow = "w-1/4" }: any) => {
     const router = useRouter();
 
     const openProjetDetails = () => {
@@ -8,7 +8,7 @@ const ProjetCard = ({ item, mdrow = "w-1/4" }: any) => {
     }
 
     return (
-        <div onClick={() => openProjetDetails()} className={`md:${mdrow} p-2`}>
+        <div onClick={() => openProjetDetails()} className={`md:${mdrow} lg:${lgrow} p-2`}>
             <div className='shadow-sm border border-slate-100 hover:cursor-pointer'>
                 <img
                     src={item.image}

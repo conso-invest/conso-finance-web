@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import LoadingShimmer from "./LoadingShimner";
 import { project } from "@/lib/apiEndpoints";
 import { UserData } from "@/lib/const";
+import Link from "next/link";
 
 interface ProjectRequest {
   id: number;
@@ -58,6 +59,13 @@ const MesDemande = ({ item }: any) => {
         Mes Demandes
       </h3>
       <section className="text-gray-700 body-font">
+        {projectRequests.length == 0 &&
+          <div className="bg-white p-10 text-center text-xl">
+            <h1 className="mb-8">Aucune demande de financement en cours</h1>
+            <Link href={`/request`} className="bg-primarycolor text-white rounded p-4">Demander du financement</Link>
+          </div>
+        }
+
         <div className="flex flex-wrap">
           {projectRequests.map((item: any) => (
             <div key={item.id} className="shadow-sm rounded my-2 w-full bg-white p-4 cursor-pointer">
@@ -71,7 +79,7 @@ const MesDemande = ({ item }: any) => {
                     <img src={item.image} className="w-full rounded-full h-full object-cover mt-5" alt="image" />
                   </div>
                 </div>
-                <hr  className="mb-4"/>
+                <hr className="mb-4" />
 
                 <h1 className="text-2xl mb-2">{item.titre}</h1>
                 <p>{item.description}</p>

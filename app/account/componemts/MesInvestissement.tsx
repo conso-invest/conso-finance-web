@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import LoadingShimmer from "./LoadingShimner";
 import { project } from "@/lib/apiEndpoints";
 import { UserData } from "@/lib/const";
+import Link from "next/link";
 
 const MesInvestissement = ({ item }: any) => {
 
@@ -46,6 +47,13 @@ const MesInvestissement = ({ item }: any) => {
     <div>
       <h3 className="text-lg font-bold text-gray-900 dark:text-white">Mes investisements</h3>
       <div className="py-5 w-full">
+        {souscription.length == 0 &&
+          <div className="bg-white p-10 text-center text-xl">
+            <h1 className="mb-8">{`Vous éffectué aucun investissement pour le moment`}</h1>
+            <Link href={`/`} className="bg-primarycolor text-white rounded p-4">Trouver des projets rentables</Link>
+          </div>
+        }
+
         {souscription.map((item: any) => (<div key={item.id} className="shadow-sm rounded my-2 w-full bg-white p-4 cursor-pointer">
           <div className="w-full">
             <div className="flex justify-start items-start">

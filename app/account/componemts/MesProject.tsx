@@ -5,6 +5,7 @@ import LoadingShimmer from "./LoadingShimner";
 import { project } from "@/lib/apiEndpoints";
 import { UserData } from "@/lib/const";
 import ProjetCard from "@/components/ProjetCard";
+import Link from "next/link";
 
 interface ProjectRequest {
   id: number;
@@ -61,6 +62,13 @@ const MesProject = ({ item }: any) => {
         Mes projets
       </h3>
       <section className="text-gray-700 body-font">
+        {projet.length == 0 &&
+          <div className="bg-white p-10 text-center text-xl">
+            <h1 className="mb-8">{`Vous n'avez aucun projet sur consofinance.`}</h1>
+            <Link href={`/request`} className="bg-primarycolor text-white rounded p-4">Soumettre un projet</Link>
+          </div>
+        }
+
         <div className="flex flex-wrap space-y-2">
           {projet.map((item: any) => (
             <ProjetCard key={item.id} item={item} mdrow={"w-1/3"}></ProjetCard>
