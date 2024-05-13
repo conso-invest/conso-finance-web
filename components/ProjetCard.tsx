@@ -13,7 +13,7 @@ const ProjetCard = ({ item, mdrow = "w-1/4" }: any) => {
                 <img
                     src={item.image}
                     alt="banner"
-                    className="rounded-t-sm lg:h-48 md:h-36 w-full object-cover object-center"
+                    className="rounded-t-sm lg:h-48 md:h-36 w-full object-fill object-center"
                 />
                 <div className="p-2 w-full">
                     <p className="text-xs text-secondarycolor mb-1 uppercase">{item.owner.name}</p>
@@ -23,7 +23,7 @@ const ProjetCard = ({ item, mdrow = "w-1/4" }: any) => {
                         <p>{item.objectif} FCFA</p>
                     </div>
                     <div className="w-full mt-2 bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
-                        <div className="bg-green-500 h-2.5 rounded-full" style={{ width: item.progress + "%" }}></div>
+                        <div className="bg-primarycolor h-2.5 rounded-full" style={{ width: item.progress + "%" }}></div>
                     </div>
                 </div>
             </div>

@@ -61,11 +61,11 @@ function SearchPage({ params: { term } }: Props) {
 
                         <div className="progress mt-10 rounded-lg p-5">
                             <div className="flex justify-between">
-                                <div className="mb-1 text-base font-medium text-green-500 dark:text-blue-500">Progression</div>
-                                <div className="text-green-500">{detail?.progress}%</div>
+                                <div className="mb-1 text-base font-medium text-primarycolor dark:text-blue-500">Progression</div>
+                                <div className="text-primarycolor">{detail?.progress}%</div>
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
-                                <div className="bg-green-500 h-2.5 rounded-full" style={{ width: detail?.progress + "%" }}></div>
+                                <div className="bg-primarycolor h-2.5 rounded-full" style={{ width: detail?.progress + "%" }}></div>
                             </div>
                             <div className="text-xl font-bold mt-10 flex justify-between">
                                 <div className="flex justify-start items-end">

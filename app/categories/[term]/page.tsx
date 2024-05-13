@@ -39,23 +39,23 @@ function CategoriesPage({ params: { term } }: Props) {
         <div className="pt-20">
             <div className="relative flex flex-col justify-center items-center">
                 <div className="lg:w-5/6">
-                    <Link href={`/#categories`}> <h1 className="text-2xl pt-10 font-bold"> <span className="border-b-2 border-b-orange-400 cursor-pointer hover:text-orange-400">Projets</span> / {projectData?.description}</h1></Link>
+                    <Link href={`/#categories`}> <h1 className="text-2xl pt-10 font-bold"> <span className="border-b-2 border-b-orange-400 cursor-pointer hover:text-orange-400">Projets</span> / {projectData?.description}({projectData?.projects?.length})</h1></Link>
                 </div>
 
                 <div className="absolute inset-0 w-full" style={{ backgroundImage: `url('/bg-cover.jpg')`, height: '60vh', zIndex: -1, filter: 'brightness(100%)' }}>
                 </div>
 
-                <div className="w-full relative min-h-60 m-4 top-0 lg:w-5/6 p-4 lg:top-10 lg:flex lg:py-10 lg:space-x-10 bg-white rounded-lg shadow-md">
+                <div className="w-full relative min-h-60 m-4 top-0 lg:w-5/6 p-4 lg:top-10 lg:flex lg:py-10 bg-white rounded-lg shadow-md">
 
                     {projectData?.projects?.length === 0 &&
-                        <div className="flex items-center">
-                            <h1 className="text-center">Aucun resultat</h1>
+                        <div className="w-full flex justify-center items-center">
+                            <h1 className="text-center text-xl">Aucun resultat pour la catégorie <span className="text-primarycolor">{projectData?.description}</span></h1>
                         </div>
                     }
 
                     {
                         projectData?.projects?.length > 0 && projectData?.projects?.map((item: any, index: any) => (<>
-                            <ProjetCard key={index} item={item} ></ProjetCard>
+                            <ProjetCard key={index} item={item} mdrow="w-1/4"></ProjetCard>
                         </>))
                     }
 

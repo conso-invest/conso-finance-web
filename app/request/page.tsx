@@ -1,10 +1,8 @@
 "use client";
-// pages/publish-request.js
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
-import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react";
 import { auth, cat, profil, project } from "@/lib/apiEndpoints";
 import { UserData } from "@/lib/const";
@@ -111,7 +109,7 @@ const PublishRequestPage = () => {
         <p className="text-2xl font-bold text-start text-primarycolor">
           Lancez-vous sur conso finance
         </p>
-        <h1 className="mb-5">Prenez quelques minutes pour le décrire afin qu'on puisse vous accompagner au mieux</h1>
+        <h1 className="mb-5">{`Prenez quelques minutes pour le décrire afin qu'on puisse vous accompagner au mieux`}</h1>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="titre" className="font-bold">

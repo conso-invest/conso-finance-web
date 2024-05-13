@@ -46,19 +46,16 @@ function Header() {
               className="py-2 cursor-pointer"
             />
           </Link>
-
+          <Link href="/" className="hidden text-xs font-bold lg:flex hover:text-primarycolor">
+            ACCUEIL
+          </Link>
           <Link
-            href="/publishproject"
-            className="hidden text-xs font-bold lg:flex hover:text-blue-400"
+            href="/request"
+            className="hidden text-xs font-bold lg:flex hover:text-primarycolor"
           >
             LANCER UN PROJET
           </Link>
-          <Link
-            href="/"
-            className="hidden text-xs font-bold lg:flex hover:text-blue-400"
-          >
-            PARTICIPER
-          </Link>
+
         </div>
         <Link href="/" className="ml-8 lg:hidden">
           <Image src={logo} alt="logo" className="w-16 py-2 cursor-pointer" />
@@ -66,7 +63,7 @@ function Header() {
         <div className="flex items-center space-x-6">
           <Link
             href="/search"
-            className="flex items-center text-xs font-bold hover:text-blue-400"
+            className="flex items-center text-xs font-bold hover:text-primarycolor"
           >
             <SearchIcon width={20} className="lg:mr-2" />
             <span className="hidden lg:flex"> RECHERCHER UN PROJET</span>
@@ -75,7 +72,7 @@ function Header() {
           {isConnected() ? (
             <Link
               href="/account"
-              className="flex items-center text-xs font-bold hover:text-blue-400"
+              className="flex items-center text-xs font-bold hover:text-primarycolor"
             >
               <UserRound width={20} className="lg:mr-2" />
               <span className="hidden lg:flex">{getUserName()}</span>
@@ -83,7 +80,7 @@ function Header() {
           ) : (
             <Link
               href="/login"
-              className="flex items-center text-xs font-bold hover:text-blue-400"
+              className="flex items-center text-xs font-bold hover:text-primarycolor"
             >
               <UserRound width={20} className="lg:mr-2" />
               <span className="hidden lg:flex">SE CONNECTER</span>
@@ -95,12 +92,13 @@ function Header() {
       {isMenuOpen && (
         <div className="absolute left-0 right-0 h-screen pt-5 bg-white shadow-md lg:hidden">
           <div className="px-4 py-2">
-            <Link href="/publishproject" className="block py-2 border-b border-gray-200">
+            <Link href="/" className="block py-2">
+              ACCUEIL
+            </Link>
+            <Link href="/request" className="block py-2 border-b border-gray-200">
               LANCER UN PROJET
             </Link>
-            <Link href="/" className="block py-2">
-              PARTICIPER
-            </Link>
+
           </div>
         </div>
       )}

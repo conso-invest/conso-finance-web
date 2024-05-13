@@ -60,7 +60,7 @@ const MesDemande = ({ item }: any) => {
       <section className="text-gray-700 body-font">
         <div className="flex flex-wrap">
           {projectRequests.map((item: any) => (
-            <div className="shadow-sm rounded my-2 w-full bg-white p-4 cursor-pointer">
+            <div key={item.id} className="shadow-sm rounded my-2 w-full bg-white p-4 cursor-pointer">
               <div className="w-full">
                 <div className="flex justify-start items-start">
                   <div className="w-full">

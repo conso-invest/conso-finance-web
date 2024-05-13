@@ -5,7 +5,7 @@ import { project } from "@/lib/apiEndpoints";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function Search() {
+export default function Search() {
     const [categoryData, setCategoryData] = useState([]);
     const [status, setStatus] = useState('');
     const [date, setDate] = useState('');
@@ -86,7 +86,7 @@ function Search() {
                             />
                         </div>
                         <button
-                            className="w-full lg:w-auto h-12 bg-primarycolor text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+                            className="w-full lg:w-auto h-12 bg-primarycolor text-white px-4 py-2 rounded-md hover:bg-primarycolor transition-colors"
                             onClick={handleSearch}
                         >
                             Rechercher
@@ -113,5 +113,3 @@ function Search() {
         </div>
     </>)
 }
-
-export default Search;

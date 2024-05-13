@@ -18,7 +18,7 @@ function Footer() {
             <div className="mb-10 lg:mb-0">
                 <h1 className="mb-4 font-bold text-primarycolor">Conso Finance Crowdfunding</h1>
                 <div>
-                    <Link href="/publishproject">Lancer un projet</Link>
+                    <Link href="/request">Lancer un projet</Link>
                 </div>
                 <div className="mt-2">
                     <Link href="/">Voir tous les projets</Link>

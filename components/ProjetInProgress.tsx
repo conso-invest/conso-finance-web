@@ -98,9 +98,9 @@ function ProjetInProgress() {
             </div>
             <div className="mx-4 lg:mx-20 my-10" id="categories">
                 <h1 className="text-2xl font-extrabold my-5">Parcourir par catégorie</h1>
-                <div className="flex flex-wrap" >
+                <div className="flex flex-wrap space-y-4">
                     {categoryList.map((item: any) => (
-                        <Link href={`categories/${item.id}`}>
+                        <Link key={item.id} href={`categories/${item.id}`}>
                             <span key={item?.id} className="cursor-pointer p-2 border rounded-full m-2 font-bold text-sm hover:text-primarycolor hover:border-primarycolor">{item.titre}</span>
                         </Link>
                     ))}
