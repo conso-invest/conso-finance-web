@@ -108,7 +108,7 @@ const PublishRequestPage = () => {
   }, []);
 
   return (
-    <div className="banner px-4 py-12 pt-28 lg:py-20 lg:px-32 lg:pt-36">
+    <div className="banner px-4 py-12 pt-28 lg:py-20 lg:px-24 lg:pt-36">
       <div className="w-full flex flex-col justify-center items-center mb-20">
         <p className="text-2xl lg:text-6xl font-extrabold text-center text-primarycolor">
           Lancez-vous sur  consofinance

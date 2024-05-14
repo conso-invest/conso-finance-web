@@ -69,11 +69,18 @@ const MesInvestissement = ({ item }: any) => {
               </div>
             </div>
             <hr className="mb-4" />
-            <div className="contrepartie">
-              <span className="font-bold text-primarycolor">Contre partie</span>
-              <h1 className="text-xl mb-2">{item.projet_contreparie.titre}</h1>
-              <p>{item.montant} FCFA</p>
-            </div>
+            {item?.souscriptioncontrepartie.length == 0 && <>
+              <h1>Aucune contrepartie : <strong>Vous avez fait un don de {item?.montant}FCFA</strong></h1>
+            </>
+            }
+
+            {item?.souscriptioncontrepartie?.map((data: any) => {
+              return (<div className="contrepartie">
+                <span className="font-bold text-primarycolor">Contre partie</span>
+                <h1 className="text-xl mb-2">{data.contrepartie?.titre}</h1>
+                <p>{data.contrepartie?.montant} FCFA</p>
+              </div>)
+            })}
           </div>
 
         </div>

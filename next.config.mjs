@@ -6,7 +6,10 @@ const nextConfig = {
             { protocol: 'http', hostname: '*'},
         ],
        
-    }
+    },
+    experimental: {
+        appDir: false,
+    },
 };
 
 export default nextConfig;

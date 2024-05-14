@@ -1,5 +1,5 @@
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const auth = {
   login: `${apiUrl}/auth/login`,
@@ -25,6 +25,8 @@ export const project = {
   getProjetdemande: `${apiUrl}/projet/demande`,
   getProjetMeList: `${apiUrl}/projet/me/list`,
   getProjetsouscription: `${apiUrl}/projet/souscription`,
+  getProjetContrePartie: `${apiUrl}/projet/get-projet-contre-partie`,
+  pay: `${apiUrl}/pay`,
   search: `${apiUrl}/projet/search`,
 };
 

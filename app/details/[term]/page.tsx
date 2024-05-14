@@ -5,7 +5,7 @@ import { project } from "@/lib/apiEndpoints";
 import axios from "axios";
 import { CalculatorIcon, CalendarRange, CalendarRangeIcon, TimerIcon, UsersRound } from "lucide-react";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import DetailProject from "../componemts/DetailProject";
 import ContrepartieProject from "../componemts/ContrepartieProject";
@@ -20,6 +20,8 @@ type Props = {
 
 function SearchPage({ params: { term } }: Props) {
 
+    const router = useRouter();
+
     const [detail, setDetail] = useState<any>({});
     const [selected, setSelected] = useState<number>(1);
 
@@ -30,7 +32,6 @@ function SearchPage({ params: { term } }: Props) {
         setSelected(index);
     };
 
-
     const fetchOptions = async () => {
         try {
             const response = await axios.get(project.detail(termToUse));
@@ -40,6 +41,10 @@ function SearchPage({ params: { term } }: Props) {
             console.error(error);
         }
     };
+
+    const getAllContrepartie = async () => {
+        router.push(`/contrepartie/${termToUse}`);
+    }
 
     useEffect(() => {
         fetchOptions();
@@ -88,7 +93,7 @@ function SearchPage({ params: { term } }: Props) {
                         </div>
 
                         <div className="flex justify-center">
-                            <Button className="w-full h-20 text-2xl mt-8 bg-primarycolor flex flex-col">
+                            <Button className="w-full h-20 text-2xl mt-8 bg-primarycolor flex flex-col" onClick={() => getAllContrepartie()}>
                                 Contribuer au projet
                                 {/* <span className="text-sm mt-2">À partir de 50.000FCFA</span> */}
                             </Button>

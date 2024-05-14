@@ -72,6 +72,7 @@ function Register() {
     }
 
     try {
+      
       const response = await axios.post(auth.register, {
         name,
         prenom,
