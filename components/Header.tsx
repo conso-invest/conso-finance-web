@@ -4,24 +4,21 @@ import Link from "next/link";
 import { useState } from "react";
 import logo from "../public/logo.png";
 import { SearchIcon, UserRound, MenuIcon } from "lucide-react";
-import { UserData } from "@/lib/const";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [userData, setUserData] = useState<any>();
+  const [userData, setUserData] = useState<any>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const isConnected = () => {
-    const userData = localStorage.getItem("UserData");
-    return userData !== null;
-  };
+
 
   const getUserName = () => {
     const userData = localStorage.getItem("UserData");
     if (userData !== null) {
+      setUserData(userData);
       return JSON.parse(userData).name;
     }
     return null;
@@ -69,7 +66,7 @@ function Header() {
             <span className="hidden lg:flex"> RECHERCHER UN PROJET</span>
           </Link>
           <div className="hidden h-10 border-r border-gray-300 lg:flex"></div>
-          {isConnected() ? (
+          {userData != null ? (
             <Link
               href="/account"
               className="flex items-center text-xs font-bold hover:text-primarycolor"

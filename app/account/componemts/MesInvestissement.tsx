@@ -75,7 +75,7 @@ const MesInvestissement = ({ item }: any) => {
             }
 
             {item?.souscriptioncontrepartie?.map((data: any) => {
-              return (<div className="contrepartie">
+              return (<div key={data.id} className="contrepartie">
                 <span className="font-bold text-primarycolor">Contre partie</span>
                 <h1 className="text-xl mb-2">{data.contrepartie?.titre}</h1>
                 <p>{data.contrepartie?.montant} FCFA</p>
