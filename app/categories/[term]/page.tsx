@@ -45,7 +45,7 @@ function CategoriesPage({ params: { term } }: Props) {
                 <div className="absolute inset-0 w-full" style={{ backgroundImage: `url('/bg-cover.jpg')`, height: '60vh', zIndex: -1, filter: 'brightness(100%)' }}>
                 </div>
 
-                <div className="w-full relative min-h-60 m-4 top-0 lg:w-5/6 p-4 lg:top-10 lg:flex lg:py-10 bg-white rounded-lg shadow-md">
+                <div className="w-full relative flex-wrap min-h-60 m-4 top-0 lg:w-5/6 p-4 lg:top-10 lg:flex lg:py-10 bg-white rounded-lg shadow-md">
 
                     {projectData?.projects?.length === 0 &&
                         <div className="w-full flex justify-center items-center">
@@ -55,7 +55,7 @@ function CategoriesPage({ params: { term } }: Props) {
 
                     {
                         projectData?.projects?.length > 0 && projectData?.projects?.map((item: any, index: any) => (<>
-                            <ProjetCard key={index} item={item} mdrow="w-1/4"></ProjetCard>
+                            <ProjetCard key={index} item={item}></ProjetCard>
                         </>))
                     }
 

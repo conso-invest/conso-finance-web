@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation';
-const ProjetCard = ({ item, mdrow,lgrow}: any) => {
+const ProjetCard = ({ item}: any) => {
     const router = useRouter();
 
     const openProjetDetails = () => {

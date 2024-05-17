@@ -65,7 +65,7 @@ function ProjetInProgress() {
                     <h1 className="text-xl lg:text-3xl font-extrabold"><span className="bg-primarycolor px-4 py-2 rounded text-white">Les projets en cours</span></h1>
                     <div className="mt-8 overflow-auto lg:w-full whitespace-nowrap scroll-smooth no-scrollbar">
                         {categoryList.slice(0, 9).map((item: any) => (
-                            <span key={item.id} className={`${activeItem === item.id ? 'border-b-8 font-bold border-primarycolor' : ''} cursor-pointer hover:border-b-2 border-primarycolor mr-4`} onClick={() => getProjetByCategoryID(item.id)} >{item.description}</span>
+                            <span key={item.id} className={`${activeItem === item.id ? 'border-b-8 font-bold border-primarycolor' : ''} cursor-pointer hover:border-b-2 border-primarycolor mr-4`} onClick={() => getProjetByCategoryID(item.id)} >{item.titre}</span>
                         ))}
                     </div>
                 </div>

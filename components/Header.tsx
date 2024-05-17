@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from "../public/logo.png";
 import { SearchIcon, UserRound, MenuIcon } from "lucide-react";
 
@@ -9,19 +9,20 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userData, setUserData] = useState<any>(null);
 
+  useEffect(() => {
+    const userData = localStorage.getItem("UserData");
+    if (userData !== null) {
+      setUserData(JSON.parse(userData));
+    }
+  }, []);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-
-
-  const getUserName = () => {
-    const userData = localStorage.getItem("UserData");
-    if (userData !== null) {
-      setUserData(userData);
-      return JSON.parse(userData).name;
-    }
-    return null;
+  const handleLogout = () => {
+    localStorage.removeItem("UserData");
+    setUserData(null);
   };
 
   return (
@@ -52,7 +53,6 @@ function Header() {
           >
             LANCER UN PROJET
           </Link>
-
         </div>
         <Link href="/" className="ml-8 lg:hidden">
           <Image src={logo} alt="logo" className="w-16 py-2 cursor-pointer" />
@@ -66,13 +66,12 @@ function Header() {
             <span className="hidden lg:flex"> RECHERCHER UN PROJET</span>
           </Link>
           <div className="hidden h-10 border-r border-gray-300 lg:flex"></div>
-          {userData != null ? (
-            <Link
-              href="/account"
-              className="flex items-center text-xs font-bold hover:text-primarycolor"
-            >
-              <UserRound width={20} className="lg:mr-2" />
-              <span className="hidden lg:flex">{getUserName()}</span>
+          {userData ? (
+            <Link href={`/account`}>
+              <div className="flex items-center text-xs font-bold hover:text-primarycolor">
+                <UserRound width={20} className="lg:mr-2" />
+                <span className="hidden lg:flex">{userData.name}</span>
+              </div>
             </Link>
           ) : (
             <Link
@@ -95,7 +94,6 @@ function Header() {
             <Link href="/request" className="block py-2 border-b border-gray-200">
               LANCER UN PROJET
             </Link>
-
           </div>
         </div>
       )}
