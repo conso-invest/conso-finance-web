@@ -74,7 +74,7 @@ function SearchPage({ params: { term } }: Props) {
                     <div className="pb-5 lg:pb-20">
                         <img width={1020} height={680} alt="projet" className="h-full rounded-lg object-fill" src={detail?.image}></img>
                         <div className="flex flex-row items-center mt-4">
-                            <span className="font-bold mr-2"> Partargez sur :</span>
+                            <span className="font-bold mr-2"> Partarger sur :</span>
                             <div className="space-x-2">
                                 <FacebookShareButton
                                     url={`https://www.consofinance.com/details/${termToUse}`}
