@@ -15,6 +15,10 @@ const MesInvestissement = ({ item }: any) => {
     fetchData();
   }, []);
 
+  const decodeJson = (data: any) => {
+    return JSON.parse(data);
+  }
+
   const fetchData = async () => {
     const userData = localStorage.getItem(UserData) || '';
 
@@ -50,7 +54,7 @@ const MesInvestissement = ({ item }: any) => {
         {souscription.length == 0 &&
           <div className="bg-white py-10 text-center text-xl">
             <h1 className="mb-8">{`Vous éffectué aucun investissement pour le moment`}</h1>
-            <Link href={`/`} className="bg-primarycolor text-white rounded p-4">Trouver des projets</Link>
+            <Link href={`/`} className="text-sm lg:text-md bg-primarycolor text-white rounded p-4">Trouver des projets</Link>
           </div>
         }
 
@@ -69,16 +73,17 @@ const MesInvestissement = ({ item }: any) => {
               </div>
             </div>
             <hr className="mb-4" />
-            {item?.souscriptioncontrepartie.length == 0 && <>
+            {decodeJson(item?.contrepartie_data)?.length == 0 && <>
               <h1>Aucune contrepartie : <strong>Vous avez fait un don de {item?.montant}FCFA</strong></h1>
             </>
             }
 
-            {item?.souscriptioncontrepartie?.map((data: any) => {
+            {decodeJson(item?.contrepartie_data)?.map((data: any) => {
               return (<div key={data.id} className="contrepartie">
                 <span className="font-bold text-primarycolor">Contre partie</span>
-                <h1 className="text-xl mb-2">{data.contrepartie?.titre}</h1>
-                <p>{data.contrepartie?.montant} FCFA</p>
+                <h1 className="text-xl mb-2">{data?.titre}</h1>
+                <p>{data?.montant} FCFA</p>
+                <p>Date livraison : {data?.date_livraison}</p>
               </div>)
             })}
           </div>

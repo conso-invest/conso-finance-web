@@ -79,7 +79,7 @@ function ProjetInProgress() {
                 </div>
             </div>
             <div className="lg:overflow-auto whitespace-nowrap scroll-smooth no-scrollbar" ref={scrollContainerRef} >
-                <div className="lg:ml-20">
+                <div className="lg:ml-20 w-screen">
                     <div className="lg:flex">
                         {(firstRowData.length == 0 && !isLoading) && <div className="bg-gray-100 w-full flex justify-center items-center lg:mr-20">
                             <h1 className="py-20 text-sm lg:text-2xl text-secondarycolor   ">Aucun projet dans cette rubrique pour le moment</h1>

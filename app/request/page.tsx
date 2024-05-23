@@ -190,8 +190,6 @@ const PublishRequestPage = () => {
 
                 </label>
               </div>
-
-              {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
             </div>
             <div className="mt-8">
               <label htmlFor="objectif" className="font-bold">
@@ -230,8 +228,8 @@ const PublishRequestPage = () => {
                 ))}
               </Select>
             </div>
-            {error && <p className="text-red-500">{error}</p>}
-            <div className="mt-16">
+            {error && <p className="text-red-500 mt-5">{error}</p>}
+            <div className="mt-4">
               <Button className="w-full h-12 text-xl bg-secondarycolor">
                 {isLoad ? "Traitement..." : " Envoyer ma demande"}
               </Button>

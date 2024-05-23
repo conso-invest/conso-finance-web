@@ -65,7 +65,7 @@ const MesProject = ({ item }: any) => {
         {projet.length == 0 &&
           <div className="bg-white py-10 text-center text-xl">
             <h1 className="mb-8">{`Vous n'avez aucun projet sur consofinance.`}</h1>
-            <Link href={`/request`} className="bg-primarycolor text-white rounded p-4">Soumettre un projet</Link>
+            <Link href={`/request`} className="text-sm lg:text-md bg-primarycolor text-white rounded p-4">Soumettre un projet</Link>
           </div>
         }
 
