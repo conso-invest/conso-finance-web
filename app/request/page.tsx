@@ -42,7 +42,6 @@ const PublishRequestPage = () => {
 
   const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     if (
       !titre ||
       !objectif ||
@@ -85,6 +84,7 @@ const PublishRequestPage = () => {
     try {
       const response = await axios.get(project.getAllCategory);
       setCategory(response.data.data);
+      setIdCategorie(response.data.data[0]?.id);
     } catch (error) {
       console.error(error);
     }
@@ -147,7 +147,7 @@ const PublishRequestPage = () => {
               <label htmlFor="image" className="font-bold mb-2">
                 Image
               </label>
-              <div className="flex flex-col items-center justify-center p-10 border-2 border-dashed border-gray-300 rounded-md">
+              <div className="flex flex-col items-center justify-center lg:p-2 border-2 border-dashed border-gray-300 rounded-md">
                 <Input
                   placeholder=""
                   type="file"
@@ -155,14 +155,14 @@ const PublishRequestPage = () => {
                 />
                 <label
                   htmlFor="file-input"
-                  className="flex flex-col items-center justify-center w-full h-64 px-6 py-10 bg-white rounded-md shadow-md cursor-pointer hover:bg-gray-100"
+                  className="flex flex-col items-center justify-center bg-white rounded-md cursor-pointer hover:bg-gray-100"
                 >
                   {preview && (
-                    <div className="mt-4">
+                    <div className="w-full rounded-lg">
                       <img
                         src={preview}
                         alt="Preview"
-                        className="h-32 rounded-md w-32"
+                        className="max-h-80 rounded-lg object-contain"
                       />
                     </div>
                   )}
@@ -183,7 +183,7 @@ const PublishRequestPage = () => {
                         ></path>
                       </svg>
                       <p className="mt-2 text-gray-500">
-                        Choose files to Upload or drag and drop them here
+                      Choisissez des fichiers à télécharger ou faites-les glisser ici
                       </p>
                     </div>
                   )}
@@ -208,7 +208,7 @@ const PublishRequestPage = () => {
                 Palez nous de vous et du projet
               </label>
               <textarea
-                className="w-full h-32 mt-2 border rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm"
+                className="p-2 w-full h-32 mt-2 border rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm"
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
               />

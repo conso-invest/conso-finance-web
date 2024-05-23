@@ -1,3 +1,4 @@
+import { formatNumber } from "@/app/utils";
 import { useRouter } from "next/navigation";
 
 const ContrepartieProject = ({ item }: any) => {
@@ -27,7 +28,7 @@ const ContrepartieProject = ({ item }: any) => {
               <div className="w-full lg:w-96 border shadow-sm mb-10 flex items-center border-b border-gray-200 p-4 rounded-lg" key={item.id}>
                 <div className="w-full">
                   <div className="flex justify-between mb-7">
-                    <div className="text-xl text-gray-600 font-bold">Pour {item.montant} FCFA</div>
+                    <div className="text-xl text-gray-600 font-bold">Pour {formatNumber(item.montant)} FCFA</div>
                     <button className="bg-primarycolor px-4 py-2 rounded-full text-white" onClick={() => getAllContrepartie()}>Choisir</button>
                   </div>
                   <img src={item.image} alt={item.titre} className="w-80 object-cover" />

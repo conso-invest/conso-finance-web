@@ -5,6 +5,7 @@ import LoadingShimmer from "./LoadingShimner";
 import { project } from "@/lib/apiEndpoints";
 import { UserData } from "@/lib/const";
 import Link from "next/link";
+import { formatNumber } from "@/app/utils";
 
 interface ProjectRequest {
   id: number;
@@ -73,7 +74,7 @@ const MesDemande = ({ item }: any) => {
                 <div className="flex justify-start items-start">
                   <div className="w-full">
                     <h1 className="text-primarycolor font-bold">{item.category.titre}</h1>
-                    <h1 className="text-primarycolor font-bold">Besion : {item.objectif} FCFA</h1>
+                    <h1 className="text-primarycolor font-bold">Besion : {formatNumber(item.objectif)} FCFA</h1>
                   </div>
                   <div className="h-20 w-20">
                     <img src={item.image} className="w-full rounded-full h-full object-cover mt-5" alt="image" />

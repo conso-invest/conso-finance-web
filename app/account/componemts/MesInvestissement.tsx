@@ -5,6 +5,7 @@ import LoadingShimmer from "./LoadingShimner";
 import { project } from "@/lib/apiEndpoints";
 import { UserData } from "@/lib/const";
 import Link from "next/link";
+import { formatNumber } from "@/app/utils";
 
 const MesInvestissement = ({ item }: any) => {
 
@@ -75,7 +76,7 @@ const MesInvestissement = ({ item }: any) => {
             <hr className="mb-4" />
             {
               decodeJson(item?.contrepartie_data)?.length == 0 && <>
-                <h1>Aucune contrepartie : <strong>Vous avez fait un don de {item?.montant}FCFA</strong></h1>
+                <h1>Aucune contrepartie : <strong>Vous avez fait un don de {formatNumber(item?.montant)}FCFA</strong></h1>
               </>
             }
 
@@ -83,7 +84,7 @@ const MesInvestissement = ({ item }: any) => {
               return (<div key={data.id} className="contrepartie">
                 <span className="font-bold text-primarycolor">Contre partie</span>
                 <h1 className="text-xl mb-2">{data?.titre}</h1>
-                <p>{data?.montant} FCFA</p>
+                <p>{formatNumber(data?.montant)} FCFA</p>
                 <p>Date livraison : {data?.date_livraison}</p>
               </div>)
             })}

@@ -1,4 +1,5 @@
 "use client";
+import { formatNumber } from "@/app/utils";
 import { Input } from "@/components/ui/input";
 import { project } from "@/lib/apiEndpoints";
 import axios from "axios";
@@ -180,7 +181,7 @@ function ContrepartiePage({ params: { term, option } }: Props) {
                                         </li>
                                     ))}
                                 </ul>
-                                <div className="font-bold text-xl my-5 text-secondarycolor">Total: {montantTotal()} FCFA</div>
+                                <div className="font-bold text-xl my-5 text-secondarycolor">Total: {formatNumber(montantTotal())} FCFA</div>
                                 <button className="bg-primarycolor w-full lg:w-1/3 p-4 rounded my-4" onClick={() => paymentIsLoad2 ? null : payer()}> {paymentIsLoad2 ? "Traitement" : "CONTINUER"}</button>
                             </div>
                         </div>}
@@ -190,7 +191,7 @@ function ContrepartiePage({ params: { term, option } }: Props) {
                                     <div className="mx-0 lg:w-full flex-wrap lg:mx-4 border shadow-sm mb-10 items-start border-b border-gray-200 p-4 rounded-lg cursor-pointer" key={item.id}>
                                         <div className="w-full">
                                             <div className="flex justify-between items-center mb-7 rounded-full">
-                                                <div className="text-lg text-gray-600 font-bold">Pour {item?.montant} FCFA</div>
+                                                <div className="text-lg text-gray-600 font-bold">Pour {formatNumber(item?.montant)} FCFA</div>
                                                 <button className="bg-primarycolor px-4 py-2 rounded-full text-white" onClick={() => togglePanier(item)} >
                                                     {panier.some((article) => article.id === item.id) ? '- Retirer' : 'Choisir'}
                                                 </button>

@@ -1,4 +1,5 @@
 'use client'
+import { formatNumber } from '@/app/utils';
 import { useRouter } from 'next/navigation';
 const ProjetCard = ({ item}: any) => {
     const router = useRouter();
@@ -20,7 +21,7 @@ const ProjetCard = ({ item}: any) => {
                     <h2 className="font-bold mb-2 overflow-hidden whitespace-nowrap">{item.titre}</h2>
                     <div className="flex justify-between mt-2 text-gray-500 text-xs">
                         <p>J-{item.remainingTime}</p>
-                        <p>{item.objectif} FCFA</p>
+                        <p>{formatNumber(item.objectif)} FCFA</p>
                     </div>
                     <div className="w-full mt-2 bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
                         <div className="bg-primarycolor h-2.5 rounded-full" style={{ width: item.progress + "%" }}></div>
