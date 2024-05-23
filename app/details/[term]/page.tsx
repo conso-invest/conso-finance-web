@@ -71,7 +71,7 @@ function SearchPage({ params: { term } }: Props) {
                 <div className="absolute inset-0 w-full" style={{ backgroundImage: `url(${detail?.image})`, height: '60vh', zIndex: -1, filter: 'brightness(60%)' }}>
                 </div>
                 <div className="relative m-4 top-10 lg:w-5/6 p-4 lg:top-20 lg:flex lg:space-x-10 bg-white rounded-lg shadow-md">
-                    <div className="pb-20">
+                    <div className="pb-5 lg:pb-20">
                         <img width={1020} height={680} alt="projet" className="h-full rounded-lg object-fill" src={detail?.image}></img>
                         <div className="flex flex-row items-center mt-4">
                             <span className="font-bold mr-2"> Partargez sur :</span>
