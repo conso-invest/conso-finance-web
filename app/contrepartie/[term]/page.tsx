@@ -1,25 +1,25 @@
 "use client";
-import ProjetCard from "@/components/ProjetCard";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { project } from "@/lib/apiEndpoints";
 import axios from "axios";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound} from "next/navigation";
 import { useEffect, useState } from "react";
 
 type Props = {
     params: {
         term: string,
+        option:any,
     }
 }
 
-function ContrepartiePage({ params: { term } }: Props) {
+function ContrepartiePage({ params: { term, option } }: Props) {
 
     const [projectData, setProjectData] = useState<any>([]);
     const [panier, setPanier] = useState<any[]>([]);
     const [quantite, setQuantite] = useState<number>(1);
     const [donAmount, setDonAmount] = useState<any>(null);
+
 
     if (!term) notFound();
     const termToUse = decodeURI(term);
