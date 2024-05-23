@@ -17,6 +17,7 @@ type Props = {
 function CategoriesPage({ params: { term } }: Props) {
 
     const [projectData, setProjectData] = useState<any>();
+    const [isLoad, setIsLoad] = useState<boolean>(true);
 
     if (!term) notFound();
     const termToUse = decodeURI(term);
@@ -25,7 +26,7 @@ function CategoriesPage({ params: { term } }: Props) {
         const response = await axios.get(project.getCategoryWithProjet,
             { params: { 'category_id': termToUse } }
         );
-        console.log(response.data.data);
+        setIsLoad(false);
         setProjectData(response.data.data[0]);
     }
 
@@ -38,27 +39,31 @@ function CategoriesPage({ params: { term } }: Props) {
     return (
         <div className="pt-20">
             <div className="relative flex flex-col justify-center items-center">
-                <div className="lg:w-5/6">
-                    <Link href={`/#categories`}> <h1 className="text-2xl pt-10 font-bold"> <span className="border-b-2 border-b-orange-400 cursor-pointer hover:text-orange-400">Projets</span> / {projectData?.description}({projectData?.projects?.length})</h1></Link>
-                </div>
+                {!isLoad &&
+                    <div className="lg:w-5/6">
+                        <Link href={`/#categories`}> <h1 className="text-2xl pt-10 font-bold"> <span className="border-b-2 border-b-orange-400 cursor-pointer hover:text-orange-400">Projets</span> / {projectData?.description}({projectData?.projects?.length})</h1></Link>
+                    </div>
+                }
 
                 <div className="absolute inset-0 w-full" style={{ backgroundImage: `url('/bg-cover.jpg')`, height: '60vh', zIndex: -1, filter: 'brightness(100%)' }}>
                 </div>
 
                 <div className="w-full relative flex-wrap min-h-60 m-4 top-0 lg:w-5/6 p-4 lg:top-10 lg:flex lg:py-10 bg-white rounded-lg shadow-md">
+                    {!isLoad ? <>
+                        {projectData?.projects?.length === 0 &&
+                            <div className="w-full flex justify-center items-center">
+                                <h1 className="text-center text-xl">Aucun resultat pour la catégorie <span className="text-primarycolor">{projectData?.description}</span></h1>
+                            </div>
+                        }
 
-                    {projectData?.projects?.length === 0 &&
-                        <div className="w-full flex justify-center items-center">
-                            <h1 className="text-center text-xl">Aucun resultat pour la catégorie <span className="text-primarycolor">{projectData?.description}</span></h1>
-                        </div>
-                    }
-
-                    {
-                        projectData?.projects?.length > 0 && projectData?.projects?.map((item: any, index: any) => (<>
-                            <ProjetCard key={index} item={item}></ProjetCard>
-                        </>))
-                    }
-
+                        {
+                            projectData?.projects?.length > 0 && projectData?.projects?.map((item: any, index: any) => (<>
+                                <ProjetCard key={index} item={item}></ProjetCard>
+                            </>))
+                        }
+                    </> : <div className="w-full flex justify-center items-center">
+                        <p>Chargement...</p>
+                    </div>}
                 </div>
             </div>
 
