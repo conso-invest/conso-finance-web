@@ -73,9 +73,10 @@ const MesInvestissement = ({ item }: any) => {
               </div>
             </div>
             <hr className="mb-4" />
-            {decodeJson(item?.contrepartie_data)?.length == 0 && <>
-              <h1>Aucune contrepartie : <strong>Vous avez fait un don de {item?.montant}FCFA</strong></h1>
-            </>
+            {
+              decodeJson(item?.contrepartie_data)?.length == 0 && <>
+                <h1>Aucune contrepartie : <strong>Vous avez fait un don de {item?.montant}FCFA</strong></h1>
+              </>
             }
 
             {decodeJson(item?.contrepartie_data)?.map((data: any) => {

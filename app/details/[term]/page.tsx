@@ -12,6 +12,20 @@ import ContrepartieProject from "../componemts/ContrepartieProject";
 import PublicationProject from "../componemts/PublicationProject";
 import CommentProject from "../componemts/CommentProject";
 import ContributionProject from "../componemts/ContributionProject";
+
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    TelegramShareButton,
+    TelegramIcon,
+    TwitterIcon,
+    TwitterShareButton,
+    InstapaperShareButton,
+    InstagramIcon,
+    WhatsappShareButton,
+    WhatsappIcon,
+} from 'next-share'
+
 type Props = {
     params: {
         term: string,
@@ -57,8 +71,38 @@ function SearchPage({ params: { term } }: Props) {
                 <div className="absolute inset-0 w-full" style={{ backgroundImage: `url(${detail?.image})`, height: '60vh', zIndex: -1, filter: 'brightness(60%)' }}>
                 </div>
                 <div className="relative m-4 top-10 lg:w-5/6 p-4 lg:top-20 lg:flex lg:space-x-10 bg-white rounded-lg shadow-md">
-                    <div>
+                    <div className="pb-20">
                         <img width={1020} height={680} alt="projet" className="h-full rounded-lg object-fill" src={detail?.image}></img>
+                        <div className="flex flex-row items-center mt-4">
+                            <span className="font-bold mr-2"> Partargez sur :</span>
+                            <div className="space-x-2">
+                                <FacebookShareButton
+                                    url={`https://www.consofinance.com/details/${termToUse}`}
+                                    quote={'next-share is a social share buttons for your next React apps.'}
+                                    hashtag={'#nextshare'}
+                                >
+                                    <FacebookIcon size={32} round />
+                                </FacebookShareButton>
+                                <TwitterShareButton
+                                    url={`https://www.consofinance.com/details/${termToUse}`}
+                                    title={'next-share is a social share buttons for your next React apps.'}
+                                >
+                                    <TwitterIcon size={32} round />
+                                </TwitterShareButton>
+                                <InstapaperShareButton
+                                    url={`https://www.consofinance.com/details/${termToUse}`}
+                                    title={'next-share is a social share buttons for your next React apps.'}
+                                >
+                                    <InstagramIcon size={32} round />
+                                </InstapaperShareButton>
+                                <WhatsappShareButton
+                                    url={`https://www.consofinance.com/details/${termToUse}`}
+                                    title={'next-share is a social share buttons for your next React apps.'}
+                                >
+                                    <WhatsappIcon size={32} round />
+                                </WhatsappShareButton>
+                            </div>
+                        </div>
                     </div>
                     <div className="lg:w-3/4">
                         <h1 className="mt-2 text-xl lg:text-5xl font-bold mb-5">{detail?.titre}</h1>
@@ -102,6 +146,7 @@ function SearchPage({ params: { term } }: Props) {
                     </div>
                 </div>
             </div>
+
 
             <div className="bg-white mt-14 lg:mt-20">
                 <div className="overflow-auto flex lg:px-20 lg:pt-20 lg:pb-3 space-x-5 font-bold border-b-2">
