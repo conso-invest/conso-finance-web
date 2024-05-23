@@ -78,26 +78,26 @@ function SearchPage({ params: { term } }: Props) {
                             <div className="space-x-2">
                                 <FacebookShareButton
                                     url={`https://www.consofinance.com/details/${termToUse}`}
-                                    quote={'next-share is a social share buttons for your next React apps.'}
-                                    hashtag={'#nextshare'}
+                                    quote={`J'ai trouvé ce projet interessant sur consofinance`}
+                                    hashtag={'#consofinance'}
                                 >
                                     <FacebookIcon size={32} round />
                                 </FacebookShareButton>
                                 <TwitterShareButton
                                     url={`https://www.consofinance.com/details/${termToUse}`}
-                                    title={'next-share is a social share buttons for your next React apps.'}
+                                    title={`J'ai trouvé ce projet interessant sur consofinance`}
                                 >
                                     <TwitterIcon size={32} round />
                                 </TwitterShareButton>
                                 <InstapaperShareButton
                                     url={`https://www.consofinance.com/details/${termToUse}`}
-                                    title={'next-share is a social share buttons for your next React apps.'}
+                                    title={`J'ai trouvé ce projet interessant sur consofinance`}
                                 >
                                     <InstagramIcon size={32} round />
                                 </InstapaperShareButton>
                                 <WhatsappShareButton
                                     url={`https://www.consofinance.com/details/${termToUse}`}
-                                    title={'next-share is a social share buttons for your next React apps.'}
+                                    title={`J'ai trouvé ce projet interessant sur consofinance`}
                                 >
                                     <WhatsappIcon size={32} round />
                                 </WhatsappShareButton>
