@@ -20,6 +20,9 @@ function ContrepartiePage({ params: { term, option } }: Props) {
     const [quantite, setQuantite] = useState<number>(1);
     const [donAmount, setDonAmount] = useState<any>(null);
     const [isLoad, setIsLoad] = useState<boolean>(true);
+    const [paymentIsLoad, setPaymentIsLoad] = useState<boolean>(false);
+    const [paymentIsLoad2, setPaymentIsLoad2] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
 
     if (!term) notFound();
     const termToUse = decodeURI(term);
@@ -81,38 +84,57 @@ function ContrepartiePage({ params: { term, option } }: Props) {
             'panier': panier,
         }
 
-        console.log(postData);
+        setPaymentIsLoad2(true);
 
-        const response = await axios.post(project.pay,
-            postData
-        );
+        try {
+            const response = await axios.post(project.pay,
+                postData
+            );
 
-        console.log(response.data.data);
-
-
-        const newWindow = window.open(response.data.data, '_blank', 'noopener,noreferrer')
-        if (newWindow) newWindow.opener = null
+            const newWindow = window.open(response.data.data, '_blank', 'noopener,noreferrer')
+            if (newWindow) newWindow.opener = null
+            setPaymentIsLoad2(false);
+        } catch (error) {
+            setPaymentIsLoad2(false);
+        }
     };
 
     // Fonction pour effectuer un don
     const doDon = async () => {
+
+        if (donAmount == null || donAmount == "") {
+            setError('Veuillez entrer le montant');
+            return;
+        }
+
+        if (donAmount < 1000) {
+            setError('Le montant minimum est de 1.000FCFA');
+            return;
+        }
+
+        setError('');
+        setPaymentIsLoad(true);
+
         var postData = {
             'amount': donAmount,
             'title': "Don pour le projet " + projectData?.titre,
-            'projet_id': projectData?.id,
+            'id_projet': projectData?.id,
         }
 
-        console.log(postData);
+        try {
+            const response = await axios.post(project.pay,
+                postData
+            );
 
-        const response = await axios.post(project.pay,
-            postData
-        );
+            const newWindow = window.open(response.data.data, '_blank', 'noopener,noreferrer')
+            if (newWindow) newWindow.opener = null
+            setPaymentIsLoad(false);
 
-        console.log(response.data.data);
+        } catch (error) {
+            setPaymentIsLoad(false);
+        }
 
 
-        const newWindow = window.open(response.data.data, '_blank', 'noopener,noreferrer')
-        if (newWindow) newWindow.opener = null
     };
 
     useEffect(() => {
@@ -159,7 +181,7 @@ function ContrepartiePage({ params: { term, option } }: Props) {
                                     ))}
                                 </ul>
                                 <div className="font-bold text-xl my-5 text-secondarycolor">Total: {montantTotal()} FCFA</div>
-                                <button className="bg-primarycolor w-full lg:w-1/3 p-4 rounded my-4" onClick={() => payer()}>CONTINUER</button>
+                                <button className="bg-primarycolor w-full lg:w-1/3 p-4 rounded my-4" onClick={() => paymentIsLoad2 ? null : payer()}> {paymentIsLoad2 ? "Traitement" : "CONTINUER"}</button>
                             </div>
                         </div>}
                         <div className="lg:flex w-full">
@@ -187,21 +209,22 @@ function ContrepartiePage({ params: { term, option } }: Props) {
 
                             <div className="bg-white">
                                 <div className="p-4 shadow-sm rounded border border-gray-200">
-                                    <h1 className="font-bold text-lg mb-2">Faire un don</h1>
+                                    <h1 className="font-bold text-lg mb-2"> Faire un don</h1>
                                     <p className="mb-4">
                                         Un don sans contrepartie pour contribuer à la réussite de la collecte !
                                     </p>
                                     <Input
-                                        placeholder=""
+                                        placeholder="Entrez le Montant"
                                         type="number"
                                         className="h-12"
                                         value={donAmount}
                                         onChange={(event) => {
-                                            console.log(event.target.value);
                                             setDonAmount(event.target.value);
+                                            setError('');
                                         }}
                                     />
-                                    <button className="bg-primarycolor w-full p-4 rounded my-4" disabled={donAmount > 500 ? false : true} onClick={() => doDon()}>FAIRE UN DON</button>
+                                    <span className="text-red-500 text-sm">{error != '' ? error : ""}</span>
+                                    <button className="bg-primarycolor w-full p-4 rounded my-4" onClick={() => paymentIsLoad ? null : doDon()}>{paymentIsLoad ? "Traitement..." : "FAIRE UN DON"} </button>
                                 </div>
                             </div>
                         </div>
@@ -210,9 +233,9 @@ function ContrepartiePage({ params: { term, option } }: Props) {
 
                 <div className="pt-48 h-2"></div>
             </> : <>
-              <div className="h-screen flex justify-center items-center bg-slate-50">
-                 <p>Chargement...</p>
-              </div>
+                <div className="h-screen flex justify-center items-center bg-slate-50">
+                    <p>Chargement...</p>
+                </div>
             </>
             }
 
