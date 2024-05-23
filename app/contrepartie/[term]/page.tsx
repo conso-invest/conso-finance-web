@@ -133,7 +133,7 @@ function ContrepartiePage({ params: { term, option } }: Props) {
                     </div>
 
                     <div className="w-full relative min-h-60 m-4 top-0 lg:w-5/6 p-4 lg:top-10  lg:py-10 bg-white rounded-lg shadow-md">
-                        {panier.length > 0 && <div className="w-full mb-5 px-4">
+                        {panier.length > 0 && <div className="w-full mb-5 lg:px-4">
                             <div className={`p-4 shadow-md border w-full `}>
                                 <h1 className="font-bold text-lg mb-6">Votre sélection</h1>
                                 <ul>
@@ -149,7 +149,7 @@ function ContrepartiePage({ params: { term, option } }: Props) {
                                                         <div className="text-secondarycolor">Montant: {item.montant * item.quantite} FCFA</div>
                                                     </div>
                                                 </div>
-                                                <div className="flex justify-center items-center space-x-3 my-4">
+                                                <div className="flex justify-end lg:justify-center items-center space-x-3 my-4">
                                                     <button onClick={() => decrementerQuantite(index)} className="text-2xl bg-primarycolor w-10 h-10 rounded-full">-</button>
                                                     <span className="font-bold text-secondarycolor">{item.quantite}</span>
                                                     <button onClick={() => incrementerQuantite(index)} className="text-2xl  bg-primarycolor w-10 h-10 rounded-full">+</button>
@@ -165,7 +165,7 @@ function ContrepartiePage({ params: { term, option } }: Props) {
                         <div className="lg:flex w-full">
                             <div className="flex flex-wrap lg:w-2/3">
                                 {projectData?.contrepartie?.length > 0 && projectData?.contrepartie?.map((item: any) =>
-                                    <div className="lg:w-full flex-wrap mx-4 border shadow-sm mb-10 items-start border-b border-gray-200 p-4 rounded-lg cursor-pointer" key={item.id}>
+                                    <div className="mx-0 lg:w-full flex-wrap lg:mx-4 border shadow-sm mb-10 items-start border-b border-gray-200 p-4 rounded-lg cursor-pointer" key={item.id}>
                                         <div className="w-full">
                                             <div className="flex justify-between items-center mb-7 rounded-full">
                                                 <div className="text-lg text-gray-600 font-bold">Pour {item?.montant} FCFA</div>
@@ -210,9 +210,9 @@ function ContrepartiePage({ params: { term, option } }: Props) {
 
                 <div className="pt-48 h-2"></div>
             </> : <>
-                <div className="h-screen flex justify-center items-center bg-slate-50">
-                    <p>Chargement...</p>
-                </div>
+              <div className="h-screen flex justify-center items-center bg-slate-50">
+                 <p>Chargement...</p>
+              </div>
             </>
             }
 
