@@ -33,14 +33,15 @@ export default function Search() {
 
         var postData = {
             'category_id': selectedCategory,
-            'status': status,
+            'status': status == 'all' ? '': status,
             'date': date,
         };
+
+        console.log(postData);
 
         const response = await axios.post(project.search, postData);
 
         setIsLoading(false)
-
         setProjectData(response.data.data);
 
     };
@@ -101,7 +102,7 @@ export default function Search() {
                 <h1 className="text-center">Recherche en cours...</h1>
             </div>}
 
-            {(projectData?.length == 0 && !isLoading && startSearch) && <div className="w-full">
+            {((projectData?.length == 0 || projectData == null) && !isLoading && startSearch) && <div className="w-full">
                 <h1 className="text-center">Aucun résultat pour cette recherche</h1>
             </div>}
 
