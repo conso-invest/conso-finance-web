@@ -4,10 +4,18 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import logo from "../public/logo.png";
 import { SearchIcon, UserRound, MenuIcon } from "lucide-react";
+import { useRouter } from 'next/navigation';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userData, setUserData] = useState<any>(null);
+  const router = useRouter();
+
+  const openPage = (link: any) => {
+    router.push(`/details/${link}`);
+    toggleMenu();
+  }
+
 
   useEffect(() => {
     const userData = localStorage.getItem("UserData");
@@ -18,6 +26,12 @@ function Header() {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
   };
 
   const handleLogout = () => {
@@ -54,20 +68,26 @@ function Header() {
             LANCER UN PROJET
           </Link>
         </div>
-        <Link href="/" className="ml-8 lg:hidden">
+        <Link href="/" className="ml-12 lg:hidden" onClick={() => closeMenu()}>
           <Image src={logo} alt="logo" className="w-16 py-2 cursor-pointer" />
         </Link>
         <div className="flex items-center space-x-6">
           <Link
-            href="/search"
-            className="flex items-center text-xs font-bold hover:text-primarycolor"
+            href="/search" onClick={() => closeMenu()}
+            className="hidden lg:flex items-center text-xs font-bold hover:text-primarycolor"
           >
             <SearchIcon width={20} className="lg:mr-2" />
-            <span className="hidden lg:flex"> RECHERCHER UN PROJET</span>
+            <span> RECHERCHER UN PROJET</span>
+          </Link>
+          <Link
+            href="/search" onClick={() => closeMenu()}
+            className="flex lg:hidden items-center text-xs font-bold hover:text-primarycolor"
+          >
+            <SearchIcon width={20} className="lg:mr-2" />
           </Link>
           <div className="hidden h-10 border-r border-gray-300 lg:flex"></div>
           {userData ? (
-            <Link href={`/account`}>
+            <Link href={`/account`} onClick={() => closeMenu()}>
               <div className="flex items-center text-xs font-bold hover:text-primarycolor">
                 <UserRound width={20} className="lg:mr-2" />
                 <span className="hidden lg:flex">{userData.name}</span>
@@ -75,7 +95,7 @@ function Header() {
             </Link>
           ) : (
             <Link
-              href="/login"
+              href="/login" onClick={() => closeMenu()}
               className="flex items-center text-xs font-bold hover:text-primarycolor"
             >
               <UserRound width={20} className="lg:mr-2" />
@@ -87,13 +107,29 @@ function Header() {
 
       {isMenuOpen && (
         <div className="absolute left-0 right-0 h-screen pt-5 bg-white shadow-md lg:hidden">
-          <div className="px-4 py-2">
-            <Link href="/" className="block py-2">
+          <div className="space-y-5 px-4 py-2">
+            <Link href="/" onClick={() => closeMenu()} className="block py-2 ">
               ACCUEIL
             </Link>
-            <Link href="/request" className="block py-2 border-b border-gray-200">
+            <Link href="/request" onClick={() => closeMenu()} className="block py-2">
               LANCER UN PROJET
             </Link>
+            {!userData ?
+              <>
+                <Link href="/login" onClick={() => closeMenu()} className="block py-2">
+                  ME CONNECTER
+                </Link>
+
+                <Link href="/register" onClick={() => closeMenu()} className="block py-2">
+                  M'INSCRIRE
+                </Link>
+              </> :
+              <>
+                <Link href="/account" onClick={() => closeMenu()} className="block py-2">
+                  MON COMPTE
+                </Link>
+              </>
+            }
           </div>
         </div>
       )}
