@@ -151,7 +151,6 @@ function SearchPage({ params: { term } }: Props) {
                         </div>
                     </div>
 
-
                     <div className="bg-white mt-14 lg:mt-20">
                         <div className="overflow-auto flex lg:px-20 lg:pt-20 lg:pb-3 space-x-5 font-bold border-b-2">
                             <div className={`pb-2 ${selected == 1 ? 'border-b-4 border-black' : ''} cursor-pointer`} onClick={() => handleClick(1)}>Projet</div>
