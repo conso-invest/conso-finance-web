@@ -134,7 +134,7 @@ function ContrepartiePage({ params: { term, option } }: Props) {
 
                     <div className="w-full relative min-h-60 m-4 top-0 lg:w-5/6 p-4 lg:top-10  lg:py-10 bg-white rounded-lg shadow-md">
                         {panier.length > 0 && <div className="w-full mb-5 lg:px-4">
-                            <div className={`p-4 shadow-md border w-full `}>
+                            <div className={`p-4 shadow-md border w-full rounded-lg`}>
                                 <h1 className="font-bold text-lg mb-6">Votre sélection</h1>
                                 <ul>
                                     {panier.map((item, index) => (
