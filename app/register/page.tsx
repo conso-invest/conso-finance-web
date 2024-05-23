@@ -38,6 +38,7 @@ function Register() {
       try {
         const response = await axios.get(profil.list);
         setOptions(response.data.data);
+        setProfile(response.data.data[0]?.id);
       } catch (error) {
         console.error(error);
       }
