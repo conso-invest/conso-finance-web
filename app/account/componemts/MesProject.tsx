@@ -40,11 +40,8 @@ const MesProject = ({ item }: any) => {
         "id_owner": JSON.parse(userData).id,
       };
 
-      console.log(JSON.parse(userData).token);
-      console.log(postData);
-
       const res = await axios.post(project.getProjetMeList, postData);
-      console.log(res.data);
+
 
       setProjet(res.data.data);
       setLoading(false);

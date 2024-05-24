@@ -24,18 +24,13 @@ const MesInvestissement = ({ item }: any) => {
     const userData = localStorage.getItem(UserData) || '';
 
     if (userData !== null) {
-      console.log(userData);
+
       var postData = {
         "token": JSON.parse(userData).token,
         "id": JSON.parse(userData).id,
       };
 
-      console.log(JSON.parse(userData).token);
-      console.log(postData);
-
-
       const res = await axios.post(project.getProjetsouscription, postData);
-      console.log(res.data);
 
       setSouscription(res.data.data);
       setLoading(false);

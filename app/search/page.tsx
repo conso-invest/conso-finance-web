@@ -37,8 +37,6 @@ export default function Search() {
             'date': date,
         };
 
-        console.log(postData);
-
         const response = await axios.post(project.search, postData);
 
         setIsLoading(false)

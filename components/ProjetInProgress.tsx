@@ -34,14 +34,12 @@ function ProjetInProgress() {
 
     const getAllCategory = async () => {
         const response = await axios.get(project.getAllCategory);
-        console.log(response.data.data);
         setCategoryList(response.data.data);
     }
 
     const getProjetByID = async () => {
         setIsLoading(true);
         const response = await axios.get(project.getProjetByCategory);
-        console.log(response.data.data);
         setProjetList(response.data.data);
         setIsLoading(false);
     }

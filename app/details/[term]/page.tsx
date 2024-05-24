@@ -52,7 +52,6 @@ function SearchPage({ params: { term } }: Props) {
             const response = await axios.get(project.detail(termToUse));
             setDetail((response.data.data));
             setIsLoad(false);
-            console.log(response.data.data);
         } catch (error) {
             setIsLoad(false);
             console.error(error);

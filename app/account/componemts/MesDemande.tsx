@@ -38,11 +38,9 @@ const MesDemande = ({ item }: any) => {
         "token": JSON.parse(userData).token,
         "user_id": JSON.parse(userData).id,
       };
-      console.log(JSON.parse(userData).token);
-      console.log(postData);
+      
 
       const res = await axios.post(project.getProjetdemande, postData);
-      console.log(res.data);
 
       setProjectRequests(res.data.data);
       setLoading(false);

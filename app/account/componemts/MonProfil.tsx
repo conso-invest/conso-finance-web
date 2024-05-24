@@ -64,8 +64,6 @@ const MonProfil = ({ item }: any) => {
                 'otp': otp,
             });
 
-            console.log(otp);
-
             if (response.data.success) {
                 const data = response.data.data;
                 localStorage.setItem(UserData, JSON.stringify(data));
