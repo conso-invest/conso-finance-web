@@ -3,6 +3,7 @@ import { formatNumber } from "@/app/utils";
 import { Input } from "@/components/ui/input";
 import { project } from "@/lib/apiEndpoints";
 import axios from "axios";
+import { WhatsappIcon } from "next-share";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -138,6 +139,13 @@ function ContrepartiePage({ params: { term, option } }: Props) {
 
     };
 
+    const contactUs = () => {
+        var message = `Je souhaite souscrire à ce projet : https://www.consofinance.com/contrepartie/agriculture-autre`;
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/+237670184640?text=${encodedMessage}`;
+        window.open(whatsappUrl);
+    }
+
     useEffect(() => {
         getContrepartieByProjetID(termToUse);
     }, []);
@@ -182,7 +190,10 @@ function ContrepartiePage({ params: { term, option } }: Props) {
                                     ))}
                                 </ul>
                                 <div className="font-bold text-xl my-5 text-secondarycolor">Total: {formatNumber(montantTotal())} FCFA</div>
-                                <button className="bg-primarycolor w-full lg:w-1/3 p-4 rounded my-4" onClick={() => paymentIsLoad2 ? null : payer()}> {paymentIsLoad2 ? "Traitement" : "CONTINUER"}</button>
+                                <div className="lg:flex justify-between">
+                                    <button className="w-full bg-primarycolor h-14 lg:w-1/3 rounded my-4" onClick={() => paymentIsLoad2 ? null : payer()}> {paymentIsLoad2 ? "Traitement" : "CONTINUER"}</button>
+                                    <button className="flex justify-center h-14 items-center bg-white border border-white w-full font-bold lg:w-1/3 p-4 rounded-lg my-4 hover:text-primarycolor" onClick={() => contactUs()}><WhatsappIcon className="rounded-full p-2 " /> {"CONTACTEZ NOUS"}</button>
+                                </div>
                             </div>
                         </div>}
                         <div className="lg:flex w-full">
@@ -226,6 +237,7 @@ function ContrepartiePage({ params: { term, option } }: Props) {
                                     />
                                     <span className="text-red-500 text-sm">{error != '' ? error : ""}</span>
                                     <button className="bg-primarycolor w-full p-4 rounded my-4" onClick={() => paymentIsLoad ? null : doDon()}>{paymentIsLoad ? "Traitement..." : "FAIRE UN DON"} </button>
+                                    <button className="flex justify-center items-center bg-white border border-primarycolor w-full rounded-lg my-4 font-bold" onClick={() => contactUs()}><WhatsappIcon className="rounded-full p-2" /> CONTACTEZ NOUS</button>
                                 </div>
                             </div>
                         </div>
