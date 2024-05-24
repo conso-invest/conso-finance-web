@@ -5,15 +5,23 @@ import { useState, useEffect } from "react";
 import logo from "../public/logo.png";
 import { SearchIcon, UserRound, MenuIcon } from "lucide-react";
 import { useRouter } from 'next/navigation';
+import Modal from "./ui/modal";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userData, setUserData] = useState<any>(null);
+  const [showModal, setShowModal] = useState<any>(false);
   const router = useRouter();
 
   const openPage = (link: any) => {
-    router.push(`/details/${link}`);
-    toggleMenu();
+
+    if (userData != null) {
+      router.push(`${link}`);
+      toggleMenu();
+    } else {
+      setShowModal(true);
+    }
+
   }
 
 
@@ -61,12 +69,12 @@ function Header() {
           <Link href="/" className="hidden text-xs font-bold lg:flex hover:text-primarycolor">
             ACCUEIL
           </Link>
-          <Link
-            href="/request"
-            className="hidden text-xs font-bold lg:flex hover:text-primarycolor"
+          <span
+            onClick={() => openPage('/request')}
+            className="cursor-pointer hidden text-xs font-bold lg:flex hover:text-primarycolor"
           >
             LANCER UN PROJET
-          </Link>
+          </span>
         </div>
         <Link href="/" className="ml-12 lg:hidden" onClick={() => closeMenu()}>
           <Image src={logo} alt="logo" className="w-16 py-2 cursor-pointer" />
@@ -111,9 +119,9 @@ function Header() {
             <Link href="/" onClick={() => closeMenu()} className="block py-2 ">
               ACCUEIL
             </Link>
-            <Link href="/request" onClick={() => closeMenu()} className="block py-2">
+            <span onClick={() => openPage('/request')} className="cursor-pointer block py-2">
               LANCER UN PROJET
-            </Link>
+            </span>
             {!userData ?
               <>
                 <Link href="/login" onClick={() => closeMenu()} className="block py-2">
@@ -133,6 +141,25 @@ function Header() {
           </div>
         </div>
       )}
+
+
+      {showModal && <Modal
+        id="default-modal"
+        title="Connexion Requise"
+        content={[
+          "Veuillez vous inscrire si vous n'avez pas encore de compte ou vous connecter pour continuer.",
+        ]}
+        acceptBtn={() => {
+          setShowModal(false);
+          closeMenu();
+          router.push('/login');
+        }}
+        declineBtn={() => {
+          setShowModal(false);
+        }}
+      />
+      }
+
     </header>
   );
 }

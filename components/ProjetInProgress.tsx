@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import axios from "axios";
 import { project } from "@/lib/apiEndpoints";
 import Link from "next/link";
+import Modal from "./ui/modal";
 
 function ProjetInProgress() {
 
