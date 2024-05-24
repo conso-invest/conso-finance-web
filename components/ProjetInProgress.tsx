@@ -68,14 +68,16 @@ function ProjetInProgress() {
                         ))}
                     </div>
                 </div>
-                <div className="hidden lg:flex space-x-2">
-                    <Button className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-slate-400" onClick={handleScrollLeft}  >
-                        <ChevronLeft />
-                    </Button>
-                    <Button className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-slate-400" onClick={handleScrollRight}  >
-                        <ChevronRight />
-                    </Button>
-                </div>
+                {
+                    firstRowData?.length >= 5 && <div className="hidden lg:flex space-x-2">
+                        <Button className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-slate-400" onClick={handleScrollLeft}  >
+                            <ChevronLeft />
+                        </Button>
+                        <Button className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-slate-400" onClick={handleScrollRight}  >
+                            <ChevronRight />
+                        </Button>
+                    </div>
+                }
             </div>
             <div className="lg:overflow-auto whitespace-nowrap scroll-smooth no-scrollbar" ref={scrollContainerRef} >
                 <div className="lg:ml-20 w-screen">
