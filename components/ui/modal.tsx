@@ -19,7 +19,7 @@ const Modal: React.FC<ModalProps> = ({ id, title, content, acceptBtn, declineBtn
                     <div className="bg-primarycolor border-0 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none">
                         {/*header*/}
                         <div className="flex items-start justify-between p-5 border-b border-solid border-secondarycolor rounded-t">
-                            <h3 className="text-3xl font-semibold text-secondarycolor">{title}</h3>
+                            <h3 className="text-xl lg:text-3xl font-semibold text-secondarycolor">{title}</h3>
                             <button
                                 className="p-1 ml-auto  border-0 text-black opacity- float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                                 onClick={declineBtn}
