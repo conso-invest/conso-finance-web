@@ -1,4 +1,6 @@
-import { Mail, MapIcon, Phone } from "lucide-react";
+"use client";
+import { Linkedin, LinkedinIcon, Mail, MapIcon, Phone } from "lucide-react";
+import { FacebookIcon, LinkedinShareButton, WhatsappIcon } from "next-share";
 import Link from "next/link";
 
 function Footer() {
@@ -8,11 +10,14 @@ function Footer() {
                 <h1 className="mb-4 font-bold text-primarycolor">Qui sommes nous ?</h1>
                 <p className="mr-4">Conso Finance est la première plateforme camerounaise de financement participatif créée en 2024.</p>
                 <h1 className="mt-8 font-bold text-primarycolor">Suivez-nous sur </h1>
-                <div className="mt-4">
-                    <Link href="https://web.facebook.com/ConsoFinance">Facebook</Link>
+                <div className="mt-1">
+                    <Link className="flex items-center" target="_blank" href="https://web.facebook.com/ConsoFinance"><FacebookIcon className="w-5 mr-2 rounded-full"></FacebookIcon>Facebook</Link>
                 </div>
-                <div className="mt-2">
-                    <Link href="https://www.linkedin.com/company/consofinance">LinkedIn</Link>
+                <div className="-mt-2">
+                    <Link className="flex items-center" target="_blank" href="https://www.linkedin.com/company/consofinance"> <Linkedin className="w-5 mr-2 rounded-full"></Linkedin> LinkedIn</Link>
+                </div>
+                <div className="-mt-2">
+                    <Link className="flex items-center"target="_blank"  href="https://wa.me/+237670184640?text=Bonjour"><WhatsappIcon className="w-5 mr-2 rounded-full"></WhatsappIcon> Whatsapp</Link>
                 </div>
             </div>
             <div className="mb-10 lg:mb-0">
@@ -34,13 +39,13 @@ function Footer() {
             <div className="mb-10 lg:mb-0">
                 <h1 className="mb-4 font-bold text-primarycolor">Nous contacter</h1>
                 <div>
-                    <Link href="mailto:contact@consofinance.com" className="flex"><Mail className="mr-2 w-4 text-primarycolor"/> contact@consofinance.com</Link>
+                    <Link href="mailto:contact@consofinance.com" className="flex"><Mail className="mr-2 w-4 text-primarycolor" /> contact@consofinance.com</Link>
                 </div>
                 <div className="my-4">
-                    <Link href="tel:+237670184640" className="flex"><Phone className="mr-2 w-4 text-primarycolor"/>  (+237) 670 184 640</Link>
+                    <Link href="tel:+237670184640" className="flex"><Phone className="mr-2 w-4 text-primarycolor" />  (+237) 670 184 640</Link>
                 </div>
                 <div className="mt-2">
-                    <Link href="https://maps.app.goo.gl/XyW7bEwHEk8w1LDr8"  target="_blank" className="flex"><MapIcon className="mr-2 w-4 text-primarycolor"/>  Titi garage - Yaoundé</Link>
+                    <Link href="https://maps.app.goo.gl/XyW7bEwHEk8w1LDr8" target="_blank" className="flex"><MapIcon className="mr-2 w-4 text-primarycolor" />  Titi garage - Yaoundé</Link>
                 </div>
             </div>
         </div>
