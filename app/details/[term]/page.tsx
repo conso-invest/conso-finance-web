@@ -160,7 +160,7 @@ function SearchPage({ params: { term } }: Props) {
                         </div>
 
                         <div className="overflow-auto p-4 lg:px-20 lg:py-5">
-                            {selected == 1 ? <DetailProject item={detail.description} /> : ''}
+                            {selected == 1 ? <DetailProject item={detail} /> : ''}
                             {selected == 2 ? <ContrepartieProject item={detail} /> : ''}
                             {selected == 3 ? <PublicationProject item={detail.publication} /> : ''}
                             {selected == 4 ? <ContributionProject item={detail.souscription} /> : ''}
