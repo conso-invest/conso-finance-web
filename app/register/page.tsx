@@ -17,6 +17,7 @@ function Register() {
   const [email, setEmail] = useState<any>("");
   const [id_profil, setProfile] = useState<any>("");
   const [password, setPassword] = useState<any>("");
+  const [passwordConfirm, setPasswordConfirm] = useState<any>("");
   const [error, setError] = useState<any>("");
   const [options, setOptions] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -33,7 +34,7 @@ function Register() {
     if (isConnected()) {
       window.location.href = "/";
     }
-    
+
     const fetchOptions = async () => {
       try {
         const response = await axios.get(profil.list);
@@ -49,31 +50,34 @@ function Register() {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    setLoading(true);
+
 
     if (!name || !prenom || !email || !id_profil || !password || !telephone) {
-      setLoading(false);
-
+  
       setError("Tous les champs sont requis.");
       return;
     }
 
+    if (password.length < 8) {
+      setError("Le mot de passe doit contenir au moins 8 caractères.");
+      return;
+    }
+
+    if (password !== passwordConfirm) {
+      setError("Les mots de passe ne correspondent pas");
+      return;
+    }
+
     if (!validateEmail(email)) {
-      setLoading(false);
 
       setError("S'il vous plaît entrer une adresse e-mail valide.");
       return;
     }
 
-    if (password.length < 8) {
-      setLoading(false);
-
-      setError("Le mot de passe doit contenir au moins 8 caractères.");
-      return;
-    }
-
     try {
-      
+
+      setLoading(true);
+
       const response = await axios.post(auth.register, {
         name,
         prenom,
@@ -95,7 +99,6 @@ function Register() {
       }
     } catch (error) {
       setLoading(false);
-
       setError(
         "Une erreur s'est produite lors de l'inscription. Veuillez réessayer plus tard."
       );
@@ -192,6 +195,18 @@ function Register() {
             className="h-12"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="mt-8">
+          <label htmlFor="Confirmer" className="font-bold">
+            Confirmer le mot de passe
+          </label>
+          <Input
+            placeholder=""
+            type="password"
+            className="h-12"
+            value={passwordConfirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
           />
         </div>
         {error && <p className="text-red-500">{error}</p>}
