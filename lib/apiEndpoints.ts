@@ -6,6 +6,8 @@ export const auth = {
   register: `${apiUrl}/auth/register`,
   logout: `${apiUrl}/auth/logout`,
   refresh: `${apiUrl}/auth/refresh`,
+  sendOTP: `${apiUrl}/auth/sendOtp`,
+  verifyOTP: `${apiUrl}/auth/verifOtp`,
 };
 
 export const profil = {
