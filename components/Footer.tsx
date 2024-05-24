@@ -9,10 +9,10 @@ function Footer() {
                 <p className="mr-4">Conso Finance est la première plateforme camerounaise de financement participatif créée en 2024.</p>
                 <h1 className="mt-8 font-bold text-primarycolor">Suivez-nous sur </h1>
                 <div className="mt-4">
-                    <Link href="/">Facebook</Link>
+                    <Link href="https://web.facebook.com/ConsoFinance">Facebook</Link>
                 </div>
                 <div className="mt-2">
-                    <Link href="/">LinkedIn</Link>
+                    <Link href="https://www.linkedin.com/company/consofinance">LinkedIn</Link>
                 </div>
             </div>
             <div className="mb-10 lg:mb-0">
@@ -37,7 +37,7 @@ function Footer() {
                     <Link href="mailto:contact@consofinance.com" className="flex"><Mail className="mr-2 w-4 text-primarycolor"/> contact@consofinance.com</Link>
                 </div>
                 <div className="my-4">
-                    <Link href="tel:+237600000000" className="flex"><Phone className="mr-2 w-4 text-primarycolor"/>  (+237) 600 000 000</Link>
+                    <Link href="tel:+237 670 184 640" className="flex"><Phone className="mr-2 w-4 text-primarycolor"/>  (+237) 600 000 000</Link>
                 </div>
                 <div className="mt-2">
                     <Link href="https://maps.app.goo.gl/XyW7bEwHEk8w1LDr8"  target="_blank" className="flex"><MapIcon className="mr-2 w-4 text-primarycolor"/>  Titi garage - Yaoundé</Link>

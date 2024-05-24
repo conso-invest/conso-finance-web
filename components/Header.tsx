@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import logo from "../public/logo.png";
 import { SearchIcon, UserRound, MenuIcon } from "lucide-react";
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import Modal from "./ui/modal";
 
 function Header() {
@@ -12,18 +12,16 @@ function Header() {
   const [userData, setUserData] = useState<any>(null);
   const [showModal, setShowModal] = useState<any>(false);
   const router = useRouter();
+  const  pathname  = usePathname(); // Obtenir le chemin actuel
 
   const openPage = (link: any) => {
-
     if (userData != null) {
       router.push(`${link}`);
       toggleMenu();
     } else {
       setShowModal(true);
     }
-
-  }
-
+  };
 
   useEffect(() => {
     const userData = localStorage.getItem("UserData");
@@ -66,12 +64,15 @@ function Header() {
               className="py-2 cursor-pointer"
             />
           </Link>
-          <Link href="/" className="hidden text-xs font-bold lg:flex hover:text-primarycolor">
+          <Link
+            href="/"
+            className={`hidden text-xs font-bold lg:flex hover:text-primarycolor ${pathname === "/" ? "active-link" : ""}`}
+          >
             ACCUEIL
           </Link>
           <span
             onClick={() => openPage('/request')}
-            className="cursor-pointer hidden text-xs font-bold lg:flex hover:text-primarycolor"
+            className={`cursor-pointer hidden text-xs font-bold lg:flex hover:text-primarycolor ${pathname === "/request" ? "active-link" : ""}`}
           >
             LANCER UN PROJET
           </span>
@@ -82,7 +83,7 @@ function Header() {
         <div className="flex items-center space-x-6">
           <Link
             href="/search" onClick={() => closeMenu()}
-            className="hidden lg:flex items-center text-xs font-bold hover:text-primarycolor"
+            className={`hidden lg:flex items-center text-xs font-bold hover:text-primarycolor ${pathname === "/search" ? "active-link" : ""}`}
           >
             <SearchIcon width={20} className="lg:mr-2" />
             <span> RECHERCHER UN PROJET</span>
@@ -95,16 +96,14 @@ function Header() {
           </Link>
           <div className="hidden h-10 border-r border-gray-300 lg:flex"></div>
           {userData ? (
-            <Link href={`/account`} onClick={() => closeMenu()}>
-              <div className="flex items-center text-xs font-bold hover:text-primarycolor">
-                <UserRound width={20} className="lg:mr-2" />
-                <span className="hidden lg:flex">{userData.name}</span>
-              </div>
+            <Link href={`/account`} onClick={() => closeMenu()} className={`flex items-center text-xs font-bold hover:text-primarycolor ${pathname === "/account" ? "active-link" : ""}`}>
+              <UserRound width={20} className="lg:mr-2" />
+              <span className="hidden lg:flex">{userData.name}</span>
             </Link>
           ) : (
             <Link
               href="/login" onClick={() => closeMenu()}
-              className="flex items-center text-xs font-bold hover:text-primarycolor"
+              className={`flex items-center text-xs font-bold hover:text-primarycolor ${pathname === "/login" ? "active-link" : ""}`}
             >
               <UserRound width={20} className="lg:mr-2" />
               <span className="hidden lg:flex">SE CONNECTER</span>
@@ -116,24 +115,24 @@ function Header() {
       {isMenuOpen && (
         <div className="absolute left-0 right-0 h-screen pt-5 bg-white shadow-md lg:hidden">
           <div className="space-y-5 px-4 py-2">
-            <Link href="/" onClick={() => closeMenu()} className="block py-2 ">
+            <Link href="/" onClick={() => closeMenu()} className={`block py-2 ${pathname === "/" ? "active-link" : ""}`}>
               ACCUEIL
             </Link>
-            <span onClick={() => openPage('/request')} className="cursor-pointer block py-2">
+            <span onClick={() => openPage('/request')} className={`cursor-pointer block py-2 ${pathname === "/request" ? "active-link" : ""}`}>
               LANCER UN PROJET
             </span>
             {!userData ?
               <>
-                <Link href="/login" onClick={() => closeMenu()} className="block py-2">
+                <Link href="/login" onClick={() => closeMenu()} className={`block py-2 ${pathname === "/login" ? "active-link" : ""}`}>
                   ME CONNECTER
                 </Link>
 
-                <Link href="/register" onClick={() => closeMenu()} className="block py-2">
+                <Link href="/register" onClick={() => closeMenu()} className={`block py-2 ${pathname === "/register" ? "active-link" : ""}`}>
                   M'INSCRIRE
                 </Link>
               </> :
               <>
-                <Link href="/account" onClick={() => closeMenu()} className="block py-2">
+                <Link href="/account" onClick={() => closeMenu()} className={`block py-2 ${pathname === "/account" ? "active-link" : ""}`}>
                   MON COMPTE
                 </Link>
               </>
@@ -141,7 +140,6 @@ function Header() {
           </div>
         </div>
       )}
-
 
       {showModal && <Modal
         id="default-modal"
@@ -159,7 +157,6 @@ function Header() {
         }}
       />
       }
-
     </header>
   );
 }
