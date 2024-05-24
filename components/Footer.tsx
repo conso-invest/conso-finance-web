@@ -37,7 +37,7 @@ function Footer() {
                     <Link href="mailto:contact@consofinance.com" className="flex"><Mail className="mr-2 w-4 text-primarycolor"/> contact@consofinance.com</Link>
                 </div>
                 <div className="my-4">
-                    <Link href="tel:+237 670 184 640" className="flex"><Phone className="mr-2 w-4 text-primarycolor"/>  (+237) 600 000 000</Link>
+                    <Link href="tel:+237670184640" className="flex"><Phone className="mr-2 w-4 text-primarycolor"/>  (+237) 670 184 640</Link>
                 </div>
                 <div className="mt-2">
                     <Link href="https://maps.app.goo.gl/XyW7bEwHEk8w1LDr8"  target="_blank" className="flex"><MapIcon className="mr-2 w-4 text-primarycolor"/>  Titi garage - Yaoundé</Link>
