@@ -14,6 +14,7 @@ const MonProfil = ({ item }: any) => {
     const [sendOtpIsLoad, setSendOtpIsLoad] = useState<any>(false);
     const [verifyOtpIsLoad, setVerifyOtpIsLoad] = useState<any>(false);
     const [error, setError] = useState<any>(null);
+    const [isVerified, setIsFeried] = useState<any>(null);
 
     const getUserData = () => {
         const userData = localStorage.getItem("UserData");
@@ -63,9 +64,14 @@ const MonProfil = ({ item }: any) => {
                 'otp': otp,
             });
 
+            console.log(otp);
+
             if (response.data.success) {
                 const data = response.data.data;
                 localStorage.setItem(UserData, JSON.stringify(data));
+                window.location.href = "/account";
+                setIsFeried(true);
+                setError('');
                 setVerifyOtpIsLoad(false);
             } else {
                 setError('Code de vérification invalide');
@@ -92,9 +98,9 @@ const MonProfil = ({ item }: any) => {
                     <h1 className="mb-4">{userData?.userprofil?.profil?.titre}</h1>
 
                     <span className="font-bold text-primarycolor text-lg">Statut du compte</span>
-                    <h1 className={`${userData?.email_verified_at != null ? "text-green-800" : "text-red-500"} mb-4`}>{userData?.email_verified_at != null ? "Vérifié" : "Non Vérifié"}</h1>
+                    <h1 className={`${(userData?.email_verified_at != null) ? "text-green-800" : "text-red-500"} mb-4`}>{(userData?.email_verified_at != null) ? "Vérifié" : "Non Vérifié"}</h1>
 
-                    {userData?.email_verified_at == null && <>
+                    {(userData?.email_verified_at == null) && <>
                         {verificationStape == 2 ? <div className="mt-8 lg:w-80">
                             <label htmlFor="sous_titre" className="">
                                 <span className="font-bold">Entrez le code de vérification</span> {` recu par mail  à l'adresse`}   {userData?.email}
