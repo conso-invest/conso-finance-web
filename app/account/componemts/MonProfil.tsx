@@ -33,6 +33,7 @@ const MonProfil = ({ item }: any) => {
     const sendOtp = async () => {
 
         try {
+console.log(auth.sendOTP);
 
             setSendOtpIsLoad(true);
 
