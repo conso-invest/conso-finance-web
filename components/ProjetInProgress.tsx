@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import axios from "axios";
 import { project } from "@/lib/apiEndpoints";
 import Link from "next/link";
+import Modal from "./ui/modal";
 
 function ProjetInProgress() {
 
@@ -45,8 +46,8 @@ function ProjetInProgress() {
     }
 
     // Divisez les données en deux ensembles
-    const firstRowData = projetList?.slice(0, Math.ceil(projetList.length / 2));
-    const secondRowData = projetList?.slice(Math.ceil(projetList.length / 2));
+    const firstRowData = projetList.length > 5 ? projetList?.slice(0, Math.ceil(projetList.length / 2)) : projetList;
+    const secondRowData =projetList.length > 5 ? projetList?.slice(Math.ceil(projetList.length / 2)):[];
 
     const getProjetByCategoryID = async (id: any) => {
         setActiveItem(id);
@@ -67,14 +68,16 @@ function ProjetInProgress() {
                         ))}
                     </div>
                 </div>
-                <div className="hidden lg:flex space-x-2">
-                    <Button className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-slate-400" onClick={handleScrollLeft}  >
-                        <ChevronLeft />
-                    </Button>
-                    <Button className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-slate-400" onClick={handleScrollRight}  >
-                        <ChevronRight />
-                    </Button>
-                </div>
+                {
+                    firstRowData?.length >= 5 && <div className="hidden lg:flex space-x-2">
+                        <Button className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-slate-400" onClick={handleScrollLeft}  >
+                            <ChevronLeft />
+                        </Button>
+                        <Button className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-slate-400" onClick={handleScrollRight}  >
+                            <ChevronRight />
+                        </Button>
+                    </div>
+                }
             </div>
             <div className="lg:overflow-auto whitespace-nowrap scroll-smooth no-scrollbar" ref={scrollContainerRef} >
                 <div className="lg:ml-20 w-screen">

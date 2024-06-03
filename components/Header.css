@@ -1,3 +1,8 @@
-.banner{
+.banner {
     background-image: url('../public/bg-cover.jpg');
+}
+
+.active-link {
+    color: #d5a833;
+    font-weight: bold;
 }
