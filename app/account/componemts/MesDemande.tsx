@@ -76,6 +76,8 @@ const MesDemande = ({ item }: any) => {
                   </div>
                   <div className="h-20 w-20">
                     <img src={item.image} className="w-full rounded-full h-full object-cover mt-5" alt="image" />
+            <Link href={`/request?type=edit&id=`+item.id} className="text-sm lg:text-md bg-primarycolor text-white rounded p-4">Modifier</Link>
+
                   </div>
                 </div>
                 <hr className="mb-4" />

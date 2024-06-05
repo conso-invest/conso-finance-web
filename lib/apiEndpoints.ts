@@ -3,6 +3,7 @@ const apiUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const auth = {
   login: `${apiUrl}/auth/login`,
+  change_password: `${apiUrl}/auth/change_password`,
   register: `${apiUrl}/auth/register`,
   logout: `${apiUrl}/auth/logout`,
   refresh: `${apiUrl}/auth/refresh`,
@@ -20,6 +21,7 @@ export const cat = {
 
 export const project = {
   detail: (slug: any) => `${apiUrl}/user/projet/detail/${slug}`,
+  get_curent_request: (slug: any) => `${apiUrl}/projet/request-detail/${slug}`,
   send_request: `${apiUrl}/projet/send-request`,
   getAllCategory: `${apiUrl}/projet/get-all-category`,
   getProjetByCategory: `${apiUrl}/projet/get-projet-by-category`,
@@ -30,6 +32,11 @@ export const project = {
   getProjetContrePartie: `${apiUrl}/projet/get-projet-contre-partie`,
   pay: `${apiUrl}/pay`,
   search: `${apiUrl}/projet/search`,
+};
+
+export const commentaire = {
+  commentaire_send:  `${apiUrl}/commentaire/send`,
+
 };
 
 /* export const users = {
