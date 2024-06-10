@@ -164,7 +164,7 @@ function SearchPage({ params: { term } }: Props) {
                             {selected == 2 ? <ContrepartieProject item={detail} /> : ''}
                             {selected == 3 ? <PublicationProject item={detail.publication} /> : ''}
                             {selected == 4 ? <ContributionProject item={detail.souscription} /> : ''}
-                            {selected == 5 ? <CommentProject item={detail.commentaire} /> : ''}
+                            {selected == 5 ? <CommentProject item={detail.commentaire} id_projet_comment={detail.id} /> : ''}
                         </div>
                     </div>
                 </> :

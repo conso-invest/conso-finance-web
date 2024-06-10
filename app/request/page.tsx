@@ -10,6 +10,7 @@ import { BookAIcon, ChefHatIcon, SunIcon, UsersIcon } from "lucide-react";
 
 const PublishRequestPage = () => {
   const [titre, setTitre] = useState("");
+ 
   const [sousTitre, setSousTitre] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [objectif, setObjectif] = useState("");
@@ -20,6 +21,75 @@ const PublishRequestPage = () => {
   const [category, setCategory] = useState<any>([]);
   const [user, setUser] = useState<any>({});
   const [isLoad, setIsLoad] = useState(false);
+  const [isLoadDetail, setIsLoadDetail] = useState(false);
+
+  function getQueryParam(param: string): string {
+    // Create a new URL object from the current URL
+    const urlObj: URL = new URL(window.location.href);
+  
+    // Get the search parameters from the URL
+    const params: URLSearchParams = new URLSearchParams(urlObj.search);
+  
+    // Get the value of the specified parameter
+    const value: string | null = params.get(param);
+  
+    // Check if the parameter is null and handle it
+    if (value === null) {
+      return null;
+    }
+  
+    return value;
+  }
+
+
+  const getDataCurrent = async (id:integer) => {
+    try {
+
+      setIsLoadDetail(true);
+
+      const response = await axios.post(project.get_curent_request(id));
+console.log(response.data);
+      if(response.data.success){
+      setIsLoadDetail(false);
+
+        setTitre(response.data.data.titre);
+        setSousTitre(response.data.data.sous_titre);
+       
+        setObjectif(response.data.data.objectif);
+        setDescription(response.data.data.description);
+        setIdCategorie(response.data.data.id_categorie);
+     //   setError("");
+        setPreview<string | null>(response.data.data.image);
+      }else{
+        window.location.href = "/request";
+      }
+      //window.location.href = "/";
+      // Redirect to a success page or display a success message
+     // setError("");
+       //  setImage<File | null>(null);
+
+/*       setTitre("");
+      setSousTitre("");
+  
+      setObjectif("");
+      setDescription("");
+      setIdCategorie("");
+      setError("");
+      setPreview<string | null>(null); */
+    } catch (error) {
+      console.error(error);
+
+      window.location.href = "/request";
+
+      setIsLoadDetail(false);
+   
+    }
+  }
+  
+  // Usage example:
+  const type: string | null = getQueryParam('type');
+  const id: string | null = getQueryParam('id');
+
 
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -59,16 +129,40 @@ const PublishRequestPage = () => {
       const formData = new FormData();
       formData.append("titre", titre);
       formData.append("sous_titre", sousTitre);
-      formData.append("image", image as Blob);
+
+
+      if(image && getQueryParam('id')==null){
+        formData.append("image", image as Blob);
+      }else if(image==null && getQueryParam('id')!=null){
+        formData.append("image", preview);
+      }else if(image!=null && getQueryParam('id')!=null){
+        formData.append("image", image as Blob);
+      }else if(image!=null && getQueryParam('id')==null){
+        formData.append("image", image as Blob);
+      }else{
+        formData.append("image", image as Blob);
+      }
+ 
+
+     
       formData.append("objectif", objectif);
       formData.append("description", description);
       formData.append("id_categorie", idCategorie);
       formData.append("token", user.token);
       formData.append("user_id", user.id);
-      const response = await axios.post(project.send_request, formData);
+
+      console.log(getQueryParam('id')==null?project.send_request:project.send_request+"/"+getQueryParam('id'));
+
+      const response = await axios.post(getQueryParam('id')==null?project.send_request:project.send_request+"/"+getQueryParam('id'), formData);
 
       setIsLoad(false);
-      window.location.href = "/";
+     // window.location.href = "/";
+     if(getQueryParam('id')!==null){
+      console.log('Type:', type); // Output: edit (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
+      console.log('ID:', id); // Output: 1 (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
+      getDataCurrent(getQueryParam('id'));
+
+    }
       // Redirect to a success page or display a success message
       setError("");
     } catch (error) {
@@ -105,6 +199,26 @@ const PublishRequestPage = () => {
   useEffect(() => {
     checkIfIsConnected();
     fetchCategory();
+      
+    try {
+   
+      if(getQueryParam('id')!==null){
+        console.log('Type:', type); // Output: edit (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
+        console.log('ID:', id); // Output: 1 (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
+        getDataCurrent(getQueryParam('id'));
+
+      }
+    
+      console.log('Type:', type); // Output: edit (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
+      console.log('ID:', id); // Output: 1 (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
+    } catch (error) {
+
+      if(getQueryParam('id')==null){
+       // setIsLoadDetail(false);
+      }
+      console.error(error.message);
+    }
+  
   }, []);
 
   return (

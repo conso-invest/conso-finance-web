@@ -5,6 +5,7 @@ import MonProfil from "./componemts/MonProfil";
 import MesProject from "./componemts/MesProject";
 import MesInvestissement from "./componemts/MesInvestissement";
 import MesDemande from "./componemts/MesDemande";
+import Securite from "./componemts/Securite";
 import { UserData } from "@/lib/const";
 
 function Account() {
@@ -16,6 +17,7 @@ function Account() {
         { id: 2, name: "Demandes", icon: <DnaIcon /> },
         { id: 3, name: "Projets", icon: <DnaIcon /> },
         { id: 4, name: "Investisements", icon: <DnaIcon /> },
+        { id: 5, name: "Securite", icon: <DnaIcon /> },
     ]
 
     return (<>
@@ -44,8 +46,11 @@ function Account() {
                     </>}
                     {activeTabs === 3 && <>
                         <MesProject item={activeTabs} />   </>}
-                    {activeTabs === 4 && <>
+                        {activeTabs === 4 && <>
                         <MesInvestissement item={activeTabs} />
+                    </>}
+                    {activeTabs === 5 && <>
+                        <Securite item={activeTabs} />
                     </>}
                 </div>
             </div>
