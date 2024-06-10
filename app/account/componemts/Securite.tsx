@@ -84,16 +84,16 @@ const Securite = ({ item }: any) => {
     <div className=" flex ">
       <div className="bg-white p-8 shadow-lg lg:w-3/6 lg:p-10">
         <p className="text-2xl font-bold text-start text-primarycolor">
-          Modification du mot de passe!{" "}
+          Modification du mot de passe {" "}
         </p>
         <p className="w-4/5 mt-2 mb-10 text-sm lg:w-3/5">
-          Connectez-vous à votre espace Conso Finance en toute sécurité.
+         Sécurisez votre compte
         </p>
         <form onSubmit={handleSubmit}>
 
           <div className="mt-8">
             <label htmlFor="password" className="font-bold">
-              Ancient mot de passe
+              Ancien mot de passe
             </label>
             <Input
               placeholder=""
@@ -105,7 +105,7 @@ const Securite = ({ item }: any) => {
           </div>
           <div className="mt-8">
             <label htmlFor="password" className="font-bold">
-              Mot de passe
+             Nouveau mot de passe
             </label>
             <Input
               placeholder=""
@@ -117,7 +117,7 @@ const Securite = ({ item }: any) => {
           </div>
           <div className="mt-8">
             <label htmlFor="password" className="font-bold">
-              Mot de passe
+             Confirmez le mot de passe
             </label>
             <Input
               placeholder=""
@@ -130,7 +130,7 @@ const Securite = ({ item }: any) => {
           {error && <p className="text-red-500">{error}</p>}
           <div className="mt-16">
             <Button className="w-full h-12 text-xl bg-secondarycolor">
-              {isLoad ? "Traitement..." : "Ajouter"}
+              {isLoad ? "Traitement..." : "Modifier"}
             </Button>
           </div>
         </form>

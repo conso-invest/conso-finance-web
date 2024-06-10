@@ -17,7 +17,7 @@ function Account() {
         { id: 2, name: "Demandes", icon: <DnaIcon /> },
         { id: 3, name: "Projets", icon: <DnaIcon /> },
         { id: 4, name: "Investisements", icon: <DnaIcon /> },
-        { id: 5, name: "Securite", icon: <DnaIcon /> },
+        { id: 5, name: "Paramètre", icon: <DnaIcon /> },
     ]
 
     return (<>
