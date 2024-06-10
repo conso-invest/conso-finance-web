@@ -33,7 +33,7 @@ export default function Search() {
 
         var postData = {
             'category_id': selectedCategory,
-            'status': status == 'all' ? '': status,
+            'status': status == 'all' ? '' : status,
             'date': date,
         };
 
@@ -104,9 +104,11 @@ export default function Search() {
                 <h1 className="text-center">Aucun résultat pour cette recherche</h1>
             </div>}
 
-            {(projectData?.length > 0 && !isLoading) && <div className="flex flex-wrap">
+            {(projectData?.length > 0 && !isLoading) && <div className="flex flex-wrap justify-center items-center">
                 {projectData.map((item: any) => (
-                    <ProjetCard key={item.id} item={item} mdrow="w-1/4" ></ProjetCard>
+                    <div className="lg:w-3/12">
+                        <ProjetCard key={item.id} item={item}></ProjetCard>
+                    </div>
                 ))}
             </div>}
         </div>

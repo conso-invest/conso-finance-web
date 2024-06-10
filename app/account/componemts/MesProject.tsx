@@ -68,7 +68,7 @@ const MesProject = ({ item }: any) => {
 
         <div className="flex flex-wrap space-y-2">
           {projet.map((item: any) => (
-            <ProjetCard key={item.id} item={item} mdrow={"w-1/3"} lgrow ="w-1/3"></ProjetCard>
+            <ProjetCard key={item.id} item={item} ></ProjetCard>
           ))}
         </div>
       </section>
