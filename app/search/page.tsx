@@ -101,7 +101,7 @@ export default function Search() {
             </div>}
 
             {((projectData?.length == 0 || projectData == null) && !isLoading && startSearch) && <div className="w-full">
-                <h1 className="text-center">Aucun résultat pour cette recherche</h1>
+                <h1 className="text-center">Aucun résultat pour cette recherche.</h1>
             </div>}
 
             {(projectData?.length > 0 && !isLoading) && <div className="flex flex-wrap justify-center items-center">
