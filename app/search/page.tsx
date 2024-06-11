@@ -106,9 +106,9 @@ export default function Search() {
 
             {(projectData?.length > 0 && !isLoading) && <div className="flex flex-wrap justify-center items-center">
                 {projectData.map((item: any) => (
-                    <div className="lg:w-3/12" key={item.id}>
+                    
                         <ProjetCard key={item.id} item={item}></ProjetCard>
-                    </div>
+                   
                 ))}
             </div>}
         </div>
