@@ -10,14 +10,14 @@ import { BookAIcon, ChefHatIcon, SunIcon, UsersIcon } from "lucide-react";
 
 const PublishRequestPage = () => {
   const [titre, setTitre] = useState("");
- 
+
   const [sousTitre, setSousTitre] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [objectif, setObjectif] = useState("");
   const [description, setDescription] = useState("");
   const [idCategorie, setIdCategorie] = useState("");
   const [error, setError] = useState("");
-  const [preview, setPreview] = useState<string | null>(null);
+  const [preview, setPreview] = useState<any>();
   const [category, setCategory] = useState<any>([]);
   const [user, setUser] = useState<any>({});
   const [isLoad, setIsLoad] = useState(false);
@@ -26,66 +26,66 @@ const PublishRequestPage = () => {
   function getQueryParam(param: string): string {
     // Create a new URL object from the current URL
     const urlObj: URL = new URL(window.location.href);
-  
+
     // Get the search parameters from the URL
     const params: URLSearchParams = new URLSearchParams(urlObj.search);
-  
+
     // Get the value of the specified parameter
     const value: string | null = params.get(param);
-  
+
     // Check if the parameter is null and handle it
     if (value === null) {
-      return null;
+      return "";
     }
-  
+
     return value;
   }
 
 
-  const getDataCurrent = async (id:integer) => {
+  const getDataCurrent = async (id: any) => {
     try {
 
       setIsLoadDetail(true);
 
       const response = await axios.post(project.get_curent_request(id));
-console.log(response.data);
-      if(response.data.success){
-      setIsLoadDetail(false);
+      console.log(response.data);
+      if (response.data.success) {
+        setIsLoadDetail(false);
 
         setTitre(response.data.data.titre);
         setSousTitre(response.data.data.sous_titre);
-       
+
         setObjectif(response.data.data.objectif);
         setDescription(response.data.data.description);
         setIdCategorie(response.data.data.id_categorie);
-     //   setError("");
-        setPreview<string | null>(response.data.data.image);
-      }else{
+        //   setError("");
+        setPreview(response.data.data.image);
+      } else {
         window.location.href = "/request";
       }
       //window.location.href = "/";
       // Redirect to a success page or display a success message
-     // setError("");
-       //  setImage<File | null>(null);
+      // setError("");
+      //  setImage<File | null>(null);
 
-/*       setTitre("");
-      setSousTitre("");
-  
-      setObjectif("");
-      setDescription("");
-      setIdCategorie("");
-      setError("");
-      setPreview<string | null>(null); */
+      /*       setTitre("");
+            setSousTitre("");
+        
+            setObjectif("");
+            setDescription("");
+            setIdCategorie("");
+            setError("");
+            setPreview<string | null>(null); */
     } catch (error) {
       console.error(error);
 
       window.location.href = "/request";
 
       setIsLoadDetail(false);
-   
+
     }
   }
-  
+
   // Usage example:
   const type: string | null = getQueryParam('type');
   const id: string | null = getQueryParam('id');
@@ -131,38 +131,38 @@ console.log(response.data);
       formData.append("sous_titre", sousTitre);
 
 
-      if(image && getQueryParam('id')==null){
+      if (image && getQueryParam('id') == null) {
         formData.append("image", image as Blob);
-      }else if(image==null && getQueryParam('id')!=null){
+      } else if (image == null && getQueryParam('id') != null) {
         formData.append("image", preview);
-      }else if(image!=null && getQueryParam('id')!=null){
+      } else if (image != null && getQueryParam('id') != null) {
         formData.append("image", image as Blob);
-      }else if(image!=null && getQueryParam('id')==null){
+      } else if (image != null && getQueryParam('id') == null) {
         formData.append("image", image as Blob);
-      }else{
+      } else {
         formData.append("image", image as Blob);
       }
- 
 
-     
+
+
       formData.append("objectif", objectif);
       formData.append("description", description);
       formData.append("id_categorie", idCategorie);
       formData.append("token", user.token);
       formData.append("user_id", user.id);
 
-      console.log(getQueryParam('id')==null?project.send_request:project.send_request+"/"+getQueryParam('id'));
+      console.log(getQueryParam('id') == null ? project.send_request : project.send_request + "/" + getQueryParam('id'));
 
-      const response = await axios.post(getQueryParam('id')==null?project.send_request:project.send_request+"/"+getQueryParam('id'), formData);
+      const response = await axios.post(getQueryParam('id') == null ? project.send_request : project.send_request + "/" + getQueryParam('id'), formData);
 
       setIsLoad(false);
-     // window.location.href = "/";
-     if(getQueryParam('id')!==null){
-      console.log('Type:', type); // Output: edit (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
-      console.log('ID:', id); // Output: 1 (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
-      getDataCurrent(getQueryParam('id'));
+      // window.location.href = "/";
+      if (getQueryParam('id') !== null) {
+        console.log('Type:', type); // Output: edit (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
+        console.log('ID:', id); // Output: 1 (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
+        getDataCurrent(getQueryParam('id'));
 
-    }
+      }
       // Redirect to a success page or display a success message
       setError("");
     } catch (error) {
@@ -199,26 +199,26 @@ console.log(response.data);
   useEffect(() => {
     checkIfIsConnected();
     fetchCategory();
-      
+
     try {
-   
-      if(getQueryParam('id')!==null){
+
+      if (getQueryParam('id') !== null) {
         console.log('Type:', type); // Output: edit (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
         console.log('ID:', id); // Output: 1 (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
         getDataCurrent(getQueryParam('id'));
 
       }
-    
+
       console.log('Type:', type); // Output: edit (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
       console.log('ID:', id); // Output: 1 (if the URL is 'http://localhost:3000/request?type=edit&&id=1')
     } catch (error) {
 
-      if(getQueryParam('id')==null){
-       // setIsLoadDetail(false);
+      if (getQueryParam('id') == null) {
+        // setIsLoadDetail(false);
       }
-      console.error(error.message);
+      console.error(error);
     }
-  
+
   }, []);
 
   return (
@@ -297,8 +297,8 @@ console.log(response.data);
                         ></path>
                       </svg>
                       <p className="mt-2 text-gray-500 p-2">
-                       Choisissez des fichiers à télécharger ou faites-les glisser ici <br />
-                       <span className="font-bold">Taille maximale acceptée : 1 Mo</span>
+                        Choisissez des fichiers à télécharger ou faites-les glisser ici <br />
+                        <span className="font-bold">Taille maximale acceptée : 1 Mo</span>
                       </p>
                     </div>
                   )}
