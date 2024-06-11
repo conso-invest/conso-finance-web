@@ -16,7 +16,7 @@ const CommentProject = ({ item,id_projet_comment }: any) => {
 
 
   const getUserData = () => {
-    const userDatadd = localStorage.getItem("UserData");
+    const userDatadd = localStorage.getItem("UserData") || '';
     if (userData !== null) {
         setUserData(JSON.parse(userDatadd));
     } else {
@@ -34,7 +34,7 @@ const CommentProject = ({ item,id_projet_comment }: any) => {
       setIsLoad(false);
       return;
     }
-    const userDatadd = localStorage.getItem("UserData");
+    const userDatadd = localStorage.getItem("UserData") || '';
     console.log(JSON.parse(userDatadd).token);
 
     var postData = {
