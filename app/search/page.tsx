@@ -76,11 +76,11 @@ export default function Search() {
                             </select>
                         </div>
                         <div className="flex items-center space-x-4">
-                            <label>Date:</label>
                             <input
-                                type="date"
+                                type="text"
                                 className="h-12 border border-gray-300 rounded-md px-2 py-1"
                                 value={date}
+                                placeholder="Mot clé"
                                 onChange={(e) => setDate(e.target.value)}
                             />
                         </div>
