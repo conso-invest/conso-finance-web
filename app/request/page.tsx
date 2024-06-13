@@ -79,8 +79,6 @@ function PublishRequestPage() {
     } catch (error) {
       console.error(error);
 
-      window.location.href = "/request";
-
       setIsLoadDetail(false);
 
     }
