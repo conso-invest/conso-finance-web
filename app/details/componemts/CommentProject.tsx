@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { commentaire } from "@/lib/apiEndpoints";
+import { toast } from "react-toastify";
 
 const CommentProject = ({ item, id_projet_comment }: any) => {
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +22,7 @@ const CommentProject = ({ item, id_projet_comment }: any) => {
 
     try {
       if (message.trim() === "") {
-        setError("Le message est obligatoire");
+        toast.error("Le message est obligatoire");
         return;
       }
 
@@ -55,12 +56,11 @@ const CommentProject = ({ item, id_projet_comment }: any) => {
         // Afficher un message de succès
         alert("Commentaire envoyé avec succès !");
       } else {
-        setError(response.data.message || "Une erreur s'est produite");
+        toast.error(response.data.message || "Une erreur s'est produite");
         setIsLoad(false);
       }
     } catch (error) {
-      console.error("Erreur lors de l'envoi du commentaire :", error);
-      setError("Une erreur s'est produite");
+      toast.error("Vous devez vour connecter pour commenter");
       setIsLoad(false);
     }
   };
@@ -89,11 +89,10 @@ const CommentProject = ({ item, id_projet_comment }: any) => {
           <Input
             placeholder="Entrez votre commentaire"
             type="text"
-            className="h-12 rounded-none rounded-tl-full rounded-bl-full"
+            className="h-12 rounded-none rounded-tl-full rounded-bl-full hover:border-none focus:outline-none"
             value={message}
             onChange={(event) => setMessage(event.target.value)}
           />
-          {error && <p className="text-red-500 mt-2">{error}</p>}
         </div>
         <div className="mt-4">
           <Button className="w-full h-12 text-lg rounded-none rounded-br-full rounded-tr-full  bg-primarycolor mb-4">
