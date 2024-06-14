@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import ProjetInProgress from "@/components/ProjetInProgress";
+import { ToastContainer } from "react-toastify";
 
 export default function Home() {
   return (
