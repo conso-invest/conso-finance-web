@@ -56,9 +56,7 @@ function Register() {
 
   const onSubmit = async (data: RegisterFormData) => {
     const { name, prenom, email, id_profil, password, passwordConfirm, telephone } = data;
-
-    console.log(data);
-    return;
+    
     // Check if telephone is undefined
     if (!telephone) {
       toast.error("Numéro de téléphone invalide");
