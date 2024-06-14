@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { auth, cat, profil, project } from "@/lib/apiEndpoints";
+import { project } from "@/lib/apiEndpoints";
 import { UserData } from "@/lib/const";
 import { BookAIcon, ChefHatIcon, SunIcon, UsersIcon } from "lucide-react"
 import Modal from "@/components/ui/modal";
@@ -63,6 +63,7 @@ function PublishRequestPage() {
   };
 
   const onSubmit = async (data: any) => {
+    
     if (!data.titre || !data.objectif || !data.description || !data.idCategorie) {
       setError("Veuillez remplir tous les champs.");
       return;
