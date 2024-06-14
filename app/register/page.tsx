@@ -9,7 +9,7 @@ import { UserData } from "@/lib/const";
 import { useForm } from "react-hook-form";
 import PhoneInput, { CountryData, PhoneInputProps } from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 interface RegisterFormData {
   name: string;
@@ -24,12 +24,6 @@ interface RegisterFormData {
 interface PhoneInputWithRefProps extends PhoneInputProps {
   forwardedRef: ForwardedRef<HTMLInputElement>;
 }
-
-const PhoneInputWithRef = React.forwardRef<HTMLInputElement, PhoneInputWithRefProps>((props, ref) => {
-  const { forwardedRef, ...rest } = props;
-
-  return <PhoneInput {...rest} inputProps={{ ref: forwardedRef }} />;
-});
 
 function Register() {
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<RegisterFormData>();
@@ -63,6 +57,8 @@ function Register() {
   const onSubmit = async (data: RegisterFormData) => {
     const { name, prenom, email, id_profil, password, passwordConfirm, telephone } = data;
 
+    console.log(data);
+    return;
     // Check if telephone is undefined
     if (!telephone) {
       toast.error("Numéro de téléphone invalide");
@@ -84,7 +80,7 @@ function Register() {
       if (response.data.success) {
         const data = response.data.data;
         localStorage.setItem(UserData, JSON.stringify(data));
-        toast.success("Compte crée avec succès !");
+        toast.success("Compte créé avec succès !");
         window.location.href = "/";
       } else {
         setLoading(false);
@@ -144,9 +140,7 @@ function Register() {
               <label htmlFor="telephone" className="h-12 font-bold">
                 Téléphone
               </label>
-              <PhoneInputWithRef
-                forwardedRef={phoneInputRef}
-                ref={phoneInputRef}
+              <PhoneInput
                 country={'cm'}
                 onChange={handlePhoneChange}
                 inputStyle={{ width: '100%', height: "50px" }}
@@ -158,7 +152,7 @@ function Register() {
               />
               {errors.telephone && <p className="text-red-500">{errors.telephone.message}</p>}
             </div>
-            <div className="mt-8">
+            <div className="w-full mt-8">
               <label htmlFor="id_profil" className="font-bold">
                 Votre profil
               </label>
@@ -238,6 +232,6 @@ function Register() {
       </div>
     </div>
   );
-}
+};
 
 export default Register;

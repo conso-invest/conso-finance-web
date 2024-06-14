@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Securite = () => {
+const Securite = ({ item }: any) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [isLoad, setIsLoad] = useState(false);
   const [error, setError] = useState<any>(null);
