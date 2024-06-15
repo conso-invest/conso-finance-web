@@ -8,9 +8,20 @@ const DetailProject = ({ item}: any) => {
   useEffect(() => {
     if (item?.video) {
       const newLink = item?.video?.replace("watch?v=", "embed/");
-      setLink(newLink);
+
+      setLink(removeAfterAmpersand(newLink));
     }
   }, []);
+
+  function removeAfterAmpersand(url:any) {
+    const ampersandIndex = url.indexOf('&');
+    if (ampersandIndex === -1) {
+      // If no ampersand is found, return the original URL
+      return url;
+    }
+    // Return the substring from the start to the ampersand index
+    return url.substring(0, ampersandIndex);
+  }
 
 
   return (
