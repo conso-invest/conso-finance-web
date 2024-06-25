@@ -46,8 +46,6 @@ export default function Search() {
             'keyword': keyword,
         };
 
-        console.log(postData);
-
         try {
             const response = await axios.post(project.search, postData);
             setProjectData(response.data.data);
