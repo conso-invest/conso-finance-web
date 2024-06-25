@@ -1,6 +1,7 @@
 "use client";
 import { formatNumber } from "@/app/utils";
 import { Input } from "@/components/ui/input";
+import Modal from "@/components/ui/modal";
 import { project } from "@/lib/apiEndpoints";
 import axios from "axios";
 import { WhatsappIcon } from "next-share";
@@ -25,6 +26,8 @@ function ContrepartiePage({ params: { term, option } }: Props) {
     const [paymentIsLoad, setPaymentIsLoad] = useState<boolean>(false);
     const [paymentIsLoad2, setPaymentIsLoad2] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
+    const [showModal, setShowModal] = useState(false);
+  
 
     if (!term) notFound();
     const termToUse = decodeURI(term);
@@ -93,10 +96,13 @@ function ContrepartiePage({ params: { term, option } }: Props) {
                 postData
             );
 
-            const newWindow = window.open(response.data.data, '_blank', 'noopener,noreferrer')
-            if (newWindow) newWindow.opener = null
+            setShowModal(true);
+
+            // const newWindow = window.open(response.data.data, '_blank', 'noopener,noreferrer')
+            // if (newWindow) newWindow.opener = null
             setPaymentIsLoad2(false);
         } catch (error) {
+            setShowModal(false);
             setPaymentIsLoad2(false);
         }
     };
@@ -128,11 +134,15 @@ function ContrepartiePage({ params: { term, option } }: Props) {
                 postData
             );
 
-            const newWindow = window.open(response.data.data, '_blank', 'noopener,noreferrer')
-            if (newWindow) newWindow.opener = null
+            // const newWindow = window.open(response.data.data, '_blank', 'noopener,noreferrer')
+            // if (newWindow) newWindow.opener = null
+
+            setShowModal(true);
+
             setPaymentIsLoad(false);
 
         } catch (error) {
+            setShowModal(false);
             setPaymentIsLoad(false);
         }
 
@@ -252,6 +262,21 @@ function ContrepartiePage({ params: { term, option } }: Props) {
             </>
             }
 
+            {showModal && <Modal
+                id="default-modal"
+                title="Demande envoyée"
+                content={[
+                    "Votre demande a été envoyée avec succès. Nous l'étudierons avec soin et vous contacterons dans les plus brefs délais. Consofinance vous remercie de votre confiance",
+                ]}
+                acceptBtn={() => {
+                    setShowModal(false);
+                    window.location.href ="/";
+                }}
+                declineBtn={() => {
+                    setShowModal(false);
+                }}
+            />
+            }
         </div>
     )
 }

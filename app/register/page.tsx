@@ -17,6 +17,7 @@ interface RegisterFormData {
   telephone: string;
   id_profil: string;
   email: string;
+  ville: string;
   password: string;
   passwordConfirm: string;
 }
@@ -55,25 +56,28 @@ function Register() {
   }, []);
 
   const onSubmit = async (data: RegisterFormData) => {
-    const { name, prenom, email, id_profil, password, passwordConfirm, telephone } = data;
-    
+    const { name, prenom, email, ville, id_profil, password, telephone } = data;
+
     // Check if telephone is undefined
     if (!telephone) {
       toast.error("Numéro de téléphone invalide");
       return;
     }
 
+    var postData = {
+      name: name,
+      prenom: prenom,
+      id_profil: id_profil,
+      password: password,
+      telephone: telephone,
+      email: email,
+      ville:ville,
+    }
+
     try {
       setLoading(true);
 
-      const response = await axios.post(auth.register, {
-        name,
-        prenom,
-        email,
-        id_profil,
-        password,
-        telephone,
-      });
+      const response = await axios.post(auth.register, postData);
 
       if (response.data.success) {
         const data = response.data.data;
@@ -158,7 +162,9 @@ function Register() {
                 {...register("id_profil", { required: "Ce champ est requis" })}
                 className="h-12 w-full rounded  border-slate-300"
               >
+                <option>--Selectionner--</option>
                 {options.map((option: any) => (
+
                   <option key={option.id} value={option.id}>
                     {option.titre}
                   </option>
@@ -178,6 +184,18 @@ function Register() {
               {...register("email", { required: "Ce champ est requis" })}
             />
             {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+          </div>
+          <div className="mt-8">
+            <label htmlFor="ville" className="h-12 font-bold">
+              Ville
+            </label>
+            <Input
+              placeholder=""
+              type="ville"
+              className="h-12"
+              {...register("ville", { required: "Ce champ est requis" })}
+            />
+            {errors.ville && <p className="text-red-500">{errors.ville.message}</p>}
           </div>
 
           <div className="mt-8">
