@@ -107,9 +107,9 @@ function ProjetInProgress() {
                     ))}
                 </div>
             </div>
-            <div className="mx-4 lg:mx-20">
+            {/* <div className="mx-4 lg:mx-20">
                 <h1 className="text-2xl font-extrabold my-5">Chaînes thématiques</h1>
-            </div>
+            </div> */}
         </div>
     )
 }
