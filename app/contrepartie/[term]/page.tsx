@@ -176,7 +176,7 @@ function ContrepartiePage({ params: { term, option } }: Props) {
                     <div className="w-full relative min-h-60 m-4 top-0 lg:w-5/6 p-4 lg:top-10  lg:py-10 bg-white rounded-lg shadow-md">
                         {panier.length > 0 && <div className="w-full mb-5 lg:px-4">
                             <div className={`p-4 shadow-md border w-full rounded-lg`}>
-                                <h1 className="font-bold text-lg mb-6">Votre sélection</h1>
+                                <h1 className="font-bold text-lg mb-6">Vos apports</h1>
                                 <ul>
                                     {panier.map((item, index) => (
                                         <li key={index} className="mb-2 border-b border-slate-200 w-full">
@@ -201,7 +201,7 @@ function ContrepartiePage({ params: { term, option } }: Props) {
                                 </ul>
                                 <div className="font-bold text-xl my-5 text-secondarycolor">Total: {formatNumber(montantTotal())} FCFA</div>
                                 <div className="lg:flex justify-between">
-                                    <button className="w-full bg-primarycolor h-14 lg:w-1/3 rounded my-4" onClick={() => paymentIsLoad2 ? null : payer()}> {paymentIsLoad2 ? "Traitement" : "CONTINUER"}</button>
+                                    <button className="w-full bg-primarycolor h-14 lg:w-1/3 rounded my-4" onClick={() => paymentIsLoad2 ? null : payer()}> {paymentIsLoad2 ? "Traitement" : "INVESTIR"}</button>
                                     <button className="flex justify-center h-14 items-center bg-white border border-white w-full font-bold lg:w-1/3 p-4 rounded-lg my-4 hover:text-primarycolor" onClick={() => contactUs()}><WhatsappIcon className="rounded-full p-2 " /> {"CONTACTEZ NOUS"}</button>
                                 </div>
                             </div>
@@ -266,7 +266,7 @@ function ContrepartiePage({ params: { term, option } }: Props) {
                 id="default-modal"
                 title="Demande envoyée"
                 content={[
-                    "Votre demande a été envoyée avec succès. Nous l'étudierons avec soin et vous contacterons dans les plus brefs délais. Consofinance vous remercie de votre confiance",
+                    "Votre demande a été envoyée avec succès. Nos équipes vous contacteront dans les plus brefs délais. Consofinance vous remercie de votre confiance.",
                 ]}
                 acceptBtn={() => {
                     setShowModal(false);
