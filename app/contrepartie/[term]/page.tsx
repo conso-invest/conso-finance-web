@@ -10,6 +10,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import InvestirTab from "../contrepartieTabs/InvestirTab";
+import DevenirActionnaireTab from "../contrepartieTabs/DevenirActionnaireTab";
+import FaireUnDonTab from "../contrepartieTabs/FaireUnDonTab";
+import TravaillerAvecNousTab from "../contrepartieTabs/TravaillerAvecNousTab";
+import DevenirPartenaireTab from "../contrepartieTabs/DevenirPartenaireTab";
+import NousContacterTab from "../contrepartieTabs/NousContacterTab";
+
 type Props = {
     params: {
         term: string,
@@ -21,12 +28,11 @@ function ContrepartiePage({ params: { term, option } }: Props) {
     const [activeTabs, setActiveTabs] = useState(1);
 
     var tabsData = [
-        { id: 1, name: "Investir", icon: <DnaIcon /> },
-        { id: 2, name: "Devenir actionaire", icon: <DnaIcon /> },
-        { id: 3, name: "Faire un don", icon: <DnaIcon /> },
-        { id: 4, name: "Travaillez avec nous", icon: <DnaIcon /> },
-        { id: 5, name: "Denenir partenaire", icon: <DnaIcon /> },
-        { id: 6, name: "Nous contacter", icon: <DnaIcon /> },
+        { id: 1, name: "Devenir Investisseur", icon: <DnaIcon /> },
+        { id: 2, name: "Devenir Actionaire", icon: <DnaIcon /> },
+        { id: 3, name: "Faire Un Don", icon: <DnaIcon /> },
+        { id: 4, name: "Travailler Avec Nous", icon: <DnaIcon /> },
+        { id: 5, name: "Nous contacter", icon: <DnaIcon /> },
     ]
 
     const [projectData, setProjectData] = useState<any>([]);
@@ -39,7 +45,6 @@ function ContrepartiePage({ params: { term, option } }: Props) {
     const [error, setError] = useState<string>('');
     const [showModal, setShowModal] = useState(false);
 
-
     if (!term) notFound();
     const termToUse = decodeURI(term);
 
@@ -51,48 +56,39 @@ function ContrepartiePage({ params: { term, option } }: Props) {
         setIsLoad(false);
     }
 
-    // Fonction pour ajouter ou retirer un article du panier
     const togglePanier = (item: any) => {
         const index = panier.findIndex((article) => article.id === item.id);
         if (index !== -1) {
-            // L'article est déjà dans le panier, on le retire
             const nouveauPanier = [...panier];
             nouveauPanier.splice(index, 1);
             setPanier(nouveauPanier);
         } else {
-            // L'article n'est pas dans le panier, on l'ajoute
             const nouvelArticle = { ...item, quantite: quantite };
             setPanier([...panier, nouvelArticle]);
         }
     };
 
-    // Fonction pour incrémenter la quantité
     const incrementerQuantite = (index: number) => {
         const nouveauPanier = [...panier];
         nouveauPanier[index].quantite++;
         setPanier(nouveauPanier);
     };
 
-    // Fonction pour décrémenter la quantité
     const decrementerQuantite = (index: number) => {
         const nouveauPanier = [...panier];
         if (nouveauPanier[index].quantite > 1) {
             nouveauPanier[index].quantite--;
         } else {
-            // Si la quantité est déjà 1, retirer l'article du panier
             nouveauPanier.splice(index, 1);
         }
         setPanier(nouveauPanier);
     };
 
-    // Calculer le montant total du panier
     const montantTotal = () => {
         return panier.reduce((total, item) => total + (item.montant * item.quantite), 0);
     };
 
-    // Bouton pour procéder au paiement
     const payer = async () => {
-
         var postData = {
             'amount': montantTotal(),
             'title': "Financement du projet " + projectData.titre,
@@ -103,14 +99,8 @@ function ContrepartiePage({ params: { term, option } }: Props) {
         setPaymentIsLoad2(true);
 
         try {
-            const response = await axios.post(project.pay,
-                postData
-            );
-
+            const response = await axios.post(project.pay, postData);
             setShowModal(true);
-
-            // const newWindow = window.open(response.data.data, '_blank', 'noopener,noreferrer')
-            // if (newWindow) newWindow.opener = null
             setPaymentIsLoad2(false);
         } catch (error) {
             setShowModal(false);
@@ -118,9 +108,7 @@ function ContrepartiePage({ params: { term, option } }: Props) {
         }
     };
 
-    // Fonction pour effectuer un don
     const doDon = async () => {
-
         if (donAmount == null || donAmount == "") {
             setError('Veuillez entrer le montant');
             return;
@@ -141,23 +129,13 @@ function ContrepartiePage({ params: { term, option } }: Props) {
         }
 
         try {
-            const response = await axios.post(project.pay,
-                postData
-            );
-
-            // const newWindow = window.open(response.data.data, '_blank', 'noopener,noreferrer')
-            // if (newWindow) newWindow.opener = null
-
+            const response = await axios.post(project.pay, postData);
             setShowModal(true);
-
             setPaymentIsLoad(false);
-
         } catch (error) {
             setShowModal(false);
             setPaymentIsLoad(false);
         }
-
-
     };
 
     const contactUs = () => {
@@ -171,169 +149,109 @@ function ContrepartiePage({ params: { term, option } }: Props) {
         getContrepartieByProjetID(termToUse);
     }, []);
 
-    //Api call to get projets
     return (
         <div className="pt-20">
-
-            {!isLoad ? <>
-                <div className="relative flex flex-col justify-center items-center">
-                    <div className="p-3 lg:w-5/6">
-                        <Link href={`/#categories`}> <h1 className="text-2xl pt-10 font-bold text-white"> <span className="border-b-2 border-b-orange-400 cursor-pointer hover:text-orange-400">Projets</span> / Souscription</h1></Link>
-                        <h1 className="mt-4 text-white">{projectData?.titre}</h1>
-                    </div>
-
-                    <div className="absolute inset-0 w-full" style={{ backgroundImage: `url(${projectData?.image})`, height: '60vh', zIndex: -1, filter: 'brightness(50%)' }}>
-                    </div>
-
-                    <div className="w-full relative min-h-60 m-4 top-0 lg:w-5/6 p-4 lg:top-10  lg:py-10 bg-white rounded-lg shadow-md">
-                        <div className="md:flex">
-                            <ul className="grid grid-cols-2 lg:flex lg:flex-col gap-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
-                                {tabsData.map((tabs: any) => (
-                                    <li key={tabs.id} className="cursor-pointer" onClick={() => setActiveTabs(tabs.id)}>
-                                        <a className={`${activeTabs === tabs?.id ? "bg-primarycolor" : "bg-gray-800"} min-h-20 inline-flex items-center px-4 py-3 text-white rounded-lg active w-full dark:bg-blue-600`} aria-current="page">
-                                            <svg className="w-4 h-4 me-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                                {tabs.icon}
-                                            </svg>
-                                            {tabs.name}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-
-                            <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full min-h-screen">
-                                {activeTabs === 1 && <>
-                                    {panier.length > 0 && <div className="w-full mb-5 lg:px-4">
-                                        <div className={`p-4 shadow-md border w-full rounded-lg`}>
-                                            <h1 className="font-bold text-lg mb-6">Vos apports</h1>
-                                            <ul>
-                                                {panier.map((item, index) => (
-                                                    <li key={index} className="mb-2 border-b border-slate-200 w-full">
-                                                        <div className="lg:flex justify-between mb-4">
-                                                            <div className="flex items-center space-x-2">
-                                                                <div>
-                                                                    <img src={item.image} className="w-28 h-28 object-cover rounded-md" alt="" />
-                                                                </div>
-                                                                <div>
-                                                                    <div className="font-bold text-secondarycolor">{item.titre}</div>
-                                                                    <div className="text-secondarycolor">Montant: {item.montant * item.quantite} FCFA</div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="flex justify-end lg:justify-center items-center space-x-3 my-4">
-                                                                <button onClick={() => decrementerQuantite(index)} className="text-2xl bg-primarycolor w-10 h-10 rounded-full">-</button>
-                                                                <span className="font-bold text-secondarycolor">{item.quantite}</span>
-                                                                <button onClick={() => incrementerQuantite(index)} className="text-2xl  bg-primarycolor w-10 h-10 rounded-full">+</button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                            <div className="font-bold text-xl my-5 text-secondarycolor">Total: {formatNumber(montantTotal())} FCFA</div>
-                                            <div className="lg:flex justify-between">
-                                                <button className="w-full bg-primarycolor h-14 lg:w-1/3 rounded my-4" onClick={() => paymentIsLoad2 ? null : payer()}> {paymentIsLoad2 ? "Traitement" : "INVESTIR"}</button>
-                                            </div>
-                                        </div>
-                                    </div>}
-                                    <div className="lg:flex w-full">
-                                        <div className="flex flex-col lg:flex-row lg:w-full">
-                                            {projectData?.contrepartie?.length > 0 && projectData?.contrepartie?.map((item: any) =>
-                                                <div className="mx-0 lg:w-full flex-wrap lg:mx-4 border shadow-sm mb-10 items-start border-b border-gray-200 p-4 rounded-lg cursor-pointer" key={item.id}>
-                                                    <div className="w-full">
-                                                        <div className="flex justify-between items-center mb-7 rounded-full">
-                                                            <div className="text-lg text-gray-600 font-bold">Pour {formatNumber(item?.montant)} FCFA</div>
-                                                            <button className="bg-primarycolor px-4 py-2 rounded-full text-white" onClick={() => togglePanier(item)} >
-                                                                {panier.some((article) => article.id === item.id) ? '- Retirer' : 'Choisir'}
-                                                            </button>
-                                                        </div>
-
-                                                        <img src={item.image} alt={item.titre} className="w-full object-cover rounded-lg" />
-                                                        <h2 className="text-lg font-semibold my-2">{item?.titre} </h2>
-                                                        <div className="text-gray-600 line-clamp-3"
-                                                            dangerouslySetInnerHTML={{ __html: item?.description }}
-                                                        />
-                                                        <p className="text-gray-600 mt-2">Date Livraison: {item?.date_livraison}</p>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-
-                                </>}
-                                {activeTabs === 2 && <>
-                                    <p>Devenir partenaire</p>
-
-                                </>}
-                                {activeTabs === 3 && <>
-                                    <div className="bg-white">
-                                        <div className="p-4 shadow-sm rounded border border-gray-200">
-                                            <h1 className="font-bold text-lg mb-2"> Faire un don</h1>
-                                            <p className="mb-4">
-                                                Un don sans contrepartie pour contribuer à la réussite de la collecte !
-                                            </p>
-                                            <Input
-                                                placeholder="Entrez le Montant"
-                                                type="number"
-                                                className="h-12"
-                                                value={donAmount}
-                                                onChange={(event) => {
-                                                    setDonAmount(event.target.value);
-                                                    setError('');
-                                                }}
-                                            />
-                                            <span className="text-red-500 text-sm">{error != '' ? error : ""}</span>
-                                            <button className="bg-primarycolor w-full p-4 rounded my-4" onClick={() => paymentIsLoad ? null : doDon()}>{paymentIsLoad ? "Traitement..." : "FAIRE UN DON"} </button>
-
-                                        </div>
-                                    </div>
-
-                                </>
-                                }
-                                {activeTabs === 4 && <>
-                                    <p>Travailler avec nous</p>
-
-                                </>
-                                }
-                                {activeTabs === 5 && <>
-                                    <p>Devenir partenaire</p>
-
-                                </>
-                                }
-                                {activeTabs === 6 && <>
-                                    <p>Nous contacter</p>
-                                    <button className="flex justify-center items-center bg-white border border-primarycolor w-full rounded-lg my-4 font-bold" onClick={() => contactUs()}><WhatsappIcon className="rounded-full p-2" /> CONTACTEZ NOUS</button>
-                                </>
-                                }
-                            </div>
+            {!isLoad ? (
+                <>
+                    <div className="relative flex flex-col justify-center items-center">
+                        <div className="p-3 lg:w-5/6">
+                            <Link href={`/#categories`}>
+                                <h1 className="text-2xl pt-10 font-bold text-white">
+                                    <span className="border-b-2 border-b-orange-400 cursor-pointer hover:text-orange-400">Projets</span> / Souscription
+                                </h1>
+                            </Link>
+                            <h1 className="mt-4 text-white">{projectData?.titre}</h1>
                         </div>
 
+                        <div className="absolute inset-0 w-full" style={{ backgroundImage: `url(${projectData?.image})`, height: '60vh', zIndex: -1, filter: 'brightness(50%)' }}>
+                        </div>
 
+                        <div className="w-full relative min-h-60 m-4 top-0 lg:w-5/6 p-4 lg:top-10 lg:py-10 bg-white rounded-lg shadow-md">
+                            <div className="md:flex">
+                                <ul className="grid grid-cols-2 lg:flex lg:flex-col gap-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
+                                    {tabsData.map((tabs: any) => (
+                                        <li key={tabs.id} className="cursor-pointer" onClick={() => setActiveTabs(tabs.id)}>
+                                            <a className={`${activeTabs === tabs?.id ? "bg-primarycolor" : "bg-gray-800"} min-h-20 inline-flex items-center px-4 py-3 text-white rounded-lg active w-full dark:bg-blue-600`} aria-current="page">
+                                                <svg className="w-4 h-4 me-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                    {tabs.icon}
+                                                </svg>
+                                                {tabs.name}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full min-h-screen">
+                                    {activeTabs === 1 && (
+                                        <InvestirTab
+                                            projectData={projectData}
+                                            panier={panier}
+                                            quantite={quantite}
+                                            setPanier={setPanier}
+                                            setQuantite={setQuantite}
+                                            montantTotal={montantTotal}
+                                            payer={payer}
+                                            paymentIsLoad2={paymentIsLoad2}
+                                            togglePanier={togglePanier}
+                                            incrementerQuantite={incrementerQuantite}
+                                            decrementerQuantite={decrementerQuantite}
+                                        />
+                                    )}
+                                    {activeTabs === 2 && <DevenirActionnaireTab
+                                        projectData={projectData}
+                                        panier={panier}
+                                        quantite={quantite}
+                                        setPanier={setPanier}
+                                        setQuantite={setQuantite}
+                                        montantTotal={montantTotal}
+                                        payer={payer}
+                                        paymentIsLoad2={paymentIsLoad2}
+                                        togglePanier={togglePanier}
+                                        incrementerQuantite={incrementerQuantite}
+                                        decrementerQuantite={decrementerQuantite}
+                                    />}
+                                    {activeTabs === 3 && (
+                                        <FaireUnDonTab
+                                            donAmount={donAmount}
+                                            setDonAmount={setDonAmount}
+                                            error={error}
+                                            setError={setError}
+                                            doDon={doDon}
+                                            paymentIsLoad={paymentIsLoad}
+                                        />
+                                    )}
+                                    {activeTabs === 4 && <TravaillerAvecNousTab projectId={projectData.id} />}
+                                    {activeTabs === 5 && <NousContacterTab contactUs={contactUs} />}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div className="pt-48 h-2"></div>
-            </> : <>
+                    <div className="pt-48 h-2"></div>
+                </>
+            ) : (
                 <div className="h-screen flex justify-center items-center bg-slate-50">
                     <p>Chargement...</p>
                 </div>
-            </>
-            }
+            )}
 
-            {showModal && <Modal
-                id="default-modal"
-                title="Demande envoyée"
-                content={[
-                    "Votre demande a été envoyée avec succès. Nos équipes vous contacteront dans les plus brefs délais. Consofinance vous remercie de votre confiance.",
-                ]}
-                acceptBtn={() => {
-                    setShowModal(false);
-                    window.location.href = "/";
-                }}
-                declineBtn={() => {
-                    setShowModal(false);
-                }}
-            />
-            }
+            {showModal && (
+                <Modal
+                    id="default-modal"
+                    title="Demande envoyée"
+                    content={[
+                        "Votre demande a été envoyée avec succès. Nos équipes vous contacteront dans les plus brefs délais. Consofinance vous remercie de votre confiance.",
+                    ]}
+                    acceptBtn={() => {
+                        setShowModal(false);
+                        window.location.href = "/";
+                    }}
+                    declineBtn={() => {
+                        setShowModal(false);
+                    }}
+                />
+            )}
         </div>
-    )
+    );
 }
 
 export default ContrepartiePage;
