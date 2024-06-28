@@ -58,7 +58,7 @@ function CategoriesPage({ params: { term } }: Props) {
 
                         {
                             projectData?.projects?.length > 0 && projectData?.projects?.map((item: any, index: any) => (<>
-                                <div className="lg:flex lg:justify-center lg:items-center" key={index}>
+                                <div className="lg:flex lg:flex-wrap lg:justify-center lg:items-center" key={index}>
                                     <ProjetCard item={item}></ProjetCard>
                                 </div>
                             </>))
