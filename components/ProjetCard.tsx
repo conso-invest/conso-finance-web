@@ -10,7 +10,7 @@ const ProjetCard = ({ item}: any) => {
 
     return (
         <div onClick={() => openProjetDetails()} className={`md:w-1/4 lg:w-2/6 p-2`}>
-            <div className='w-72 shadow-sm border border-slate-100 hover:cursor-pointer'>
+            <div className='w-full lg:w-72  shadow-sm border border-slate-100 hover:cursor-pointer'>
                 <img
                     src={item.image}
                     alt="banner"
