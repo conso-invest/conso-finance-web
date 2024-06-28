@@ -18,6 +18,7 @@ type InvestirTabProps = {
 const InvestirTab = ({ projectData, panier, quantite, setPanier, setQuantite, montantTotal, payer, paymentIsLoad2, togglePanier, incrementerQuantite, decrementerQuantite }: InvestirTabProps) => {
     return (
         <div>
+            <h1 className="text-center text-2xl lg:font-bold lg:text-3xl mb-10">Devenir Investisseur</h1>
             {panier.length > 0 && (
                 <div className="w-full mb-5 lg:px-4">
                     <div className={`p-4 shadow-md border w-full rounded-lg`}>
@@ -52,8 +53,8 @@ const InvestirTab = ({ projectData, panier, quantite, setPanier, setQuantite, mo
                 </div>
             )}
             <div className="lg:flex w-full">
-                <div className="flex flex-col lg:flex-row lg:w-full">
-                    {projectData?.contrepartie?.length > 0 && projectData?.contrepartie?.filter((contrepart: any) =>contrepart.type==="INVESTISSEMENT").map((item: any) =>
+                <div className="flex flex-wrap lg:flex-row lg:w-full">
+                    {projectData?.contrepartie?.length > 0 && projectData?.contrepartie?.filter((contrepart: any) => contrepart.type === "INVESTISSEMENT").map((item: any) =>
                         <div className="mx-0 lg:w-full flex-wrap lg:mx-4 border shadow-sm mb-10 items-start border-b border-gray-200 p-4 rounded-lg cursor-pointer" key={item.id}>
                             <div className="w-full">
                                 <div className="flex justify-between items-center mb-7 rounded-full">
@@ -62,7 +63,7 @@ const InvestirTab = ({ projectData, panier, quantite, setPanier, setQuantite, mo
                                         {panier.some((article) => article.id === item.id) ? '- Retirer' : 'Choisir'}
                                     </button>
                                 </div>
-                                <img src={item.image} alt={item.titre} className="w-full object-cover rounded-lg" />
+                                {item.image != null && <img src={item.image} alt={item.titre} className="w-full object-cover rounded-lg" />}
                                 <h2 className="text-lg font-semibold my-2">{item?.titre} </h2>
                                 <div className="text-gray-600 line-clamp-3" dangerouslySetInnerHTML={{ __html: item?.description }} />
                                 <p className="text-gray-600 mt-2">Date Livraison: {item?.date_livraison}</p>
@@ -70,9 +71,10 @@ const InvestirTab = ({ projectData, panier, quantite, setPanier, setQuantite, mo
                         </div>
                     )}
 
-                    {projectData?.contrepartie?.length == 0 && <div className="flex items-center justify-center min-h-20 w-full">
-                        <p className="text-center">Aucune contrepartie disponible pour le moment</p>
-                    </div>
+                    {
+                        projectData?.contrepartie?.filter((contrepart: any) => contrepart.type === "INVESTISSEMENT").length == 0 && <div className="flex items-center justify-center min-h-20 w-full">
+                            <p className="text-center">Aucune contrepartie disponible pour le moment</p>
+                        </div>
                     }
                 </div>
             </div>

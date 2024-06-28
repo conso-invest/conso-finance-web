@@ -13,8 +13,8 @@ type FaireUnDonTabProps = {
 const FaireUnDonTab = ({ donAmount, setDonAmount, error, setError, doDon, paymentIsLoad }: FaireUnDonTabProps) => {
     return (
         <div className="bg-white">
+            <h1 className="text-center text-2xl lg:font-bold lg:text-3xl mb-10">Faire un don</h1>
             <div className="p-4 shadow-sm rounded border border-gray-200">
-                <h1 className="font-bold text-lg mb-2"> Faire un don</h1>
                 <p className="mb-4">Un don sans contrepartie pour contribuer à la réussite de la collecte !</p>
                 <Input
                     placeholder="Entrez le Montant"

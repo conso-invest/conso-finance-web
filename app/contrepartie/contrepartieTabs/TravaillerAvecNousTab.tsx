@@ -43,6 +43,7 @@ function TravaillerAvecNousTab({ projectId }: Props) {
 
     return (
         <div>
+            <h1 className="text-center text-2xl lg:font-bold lg:text-3xl mb-10">Travailler avec nous</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
                     <label htmlFor="collaborationType" className="block font-medium">

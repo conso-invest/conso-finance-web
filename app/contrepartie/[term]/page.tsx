@@ -28,7 +28,7 @@ function ContrepartiePage({ params: { term, option } }: Props) {
 
     var tabsData = [
         { id: 1, name: "Devenir Investisseur", icon: <DnaIcon /> },
-        { id: 2, name: "Devenir Actionaire", icon: <DnaIcon /> },
+        { id: 2, name: "Devenir Actionnaire", icon: <DnaIcon /> },
         { id: 3, name: "Faire Un Don", icon: <DnaIcon /> },
         { id: 4, name: "Travailler Avec Nous", icon: <DnaIcon /> },
         { id: 5, name: "Nous contacter", icon: <DnaIcon /> },
