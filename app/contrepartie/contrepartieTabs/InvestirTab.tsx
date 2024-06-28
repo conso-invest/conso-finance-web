@@ -53,7 +53,7 @@ const InvestirTab = ({ projectData, panier, quantite, setPanier, setQuantite, mo
             )}
             <div className="lg:flex w-full">
                 <div className="flex flex-col lg:flex-row lg:w-full">
-                    {projectData?.contrepartie?.length > 0 && projectData?.contrepartie?.map((item: any) =>
+                    {projectData?.contrepartie?.length > 0 && projectData?.contrepartie?.filter((contrepart: any) =>contrepart.type==="INVESTISSEMENT").map((item: any) =>
                         <div className="mx-0 lg:w-full flex-wrap lg:mx-4 border shadow-sm mb-10 items-start border-b border-gray-200 p-4 rounded-lg cursor-pointer" key={item.id}>
                             <div className="w-full">
                                 <div className="flex justify-between items-center mb-7 rounded-full">

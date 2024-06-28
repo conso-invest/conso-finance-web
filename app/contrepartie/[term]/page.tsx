@@ -14,7 +14,6 @@ import InvestirTab from "../contrepartieTabs/InvestirTab";
 import DevenirActionnaireTab from "../contrepartieTabs/DevenirActionnaireTab";
 import FaireUnDonTab from "../contrepartieTabs/FaireUnDonTab";
 import TravaillerAvecNousTab from "../contrepartieTabs/TravaillerAvecNousTab";
-import DevenirPartenaireTab from "../contrepartieTabs/DevenirPartenaireTab";
 import NousContacterTab from "../contrepartieTabs/NousContacterTab";
 
 type Props = {
