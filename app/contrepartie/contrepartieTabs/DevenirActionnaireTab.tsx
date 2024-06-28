@@ -64,7 +64,7 @@ const DevenirActionnaireTab = ({ projectData, panier, quantite, setPanier, setQu
                                         {panier.some((article) => article.id === item.id) ? '- Retirer' : 'Choisir'}
                                     </button>
                                 </div>
-                                {item.image != null && <img src={item.image} alt={item.titre} className="w-full object-cover rounded-lg" />}
+                                {item.image != null && <img src={item.image} alt="" className="w-full object-cover rounded-lg" />}
                                 <h2 className="text-lg font-semibold my-2">{item?.titre} </h2>
                                 <div className="text-gray-600 line-clamp-3" dangerouslySetInnerHTML={{ __html: item?.description }} />
                                 <p className="text-gray-600 mt-2">Date Livraison: {item?.date_livraison}</p>

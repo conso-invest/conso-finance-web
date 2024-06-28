@@ -27,7 +27,7 @@ const FaireUnDonTab = ({ donAmount, setDonAmount, error, setError, doDon, paymen
                     }}
                 />
                 <span className="text-red-500 text-sm">{error != '' ? error : ""}</span>
-                <button className="bg-primarycolor w-full p-4 rounded my-4" onClick={() => paymentIsLoad ? null : doDon()}>{paymentIsLoad ? "Traitement..." : "FAIRE UN DON"} </button>
+                <button className="text-white bg-primarycolor w-full p-4 rounded my-4" onClick={() => paymentIsLoad ? null : doDon()}>{paymentIsLoad ? "Traitement..." : "FAIRE UN DON"} </button>
             </div>
         </div>
     );
