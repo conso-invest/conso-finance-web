@@ -1,5 +1,5 @@
 "use client";
-import { DnaIcon } from "lucide-react";
+import { DnaIcon, Users2Icon } from "lucide-react";
 import { useEffect, useState } from "react";
 import MonProfil from "./componemts/MonProfil";
 import MesProject from "./componemts/MesProject";
@@ -7,6 +7,7 @@ import MesInvestissement from "./componemts/MesInvestissement";
 import MesDemande from "./componemts/MesDemande";
 import Securite from "./componemts/Securite";
 import { UserData } from "@/lib/const";
+import MesFollowers from "./componemts/MesFollowers";
 
 function Account() {
 
@@ -17,7 +18,8 @@ function Account() {
         { id: 2, name: "Demandes", icon: <DnaIcon /> },
         { id: 3, name: "Projets", icon: <DnaIcon /> },
         { id: 4, name: "Investisements", icon: <DnaIcon /> },
-        { id: 5, name: "Paramètre", icon: <DnaIcon /> },
+        { id: 5, name: "Followers", icon: <Users2Icon /> },
+        { id: 6, name: "Paramètre", icon: <DnaIcon /> },
     ]
 
     return (<>
@@ -45,11 +47,16 @@ function Account() {
                         <MesDemande item={activeTabs} />
                     </>}
                     {activeTabs === 3 && <>
-                        <MesProject item={activeTabs} />   </>}
-                        {activeTabs === 4 && <>
+                        <MesProject item={activeTabs} />   </>
+                    }
+                    {activeTabs === 4 && <>
                         <MesInvestissement item={activeTabs} />
                     </>}
                     {activeTabs === 5 && <>
+                        <MesFollowers item={activeTabs} />
+                    </>}
+
+                    {activeTabs === 6 && <>
                         <Securite item={activeTabs} />
                     </>}
                 </div>

@@ -1,5 +1,4 @@
 import axios from "axios";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import { project } from "@/lib/apiEndpoints";
 import { UserData } from "@/lib/const";
