@@ -32,10 +32,13 @@ export const project = {
   getProjetContrePartie: `${apiUrl}/projet/get-projet-contre-partie`,
   pay: `${apiUrl}/pay`,
   search: `${apiUrl}/projet/search`,
+  followOwner: `${apiUrl}/projet/follow-owner`,
+  followers: `${apiUrl}/projet/followers`,
+  following: `${apiUrl}/projet/following`,
 };
 
 export const commentaire = {
-  commentaire_send:  `${apiUrl}/commentaire/send`,
+  commentaire_send: `${apiUrl}/commentaire/send`,
 
 };
 

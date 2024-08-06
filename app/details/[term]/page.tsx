@@ -25,6 +25,7 @@ import {
     WhatsappShareButton,
     WhatsappIcon,
 } from 'next-share'
+import { toast } from "react-toastify";
 
 type Props = {
     params: {
@@ -39,6 +40,8 @@ function SearchPage({ params: { term } }: Props) {
     const [detail, setDetail] = useState<any>({});
     const [isLoad, setIsLoad] = useState<boolean>(true);
     const [selected, setSelected] = useState<number>(1);
+    const [isFollow, setIsFollow] = useState<boolean>(false);
+
 
     if (!term) notFound();
     const termToUse = decodeURI(term);
@@ -62,6 +65,33 @@ function SearchPage({ params: { term } }: Props) {
         router.push(`/contrepartie/${termToUse}`);
     }
 
+    const follow = async () => {
+        const userData = localStorage.getItem("UserData");
+
+        if (userData == null) {
+            return toast.error("Vous devez vous connecter pour effectuer cette opération");
+        }
+
+        if (detail.owner.id == (JSON.parse(userData)).id) {
+            return toast.error("Vous ne pouvez pas vous suivre");
+        }
+
+        var postdata = {
+            'follower_id': detail.owner.id,
+            'following_id': (JSON.parse(userData)).id
+        }
+
+        setIsFollow(true);
+
+        try {
+            const response = await axios.post(project.followOwner, postdata);
+            return toast.success(response.data.message);
+        } catch (error) {
+            console.error(error);
+            setIsFollow(false);
+        }
+    }
+
     useEffect(() => {
         fetchOptions();
     }, []);
@@ -74,9 +104,25 @@ function SearchPage({ params: { term } }: Props) {
                         <div className="absolute inset-0 w-full" style={{ backgroundImage: `url(${detail?.image})`, height: '60vh', zIndex: -1, filter: 'brightness(60%)' }}>
                         </div>
                         <div className="relative m-4 top-10 lg:w-5/6 p-4 lg:top-20 lg:flex lg:space-x-10 bg-white rounded-lg shadow-md">
-                            <div className="pb-5 lg:pb-20">
+                            <div className="pb-5 lg:pb-48">
                                 <img width={1020} height={680} alt="projet" className="h-full rounded-lg object-fill" src={detail?.image}></img>
-                                <div className="flex flex-row items-center mt-4">
+                                <div className="mt-4 flex justify-between items-center  bg-secondarycolor p-4 rounded-lg shadow">
+                                    <div className="flex items-center space-x-4">
+                                        <div className="bg-primarycolor text-white rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold">
+                                            {detail?.owner.name.charAt(0)}
+                                        </div>
+                                        <div className="text-white font-medium">{detail?.owner.name}</div>
+                                    </div>
+                                    <button
+                                        className={`${isFollow ? "bg-primarycolor" : "bg-blue-500"} text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition`}
+                                        onClick={() => follow()}
+                                    >
+                                        {isFollow ? 'Suivi 😊' : 'Suivre'}
+                                    </button>
+
+                                </div>
+
+                                <div className="flex flex-row items-center mt-8">
                                     <span className="font-bold mr-2"> Partarger sur :</span>
                                     <div className="space-x-2">
                                         <FacebookShareButton
@@ -172,7 +218,7 @@ function SearchPage({ params: { term } }: Props) {
                         <div className="h-screen bg-slate-50 flex justify-center items-center">Chargement...</div>
                     </>
             }
-        </div>
+        </div >
     );
 }
 
