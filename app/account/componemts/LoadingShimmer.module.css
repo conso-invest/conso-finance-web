@@ -18,7 +18,7 @@
     margin: 10px;
     background: #afaeae;
     border-radius: 50%;
-    animation: shimmer 1.5s infinite;
+    animation: shimmer 1.6s infinite;
   }
   
   .loadingShimmer::after {
